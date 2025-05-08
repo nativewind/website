@@ -1,4 +1,4 @@
-import { Logo, Wordmark } from "../assets";
+import { Wordmark } from "../assets";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
 import { ExternalLink } from "lucide-react";

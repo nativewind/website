@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { HomeLayout } from '@/components/home';
-import { Logo } from '../assets';
+import { Wordmark } from '../assets';
 import { BookText, Book, Cpu, Heart, Layout as LayoutIcon, LayoutTemplate, Server, UsersRound } from 'lucide-react';
 import { RootToggle } from '@/components/layout/root-toggle';
 
@@ -13,10 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     nav={{
       transparentMode: 'always',
       title: (
-        <>
-          <Logo />
-          <div className="-ml-1.5">Nativewind</div>
-        </>
+        <Wordmark className="h-6" />
       ),
     }}
     afterTitle={(
