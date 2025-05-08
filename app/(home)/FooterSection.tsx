@@ -1,4 +1,4 @@
-import { Logo } from "../assets";
+import { Logo, Wordmark } from "../assets";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
 import { ExternalLink } from "lucide-react";
@@ -43,17 +43,13 @@ function Socials() {
 export default function FooterSection() {
   return (
     <>
-      <footer id="footer" className="relative w-full max-w-fd-container mx-auto text-fd-muted-foreground mt-32">
-        <div className="-z-10 h-24 w-[33rem] bg-cyan-500/50 rounded-[100%] max-w-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-3xl "></div>
-        <h1 className="absolute -z-10 left-1/2 -translate-x-1/2 top-0 -translate-y-2/3 lg:-translate-y-1/2 text-6xl sm:text-8xl md:text-9xl lg:text-9xl font-bold opacity-50 bg-gradient-to-br from-black to-cyan-800 bg-clip-text text-transparent dark:from-white">Nativewind</h1>
-        <SectionLink href="#footer" name="fooooter" border />
-        <div className="border-t -mt-0.7 bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto p-12 grid grid-cols-2 sm:flex justify-around">
+      <footer id="footer" className="relative w-full max-w-fd-container mx-auto text-fd-muted-foreground">
+        <div className="-z-10 h-24 w-[33rem] bg-cyan-500/50 rounded-[100%] max-w-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-3xl"/>
+        <SectionLink className="-mb-[calc(1.25rem+1px)] z-30" href="#footer" name="border-t p-12 grid grid-cols-2 sm:flex justify-around" border />
+        <div className="border-t bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto p-12 grid grid-cols-2 sm:flex justify-between">
           
-          <div className="flex-col gap-3 hidden sm:flex">
-            <div className="flex gap-1 text-fd-foreground">
-              <Logo />
-              <p className="text-xl font-light">Nativewind</p>
-            </div>
+          <div className="flex-col gap-3 hidden sm:flex my-auto">
+            <Wordmark className="text-fd-foreground h-7" />
             <Socials />
             <div className="text-xs">
               <div className="inline-block -scale-x-100 mr-1">©</div>
@@ -75,15 +71,10 @@ export default function FooterSection() {
             <a href="https://nativewindui.com" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">NativewindUI <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
             <a href="https://gluestack.io/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Gluestack <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
           </div>
-
-          {/* <Logo className="absolute -bottom-20 right-0 sm:hidden w-44 h-44 opacity-20" /> */}
           
-          <div className="flex-col gap-3 flex sm:hidden">
+          <div className="flex-col items-start gap-3 flex sm:hidden">
             <Socials />
-            <div className="flex items-center gap-1 text-fd-foreground">
-              <Logo />
-              <p className="text-xl font-light">Nativewind</p>
-            </div>
+            <Wordmark className="text-fd-foreground h-7 w-fit" />
             <div className="text-xs">
               <div className="inline-block -scale-x-100 mr-1">©</div>
               Copyright {new Date().getFullYear()}
