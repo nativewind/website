@@ -11,12 +11,12 @@ const socials = [
   },
   {
     name: "Twitter",
-    href: "https://twitter.com/nativewind",
+    href: "https://twitter.com/nativewindcss",
     icon: TwitterIcon,
   },
   {
     name: "Discord",
-    href: "discord.gg/nativewind",
+    href: "https://discord.gg/tzmpVCP3gG",
     icon: DiscordIcon,
   }
 ]
