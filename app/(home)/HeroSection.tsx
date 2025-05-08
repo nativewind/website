@@ -13,7 +13,7 @@ export default function HeroSection() {
         
       {/* [mask-image:linear-gradient(to_bottom,red,transparent_55%)] */}
       <div className="absolute -z-10 inset-0 w-full h-full overflow-x-clip [mask-size:100%_100%] [mask-repeat:no-repeat] [mask-position:center_top] [mask-composite:exclude] [mask-mode:alpha] [mask-origin:content-box] [mask-clip:content-box] [mask-border-mode:match-source]  [mask-image:linear-gradient(to_bottom,red,transparent_88%)]">
-        <div className="-z-10 bg-gradient-to-b from-white to-white dark:from-neutral-800 dark:to-neutral-800 rounded-full w-[50rem] h-[50rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border dark:blur-3xl"></div>
+        <div className="-z-10 bg-gradient-to-b from-white to-white dark:from-neutral-800 dark:to-neutral-800 rounded-full w-[50rem] h-[50rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border dark:blur-3xl"/>
 
         {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90 w-[14rem] h-[33rem] rounded-[100%] border-[1rem] border-cyan-500"></div> */}
         {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-z-30 rotate-x-66 w-[33rem] h-[33rem] rounded-[100%] p-4 animate-react-rotate bg-gradient-to-r from-cyan-200 from-0% to-10% to-transparent">
@@ -28,7 +28,8 @@ export default function HeroSection() {
 
       <VectorField />
         
-      <SectionLink className="z-30 hidden sm:block !relative -translate-y-6" href="#" name="text-4xl text-balance tracking-tight leading-tight" />
+      <SectionLink border className="z-30 hidden sm:block lg:hidden !relative -translate-y-6 max-lg:px-4" href="#" name="px-4 text-4xl text-balance tracking-tight leading-tight" />
+      <SectionLink border className="z-30 hidden lg:block !relative -translate-y-6 max-lg:px-4" href="#" name="text-5xl text-balance tracking-tight leading-tight" />
       <h1 className="text-4xl lg:text-5xl font-medium dark:opacity-90 bg-gradient-to-br from-black/50 to-cyan-800/90 bg-clip-text text-transparent dark:from-white/80 dark:from-50% border-y border-dashed bg-fd-background backdrop-blur tracking-tight leading-tight">
         <div className="max-w-fd-container text-start mx-auto max-lg:px-4 text-balance w-full">
             Style your React Native apps using Tailwind CSS.

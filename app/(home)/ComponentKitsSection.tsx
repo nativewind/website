@@ -1,18 +1,13 @@
-import SectionLink from "./SectionLink";
+import SectionTitle from "./SectionTitle";
 import { ExternalLink } from 'lucide-react';
 
 export default function ComponentKitsSection() {
   return (
     <>
-      <h1 id="component-kits" className="text-3xl font-bold pb-8 border-t border-dashed backdrop-blur w-full dark:opacity-90 -mt-[1px] pt-9 relative">
-        <div className="w-full max-w-fd-container mx-auto max-md:px-4 text-left relative">
-          UI Component Kits
-        </div>
-      </h1>
+      <SectionTitle id="component-kits" title="UI Component Kits" />
 
       <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-t border-dashed [mask:linear-gradient(to_bottom,red_calc(100%-5rem),transparent)]">    
-        {/* <SectionLink className="z-30" href="#component-kits" name="component kits" /> */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-dashed text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 text-left">
           <a href="https://nativewindui.com" target="_blank" rel="noopener noreferrer" className="p-10 flex-1 hover:bg-black/5 dark:hover:bg-cyan-400/5 duration-300 group border-r border-dashed relative">
             <div className="absolute inset-0 -z-10 bg-grid-dots-current group-hover:text-cyan-400/40 h-full w-full text-transparent duration-300" />
             <div className="-m-2 border border-dashed rounded-md backdrop-blur group-hover:rounded-xl duration-600 ease-out p-2 group-hover:border-black dark:group-hover:border-cyan-400">
