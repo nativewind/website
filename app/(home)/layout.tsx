@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           },
           {
             title: 'v2',
-            url: 'https://www.nativewind.dev/v2/',
+            url: 'https://v2.nativewind.dev/',
           },
         ]}
       />
