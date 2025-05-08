@@ -1,0 +1,94 @@
+{
+  "pages": [
+    "[BookOpen][Docs](/docs/)",
+    "[LayoutTemplate][Showcase](/#showcase)",
+
+    "---Overview---",
+    "index",
+    "guides/goals",
+
+    "---Getting Started---",
+    "getting-started/installation/index",
+    "getting-started/typescript",
+    "getting-started/other-bundlers",
+    "getting-started/using-with-monorepos",
+
+    "---Guides---",
+    "guides/troubleshooting",
+    "guides/custom-components",
+    "guides/third-party-components",
+    "guides/themes",
+    "guides/editor-setup",
+
+    
+    "---Core concepts---",
+    "core-concepts/tailwindcss",
+    "core-concepts/quirks",
+
+    "core-concepts/responsive-design",
+    "core-concepts/dark-mode",
+    "core-concepts/functions-and-directives",
+
+    "---React Native concepts---",
+    "core-concepts/units",
+    "core-concepts/differences",
+    "core-concepts/style-specificity",
+    "tailwind/new-concepts/safe-area-insets",
+
+    "---Customization---",
+    "customization/configuration",
+    "customization/content",
+    "customization/theme",
+    "customization/colors",
+
+    "---API---",
+    "api/with-nativewind",
+    "api/vars",
+    "api/use-color-scheme",
+    "api/remap-props",
+    "api/css-interop",
+
+    "---Layout---",
+    "...tailwind/layout",
+
+    "---Flexbox & Grid---",
+    "...tailwind/flexbox",
+
+    "---Spacing---",
+    "...tailwind/spacing",
+
+    "---Sizing---",
+    "...tailwind/sizing",
+
+    "---Typography---",
+    "...tailwind/typography",
+
+    "---Backgrounds---",
+    "...tailwind/backgrounds",
+
+    "---Borders---",
+    "...tailwind/borders",
+
+    "---Effects---",
+    "...tailwind/effects",
+
+    "---Transitions & Animation---",
+    "...tailwind/transitions-animation",
+
+    "---Transforms---",
+    "...tailwind/transforms",
+
+    "---Interactivity---",
+    "...tailwind/interactivity",
+
+    "---SVG---",
+    "...tailwind/svg",
+
+    "---Accessibility---",
+    "...tailwind/accessibility",
+
+    "---Plugins---",
+    "...tailwind/plugins"
+
+  ]
+}

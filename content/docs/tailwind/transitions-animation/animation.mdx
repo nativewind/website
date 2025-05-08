@@ -1,0 +1,36 @@
+---
+title: Animation
+---
+
+import Compatibility from "../_compatibility.mdx";
+import Usage from "../_usage.tsx";
+
+{/* # Animation */}
+
+## Usage
+
+<Usage />
+
+<Callout type="warn" title="CAUTION">
+Animation support is experimental! We are waiting for your feedback to improve implementation.
+</Callout>
+
+## Compatibility
+
+<Compatibility
+  experimental={[
+    "animate-none",
+    "animate-spin",
+    "animate-ping",
+    "animate-bounce",
+    "animate-[n]",
+  ]}
+/>
+
+## Contributors
+
+NativeWind's animation is still experimental and very basic. We are looking for contributors to help with
+
+- Animated all mapped props (currently only works with `style`)
+- Improve performance
+- Update code to support new Reanimated v3 features (currently written in v2 style)

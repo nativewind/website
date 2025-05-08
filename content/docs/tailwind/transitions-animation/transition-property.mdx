@@ -1,0 +1,31 @@
+---
+title: Transition Property
+---
+
+import Compatibility from "../_compatibility.mdx";
+import Usage from "../_usage.tsx";
+
+{/* # Transition Property */}
+
+## Usage
+
+<Usage />
+
+<Callout type="warn" title="CAUTION">
+Animation support is experimental! We are waiting for your feedback to improve implementation.
+</Callout>
+
+## Compatibility
+
+<Compatibility
+  experimental={[
+    "transition",
+    "transition-all",
+    "transition-colors",
+    "transition-opacity",
+    "transition-transform",
+    "transition-{n}",
+    "transition-[n]",
+  ]}
+  none={["transition-shadow"]}
+/>

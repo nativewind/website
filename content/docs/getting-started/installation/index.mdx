@@ -1,0 +1,92 @@
+---
+title: Installation
+---
+
+import Install from './_install.mdx';
+
+{/* # Installation */}
+
+> NativeWind works with both Expo and framework-less React Native projects but Expo provides a more streamlined experience.
+> 
+> **Web**: If you'd like to use Metro to bundle for a website or App Clip and you are **not** using Expo, you will need either Expo's Metro config `@expo/metro-config` or to manually use Tailwind CLI to generate a CSS file.
+
+<a href="./installation/" className="underline underline-offset-8 text-fd-primary hover:opacity-100 p-4">SDK50+</a> 
+| <a href="./installation/sdk49" className="decoration-transparent hover:decoration-fd-foreground opacity-70 hover:opacity-100 underline-offset-8 rounded-lg p-4">SDK49</a> 
+| <a href="./installation/frameworkless" className="decoration-transparent hover:decoration-fd-foreground opacity-70 hover:opacity-100 underline-offset-8 rounded-lg p-4">Framework-less</a> 
+| <a href="./installation/nextjs" className="decoration-transparent hover:decoration-fd-foreground opacity-70 hover:opacity-100 underline-offset-8 rounded-lg p-4">Next.js</a>
+
+<Callout type="tip">
+ If you'd like to skip manual setup and use NativeWind with Expo, you can use the following command to initialize a new Expo project with NativeWind and Tailwind CSS.
+
+  ```bash
+  npx create-expo-stack@latest --nativewind
+  ```
+</Callout>
+
+## Installation with Expo SDK 50+
+
+### 1. Install NativeWind
+
+<Install framework="expo" />
+
+### 2. Setup Tailwind CSS
+
+<include>./_tailwind.mdx</include>
+
+### 3. Add the Babel preset
+
+```js title="babel.config.js"
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};
+```
+
+### 4. Modify your metro.config.js
+
+```js title="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname)
+
+module.exports = withNativeWind(config, { input: './global.css' })
+```
+
+### 5. Import your CSS file
+
+```js title="App.js"
+import "./global.css"
+
+export default App() {
+  /* Your App */
+}
+```
+
+### 6. Modify your `app.json`
+
+Switch the bundler to use the [Metro bundler](https://docs.expo.dev/guides/customizing-metro/#web-support)
+
+```js
+{
+  "expo": {
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
+```
+
+### 7. TypeScript (optional)
+
+Please follow the [TypeScript guide](./typescript).
+
+## Additional Setup Guides
+
+- [Using with Monorepos](./using-with-monorepos) - Learn how to set up NativeWind in monorepo environments like NX
+- [Other Bundlers](./other-bundlers) - Learn how to use NativeWind with other bundlers

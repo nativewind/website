@@ -1,0 +1,154 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
+
+:root {
+  --color-fd-bg: #e4e4e4;
+  --color-fd-primary: #0092b3;
+  --color-fd-border: #ccc;
+  /* --fd-layout-width: 1400px; */
+  --spacing-fd-container: 1100px;
+}
+
+.dark {
+  --color-fd-primary: #3ad1ff;
+  --color-fd-border: #242424;
+}
+
+@keyframes react-rotate {
+  from {
+    transform: rotateX(66deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(66deg) rotateZ(360deg);
+  }
+}
+
+.animate-react-rotate {
+  animation: react-rotate 1.5s linear infinite;
+}
+
+.bg-grid-dots {
+  background-image: radial-gradient(
+    circle at 0 0,
+    #777 1.5px,
+    transparent 0
+  ),
+  radial-gradient(
+    circle at 100% 100%,
+    #777 1.5px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.bg-grid-dots-current {
+  background-image: radial-gradient(
+    circle at 0 0,
+    currentColor 1.5px,
+    transparent 0
+  ),
+  radial-gradient(
+    circle at 100% 100%,
+    currentColor 1.5px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.bg-grid-lines {
+  background-position: -10px -10px;
+  background-size: 20px 20px;
+  background-image:
+    linear-gradient(to right, #8884 1px, transparent 1px),
+    linear-gradient(to bottom, #8884 1px, transparent 1px);
+}
+.bg-grid-lines-lg {
+  background-position: -20px -20px;
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, #8884 1px, transparent 1px),
+    linear-gradient(to bottom, #8884 1px, transparent 1px);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.cut-corners {
+  background:var(transparent, rgb(214, 233, 255));
+  mask:linear-gradient(
+                -45deg, 
+                transparent 10.313708498984761px, 
+                white 11.313708498984761px, 
+                white calc(100% - 10.313708498984761px), 
+                transparent calc(100% - 11.313708498984761px)
+            ),
+            linear-gradient(
+                45deg, 
+                transparent -1px, 
+                white 0px, 
+                white calc(100% - -1px),
+                transparent calc(100% - 0px)
+            );-webkit-mask-composite:destination-in;mask-composite:intersect
+}
+
+.animate-left-right {
+  animation: left-right 1.5s alternate infinite;
+}
+@keyframes left-right {
+  0%, 10% {
+    transform: translateX(0) rotate(0deg);
+  }
+  /* 33% {
+    translate: 0 100%;
+  }
+  66% {
+    translate: 0 -100%;
+  } */
+  90%, 100% {
+    transform: translateX(calc(100cqw - 1rem - 1.5rem));
+  }
+}
+
+/* smooth scroll */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 3rem;
+}
+
+.animate-fade-in {
+  animation: fade-in 3s ease-in;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* used for letters in hero visual */
+@keyframes fade-to-gray {
+  0% {
+    color: var(--color-fd-primary)
+  }
+  100% {
+    /* color: alpha(var(--color-fd-foreground) / 50%) */
+    color: var(--color-fd-foreground)
+  }
+}
+
+.animate-fade-to-gray {
+  animation: fade-to-gray 1s ease-in-out forwards;
+}
+
+.cursed {
+  mask-image:radial-gradient(transparent 1px, rgb(15, 17, 21), #ffffff 1px);mask-size:4px 4px;
+}

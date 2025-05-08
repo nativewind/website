@@ -1,0 +1,81 @@
+---
+title: _npm helper
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
+
+<Tabs groupId="npm-install" items={["npm", "yarn", "pnpm", "bun", props.framework === 'expo' ? "expo" : undefined]}>
+  <Tab value="npm">
+    <CodeBlock language="bash">
+      <Pre>
+        {[
+          props.deps?.length ? `npm install ${props.deps.join(" ")}` : undefined,
+          props.devDeps?.length
+            ? `npm install -D ${props.devDeps.join(" ")}`
+            : undefined,
+        ]
+          .filter(Boolean)
+          .join("\n")}
+      </Pre>
+    </CodeBlock>
+  </Tab>
+  <Tab value="yarn">
+    <CodeBlock language="bash">
+      <Pre>
+        {[
+          props.deps?.length ? `yarn add ${props.deps.join(" ")}` : undefined,
+          props.devDeps?.length
+            ? `yarn add -D ${props.devDeps.join(" ")}`
+            : undefined,
+        ]
+          .filter(Boolean)
+          .join("\n")}
+      </Pre>
+    </CodeBlock>
+  </Tab>
+  <Tab value="pnpm">
+    <CodeBlock language="bash">
+      <Pre>
+        {[
+          props.deps?.length ? `pnpm install ${props.deps.join(" ")}` : undefined,
+          props.devDeps?.length
+            ? `pnpm install -D ${props.devDeps.join(" ")}`
+            : undefined,
+        ]
+          .filter(Boolean)
+          .join("\n")}
+      </Pre>
+    </CodeBlock>
+  </Tab>
+  <Tab value="bun">
+    <CodeBlock language="bash">
+      <Pre>
+        {[
+          props.deps?.length ? `bun install ${props.deps.join(" ")}` : undefined,
+          props.devDeps?.length
+            ? `bun install -D ${props.devDeps.join(" ")}`
+            : undefined,
+        ]
+          .filter(Boolean)
+          .join("\n")}
+      </Pre>
+    </CodeBlock>
+  </Tab>
+  {props.framework === 'expo' && (
+    <Tab value="expo" label="Expo">
+      <CodeBlock language="bash">
+        <Pre>
+          {[
+            props.deps?.length ? `npx expo install ${props.deps.join(" ")}` : undefined,
+            props.devDeps?.length
+              ? `npx expo install -D ${props.devDeps.join(" ")}`
+              : undefined,
+          ]
+            .filter(Boolean)
+            .join("\n")}
+        </Pre>
+      </CodeBlock>
+    </Tab>
+  )}
+</Tabs>
