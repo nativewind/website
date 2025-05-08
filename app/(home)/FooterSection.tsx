@@ -57,7 +57,7 @@ export default function FooterSection() {
             <Socials />
             <div className="text-xs">
               <div className="inline-block -scale-x-100 mr-1">©</div>
-              Copyleft {new Date().getFullYear()}
+              Copyright {new Date().getFullYear()}
             </div>
           </div>
 
@@ -86,7 +86,7 @@ export default function FooterSection() {
             </div>
             <div className="text-xs">
               <div className="inline-block -scale-x-100 mr-1">©</div>
-              Copyleft {new Date().getFullYear()}
+              Copyright {new Date().getFullYear()}
             </div>
           </div>
         </div>
