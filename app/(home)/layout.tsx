@@ -4,6 +4,9 @@ import { Wordmark } from '../assets';
 import { BookText, Book, Cpu, Heart, Layout as LayoutIcon, LayoutTemplate, Server, UsersRound } from 'lucide-react';
 import { RootToggle } from '@/components/layout/root-toggle';
 
+import Image from 'next/image';
+import LogoAnimated from '../assets/logo-animated.gif';
+
 export default function Layout({ children }: { children: ReactNode }) {
   return <HomeLayout
     themeSwitch={{
@@ -13,7 +16,10 @@ export default function Layout({ children }: { children: ReactNode }) {
     nav={{
       transparentMode: 'always',
       title: (
-        <Wordmark className="h-6" />
+        // <div className="relative group">
+        //   <Image className="absolute top-1/2 -translate-y-1/2 -left-2 h-11 w-11 opacity-0 group-hover:opacity-100 duartion-500" src={LogoAnimated} alt="animated-logo" />
+        // </div>
+        <Wordmark className="h-6 group-hover:[mask-image:linear-gradient(to_right,transparent_2rem,red_2rem)] duartion-500" />
       ),
     }}
     afterTitle={(
