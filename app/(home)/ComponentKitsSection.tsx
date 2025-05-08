@@ -18,7 +18,7 @@ export default function ComponentKitsSection() {
             <div className="-m-2 border border-dashed rounded-md backdrop-blur group-hover:rounded-xl duration-600 ease-out p-2 group-hover:border-black dark:group-hover:border-cyan-400">
               <img className="rounded-sm group-hover:rounded-lg duration-600" src="https://nativewindui.com/og.png" />
             </div>
-            <h2 className="text-lg font-semibold mt-8 relative flex gap-2">NativeWindUI
+            <h2 className="text-lg font-semibold mt-8 relative flex gap-2">NativewindUI
               <ExternalLink className="mt-1 h-4.5 w-4.5 group-hover:translate-0 -translate-x-2 translate-y-2 opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 duration-300" />
             </h2>
             <p className="text-sm opacity-50 mt-4 text-pretty">30+ beautiful components and flows that strive for a native look & feel. The perfect starting point for those who need to ship fast and look good doing it.</p>

@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       title: (
         <>
           <Logo />
-          <div className="-ml-1.5">NativeWind</div>
+          <div className="-ml-1.5">Nativewind</div>
         </>
       ),
     }}

@@ -4,7 +4,7 @@ title: Installation
 
 {/* # Installation */}
 
-> NativeWind works with both Expo and framework-less React Native projects but Expo provides a more streamlined experience.
+> Nativewind works with both Expo and framework-less React Native projects but Expo provides a more streamlined experience.
 > 
 > **Web**: If you'd like to use Metro to bundle for a website or App Clip and you are **not** using Expo, you will need either Expo's Metro config `@expo/metro-config` or to manually use Tailwind CLI to generate a CSS file.
 
@@ -16,17 +16,17 @@ title: Installation
 
 ## Installation with Next.js
 
-NativeWind can be used in a Next.js project that is already configured to use Expo or framework-less React Native Web.
+Nativewind can be used in a Next.js project that is already configured to use Expo or framework-less React Native Web.
 
 Setting up a new Next.js project to use React Native Web is out of scope for these instructions.
 
-> NativeWind will only work with the `/pages` router or on `"use client"` routes. RSC support is in progress.
+> Nativewind will only work with the `/pages` router or on `"use client"` routes. RSC support is in progress.
 
 ### 1. Setup Tailwind CSS
 
 Simply configure Next.js as per [the Tailwind CSS Next.js setup guide](https://v3.tailwindcss.com/docs/guides/nextjs)
 
-### 2. Add the NativeWind preset
+### 2. Add the Nativewind preset
 
 ```diff title="tailwind.config.js"
 
@@ -43,7 +43,7 @@ module.exports = {
 
 ### 3. Update import source
 
-NativeWind requires the `jsxImportSource` to be set to `nativewind`. The option to configure this depends on how you are compiling your Next.js project.
+Nativewind requires the `jsxImportSource` to be set to `nativewind`. The option to configure this depends on how you are compiling your Next.js project.
 
 <Tabs groupId="compiler" items={["SWC","Babel"]} className="bg-fd-secondary">
   <Tab value="swc" className="bg-fd-card p-1 rounded-xl border [&>p]:px-4 [&>p]:pt-4">
@@ -77,7 +77,7 @@ NativeWind requires the `jsxImportSource` to be set to `nativewind`. The option 
   </Tab>
 </Tabs>
 
-### 4. Transpile NativeWind
+### 4. Transpile Nativewind
 
 ```diff title="next.config.js"
 /** @type {import('next').NextConfig} */
@@ -98,7 +98,7 @@ import typeof AccessibilityInfo from './Libraries/Components/AccessibilityInfo/A
 SyntaxError: Cannot use import statement outside a module
 ```
 
-This signals that you have incorrectly setup React Native Web and/or a dependency needs to be added to `transpilePackages`. This is out of scope for NativeWind.
+This signals that you have incorrectly setup React Native Web and/or a dependency needs to be added to `transpilePackages`. This is out of scope for Nativewind.
 
 ### Styles are not being applied
 
@@ -121,5 +121,5 @@ module.exports = {
 
 ## Additional Setup Guides
 
-- [Using with Monorepos](./using-with-monorepos) - Learn how to set up NativeWind in monorepo environments like NX
-- [Other Bundlers](./other-bundlers) - Learn how to use NativeWind with other bundlers
+- [Using with Monorepos](./using-with-monorepos) - Learn how to set up Nativewind in monorepo environments like NX
+- [Other Bundlers](./other-bundlers) - Learn how to use Nativewind with other bundlers

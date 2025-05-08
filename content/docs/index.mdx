@@ -4,13 +4,13 @@ title: Overview
 
 {/* # Overview */}
 
-## What is NativeWind?
+## What is Nativewind?
 
-NativeWind allows you to use [Tailwind CSS](https://tailwindcss.com) to style your components in React Native. Styled components can be shared between all React Native platforms, using the best style engine for that platform; CSS StyleSheet on web and StyleSheet.create for native. Its goals are to provide a consistent styling experience across all platforms, improving Developer UX, component performance and code maintainability.
+Nativewind allows you to use [Tailwind CSS](https://tailwindcss.com) to style your components in React Native. Styled components can be shared between all React Native platforms, using the best style engine for that platform; CSS StyleSheet on web and StyleSheet.create for native. Its goals are to provide a consistent styling experience across all platforms, improving Developer UX, component performance and code maintainability.
 
-On native platforms, NativeWind performs two functions. First, at build time, it compiles your Tailwind CSS styles into `StyleSheet.create` objects and determines the conditional logic of styles (e.g. hover, focus, active, etc). Second, it has an efficient runtime system that applies the styles to your components. This means you can use the full power of Tailwind CSS, including media queries, container queries, and custom values, while still having the performance of a native style system.
+On native platforms, Nativewind performs two functions. First, at build time, it compiles your Tailwind CSS styles into `StyleSheet.create` objects and determines the conditional logic of styles (e.g. hover, focus, active, etc). Second, it has an efficient runtime system that applies the styles to your components. This means you can use the full power of Tailwind CSS, including media queries, container queries, and custom values, while still having the performance of a native style system.
 
-On web, NativeWind is a small polyfill for adding `className` support to React Native Web.
+On web, Nativewind is a small polyfill for adding `className` support to React Native Web.
 
 ## Key Features
 
@@ -44,13 +44,13 @@ A full featured style system should have
 - Device state styles (orientation, color scheme)
 - Use the best rendering engine available
 
-React Native's StyleSheet system only provides static styles, with other features left for the user to implement. By using NativeWind you can focus on writing your system instead of building your own custom style system.
+React Native's StyleSheet system only provides static styles, with other features left for the user to implement. By using Nativewind you can focus on writing your system instead of building your own custom style system.
 
 On the web, it avoids injecting a StyleSheet at runtime by reusing the existing Tailwind CSS stylesheet, allowing you to use Server Side Rendering and much better initial page load performance.
 
 ## In action
 
-NativeWind handles both the Tailwind CSS compilation and the runtime styles. It works via a JSX transform, meaning there is no need for custom wrappers/boilerplate.
+Nativewind handles both the Tailwind CSS compilation and the runtime styles. It works via a JSX transform, meaning there is no need for custom wrappers/boilerplate.
 
 As all React components are transformed with JSX, it works with 3rd party modules.
 
@@ -79,7 +79,7 @@ export function MyText({ bold, italic, lineThrough, ...props }) {
 }
 ```
 
-By default NativeWind maps `className`->`style`, but it can handle the mapping of complex components.
+By default Nativewind maps `className`->`style`, but it can handle the mapping of complex components.
 
 ```tsx
 remapProps(FlatList, {
