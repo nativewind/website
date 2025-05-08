@@ -1,16 +1,18 @@
-import ColorsVisual from "./ColorsVisual";
-import CSSAnimationVisual from "./CSSAnimationVisual";
-import CSSVariablesVisual from "./CSSVariablesVisual";
-import DarkModeVisual from "./DarkModeVisual";
-import SectionLink from "./SectionLink";
+import SectionTitle from "./SectionTitle";
+
 import WhyNativewindCard from "./WhyNativeWindCard";
+
+import DarkModeVisual from "./DarkModeVisual";
+import ColorsVisual from "./ColorsVisual";
+import CSSVariablesVisual from "./CSSVariablesVisual";
+import CSSAnimationVisual from "./CSSAnimationVisual";
 
 export default function WhyNativewindSection() {
   return (
     <>
-      <h1 id="why-nativewind" className="text-3xl font-bold py-8 border-t border-dashed backdrop-blur w-full dark:opacity-90"><div className="w-full max-w-fd-container max-md:px-4 mx-auto text-left">Why Nativewind?</div></h1>
-      <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-y border-dashed">      
-        {/* <SectionLink className="z-30" href="#why-nativewind" name="why nativewind?" /> */}
+      <SectionTitle id="why-nativewind" title="Why Nativewind?" />
+
+      <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px]">      
 
         <div className="flex-1 flex max-sm:flex-col w-full border-t border-dashed">
           <WhyNativewindCard href="/docs/core-concepts/dark-mode" title="Dark/Light mode" number="00" color="cyan" visual={<DarkModeVisual/>} />

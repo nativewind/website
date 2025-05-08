@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Nativewind',
-  description: 'Use Tailwind in React Native',
+  description: 'Use Tailwind in React Native.',
   icons: {
     icon: '/favicon.svg',
   },

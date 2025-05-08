@@ -1,7 +1,8 @@
-import SectionLink from "./SectionLink";
-import NoonaLogo from "../assets/noona.png";
-import Image from "next/image";
+import SectionTitle from "./SectionTitle";
 import { ExternalLink } from "lucide-react";
+
+import Image from "next/image";
+import NoonaLogo from "../assets/noona.png";
 
 const showcaseItems = [
   {
@@ -17,10 +18,9 @@ const showcaseItems = [
 export default function ComponentKitsSection() {
   return (
     <>
-      <h1 id="showcase" className="text-3xl font-bold pb-8 border-t border-dashed backdrop-blur w-full dark:opacity-90 -mt-[1px] pt-9">
-        <div className="w-full max-w-fd-container max-md:px-4 mx-auto text-left">Who is using Nativewind?</div></h1>
-      <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-y border-dashed">      
-        {/* <SectionLink className="z-30" href="#showcase" name="showcase" /> */}
+      <SectionTitle id="showcase" title="Who is using Nativewind?" />
+
+      <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-t border-dashed">      
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-wrap text-left gap-8 justify-around p-8 [mask:linear-gradient(to_right,transparent,red_1rem,red_calc(100%-1rem),transparent)] max-w-full mt-2">
           {showcaseItems.map((item) => (
             <div key={item.name} className="group rounded-2xl border border-dashed p-4 flex-1 bg-fd-card relative mt-24">

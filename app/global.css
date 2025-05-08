@@ -9,7 +9,13 @@
   --color-fd-primary: #0092b3;
   --color-fd-border: #ccc;
   /* --fd-layout-width: 1400px; */
-  --spacing-fd-container: 1100px;
+  --spacing-fd-container: 1000px;
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --spacing-fd-container: 1100px;
+  }
 }
 
 .dark {
