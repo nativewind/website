@@ -1,7 +1,7 @@
 import { DocsLayout } from '@/components/notebook';
 import type { ReactNode } from 'react';
 import { source } from '@/lib/source';
-import { Logo } from '../assets';
+import { Wordmark } from '../assets';
 import { RootToggle } from '@/components/layout/root-toggle';
 import Link from 'next/link';
 import { BookOpen, BookText, Heart, LayoutTemplate, UserRound } from 'lucide-react';
@@ -20,10 +20,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       nav={{
         // transparentMode: 'top',
         title: (
-          <>
-            <Logo className="group-hover:text-fd-primary duration-300" />
-            <div className="-ml-1.5">NativeWind</div>
-          </>
+          <Wordmark className="h-6 group-hover:text-fd-primary duration-300" />
         ),
         afterTitle: (
           <RootToggle
