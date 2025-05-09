@@ -221,7 +221,6 @@ const items : ShowcaseItemProps[] = [
     logo: MindLumenLogo,
     website: "https://mindlumen.ai/",
     appstore: "https://apps.apple.com/nl/app/ai-therapist-mindlumen/id6738006220",
-    playstore: "",
   },
   {
     name: "HiveMind",
