@@ -16,7 +16,7 @@ import RovelistLogo from "../assets/rovelist.png";
 import DayStackLogo from "../assets/daystack.png";
 import FluentlyLogo from "../assets/fluently.png";
 import HiveMindLogo from "../assets/hivemind.png";
-import MindLumenLogo from "../assets/mindlumen.png";
+import MindLumenLogo from "../assets/MindLumen.png";
 import BrainnotesLogo from "../assets/brainnotes.png";
 import FocusminnyLogo from "../assets/focusminny.png";
 import GoTogetherLogo from "../assets/gotogether.png";
