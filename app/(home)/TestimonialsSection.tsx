@@ -21,6 +21,7 @@ import BrainnotesLogo from "../assets/brainnotes.png";
 import FocusminnyLogo from "../assets/focusminny.png";
 import GoTogetherLogo from "../assets/gotogether.png";
 import ShutterMateLogo from "../assets/shuttermate.png";
+import FoloLogo from "../assets/folo.png";
 import ShowcaseItem, { ShowcaseItemProps } from "./ShowcaseItem";
 
 export default function ComponentKitsSection() {
@@ -228,5 +229,12 @@ const items : ShowcaseItemProps[] = [
     logo: HiveMindLogo,
     website: "https://gethivemind.app/",
     appstore: "https://apps.apple.com/de/app/hivemind-study-by-scrolling/id6737344456",
+  },
+  {
+    name: "Folo",
+    description: "🧡 Follow everything in one place",
+    logo: FoloLogo,
+    website: "https://follow.is/",
+    appstore: "https://apps.apple.com/us/app/folo-follow-everything/id6739802604",
   }
 ];
