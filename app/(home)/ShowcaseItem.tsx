@@ -12,12 +12,12 @@ export interface ShowcaseItemProps {
 
 export default function ShowcaseItem({ name, website, appstore, playstore, logo, description }: ShowcaseItemProps) {
   return (
-    <div className="group pt-8 pb-12">
+    <div className={`group pt-12 ${website && 'pb-14'}`}>
       <div className="rounded-2xl border border-dashed p-4 flex-1 bg-fd-card relative">
 
         <Image src={logo} className="rounded-2xl h-16 w-16 -mt-12 mb-4 backdrop-blur left-4 border border-dashed bg-fd-muted object-cover" alt={`${name} logo`} />
         <b className="font-bold text-xl">{name}</b>
-        <p className="opacity-50 mt-2 text-pretty">{description}</p>
+        <p className="opacity-50 mt-2 text-pretty line-clamp-3">{description}</p>
           
         {website && (
           <a href={website} target="_blank" rel="noopener noreferrer" className="absolute left-0 bottom-0 translate-y-12 group/link border px-3 py-1.5 shadow-xl dark:shadow-2xl group-hover:translate-y-1/2 group-hover:translate-x-4 duration-300 bg-fd-accent hover:bg-fd-background hover:border-black dark:hover:border-fd-primary dark:hover:shadow-fd-primary rounded-xl font-mono text-sm w-fit ease-[cubic-bezier(0.175,0.885,0.32,1.275)] flex gap-2">

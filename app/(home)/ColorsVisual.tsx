@@ -45,7 +45,7 @@ export default function ColorsVisual() {
   }
 
   return (
-    <div id="container"className="w-full h-full sm:overflow-scroll hide-scrollbar"
+    <div id="container"className="w-full h-full sm:overflow-x-scroll overflow-y-clip hide-scrollbar"
       onMouseMove={(e) => {
         if (window.innerWidth < 768) return;
         const { clientX, clientY, currentTarget } = e;

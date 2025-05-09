@@ -6,32 +6,58 @@ import HyppeLogo from "../assets/hyppe.png";
 import ReemiLogo from "../assets/reemi.png";
 import SwipeyLogo from "../assets/swipey.png";
 import SewaYouLogo from "../assets/sewayou.png";
+import KnowhereLogo from "../assets/knowhere.png";
 import BrainnotesLogo from "../assets/brainnotes.png";
 import ShowcaseItem, { ShowcaseItemProps } from "./ShowcaseItem";
 
 export default function ComponentKitsSection() {
+  function shuffleArray(array : ShowcaseItemProps[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
   return (
     <>
       <SectionTitle id="showcase" title="Who is using Nativewind?" />
 
       <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-t border-dashed">  
         {/* <SectionLink className="z-30" href="#showcase" name="showcase" /> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-wrap text-left gap-8 justify-around p-8 [mask:linear-gradient(to_right,transparent,red_1rem,red_calc(100%-1rem),transparent)] max-w-full">
-          {/* col 1 */}
-          <div className="flex flex-col gap-8">
-            {items.slice(0, items.length / 3).map((item) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 flex-wrap text-left gap-8 justify-around p-8 [mask:linear-gradient(to_right,transparent,red_1rem,red_calc(100%-1rem),transparent)] max-w-full">
+          {/* col 1.1 */}
+          <div className="flex sm:hidden flex-col">
+            {shuffleArray(items).map((item) => (
               <ShowcaseItem key={item.name} {...item} />
             ))}
           </div>
-          {/* col 2 */}
-          <div className="flex flex-col gap-8">
-            {items.slice(items.length / 3, 2*items.length / 3).map((item) => (
+          {/* col 2.1 */}
+          <div className="hidden sm:flex lg:hidden flex-col">
+            {shuffleArray(items.slice(0, items.length / 2)).map((item) => (
               <ShowcaseItem key={item.name} {...item} />
             ))}
           </div>
-          {/* col 3 */}
-          <div className="flex flex-col gap-8">
-            {items.slice(2*items.length / 3, items.length).map((item) => (
+          {/* col 2.2 */}
+          <div className="hidden sm:flex lg:hidden flex-col">
+            {shuffleArray(items.slice(items.length / 2, items.length)).map((item) => (
+              <ShowcaseItem key={item.name} {...item} />
+            ))}
+          </div>
+          {/* col 3.1 */}
+          <div className="hidden lg:flex flex-col">
+            {shuffleArray(items.slice(0, items.length / 3)).map((item) => (
+              <ShowcaseItem key={item.name} {...item} />
+            ))}
+          </div>
+          {/* col 3.2 */}
+          <div className="hidden lg:flex flex-col">
+            {shuffleArray(items.slice(items.length / 3, 2*items.length / 3)).map((item) => (
+              <ShowcaseItem key={item.name} {...item} />
+            ))}
+          </div>
+          {/* col 3.3 */}
+          <div className="hidden lg:flex flex-col">
+            {shuffleArray(items.slice(2*items.length / 3, items.length)).map((item) => (
               <ShowcaseItem key={item.name} {...item} />
             ))}
           </div>
@@ -73,11 +99,11 @@ const items : ShowcaseItemProps[] = [
     name: "Reemi",
     description: "Get notifications to check in with your favorite people.",
     logo: ReemiLogo,
-    appstore: "https://apps.apple.com/id/app/swipey-fin-os-for-modern-biz/id1589412706",
+    appstore: " https://apps.apple.com/us/app/reemi-social-reminders/id6742418635",
   },
   {
     name: "Swipey",
-    description: "Powerful expense management solution with corporate cards, account payables, and accounting integration for all your payments in all-in-one Finance operating system.",
+    description: "Swipey is the next-gen financial OS that helps you manage all your business finances in one place.",
     logo: SwipeyLogo,
     website: "https://swipey.co/",
     appstore: "https://apps.apple.com/id/app/swipey-fin-os-for-modern-biz/id1589412706",
@@ -87,6 +113,14 @@ const items : ShowcaseItemProps[] = [
     description: "Wave is the AI-powered transcription and summarization app for audio recordings and phone calls.",
     logo: WaveLogo,
     website: "https://wave.co/",
-    appstore: "https://apps.apple.com/us/app/wave-ai-note-taker/id6451491556"
+    appstore: "https://apps.apple.com/us/app/wave-ai-note-taker/id6451491556",
+    playstore: "https://apps.apple.com/us/app/wave-ai-note-taker/id6451491556?mt=8",
+  },
+  {
+    name: "Knowhere",
+    description: "Easily discover what you and your friends want to do, all in your hand, all in one place.",
+    logo: KnowhereLogo,
+    website: "https://knowheresocial.com/",
+    appstore: "https://apps.apple.com/us/app/knowhere/id6467689920",
   }
 ];
