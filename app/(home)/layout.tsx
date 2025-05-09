@@ -53,7 +53,13 @@ export default function Layout({ children }: { children: ReactNode }) {
             menu: {
               banner: (
                 <div className="-mx-3 -mt-3">
-                  <div className="bg-cyan-500/20 rounded-t-xl w-full h-64"></div>
+                  <Image
+                    src="/og.png"
+                    alt="Banner image"
+                    width={1200}
+                    height={256}
+                    className="w-full h-64 object-cover rounded-t-xl"
+                  />
                 </div>
               ),
               className: 'md:row-span-2',
