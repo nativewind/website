@@ -229,5 +229,5 @@ const items : ShowcaseItemProps[] = [
     logo: HiveMindLogo,
     website: "https://gethivemind.app/",
     appstore: "https://apps.apple.com/de/app/hivemind-study-by-scrolling/id6737344456",
-  },
+  }
 ];
