@@ -39,7 +39,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         ),
         mode: 'top',
       }}
-      // TODO: remove, probably won't be used
+      // TODO: remove, probably won't be used...
       // tabMode: 'navbar',
       sidebar={{
         collapsible: true,
