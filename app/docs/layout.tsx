@@ -73,9 +73,9 @@ export default function Layout({ children }: { children: ReactNode }) {
         },
         // banner: (
         //   <div className="flex flex-col pt-2 gap-2 w-full rounded-xl bg-gradient-to-b from-fd-primary/20 to-cyan-300/50 backdrop-blur p-4">
-        //     <h1 className="text-xl font-bold mt-1">NativeWind v5 <i className="opacity-50">beta</i></h1>
+        //     <h1 className="text-xl font-bold mt-1">Nativewind v5 <i className="opacity-50">beta</i></h1>
         //     <p className="text-sm text-fd-foreground/60">
-        //       Check out the new features and improvements in the latest version of NativeWind.
+        //       Check out the new features and improvements in the latest version of Nativewind.
         //     </p>
         //     <Link
         //       href="/docs/overview"

@@ -4,19 +4,19 @@ title: "Styling Third-Party Components"
 
 {/* # Styling third-party components */}
 
-A third-party component is a component that is a dependency of your application and not a core React Native component. NativeWind works by passing the `className` prop to the core React Native components. Unfortunately, its not always obvious what third-party components implement this behavior without checking their source code.
+A third-party component is a component that is a dependency of your application and not a core React Native component. Nativewind works by passing the `className` prop to the core React Native components. Unfortunately, its not always obvious what third-party components implement this behavior without checking their source code.
 
 This is an example of a 3rd party component that does not pass the `className` prop down:
 
 ```tsx
-// ❌ This component will not work with NativeWind
+// ❌ This component will not work with Nativewind
 // This component is 'picking' the props.
 // Any props that are not explicitly defined will not be passed down
 function ThirdPartyComponent({ style }) {
   return <View style={style} />;
 }
 
-// ✅ This component will work with NativeWind
+// ✅ This component will work with Nativewind
 function ThirdPartyComponent({ style, ...props }) {
   return <View style={style} {...props} />;
 }
@@ -24,7 +24,7 @@ function ThirdPartyComponent({ style, ...props }) {
 
 ## Improving 3rd party components
 
-If you encounter a 3rd party component 'picks' its props, you should consider submitting a pull request to modify the component so it passes all props down. Components that 'pick' their props can be very limiting, and not just for NativeWind! React Native often adds new APIs and 'picking' props prevents you from using these new features.
+If you encounter a 3rd party component 'picks' its props, you should consider submitting a pull request to modify the component so it passes all props down. Components that 'pick' their props can be very limiting, and not just for Nativewind! React Native often adds new APIs and 'picking' props prevents you from using these new features.
 
 ```tsx
 function ThirdPartyComponent({ style }) {
@@ -57,12 +57,12 @@ remapProps(ThirdPartyComponent, {
   contentContainerClassName: "contentContainerStyle",
 });
 
-// Now you can use the component with NativeWind
+// Now you can use the component with Nativewind
 <ThirdPartyComponent className="p-5" contentContainerClassName="p-2" />;
 ```
 
 <Callout type="tip">
-NativeWind's style objects are more complex than the objected created `StyleSheet.create`. To not break third-party components, `remapProps` will pass a special object to the target prop. To the third-party component this will appear as an empty object.
+Nativewind's style objects are more complex than the objected created `StyleSheet.create`. To not break third-party components, `remapProps` will pass a special object to the target prop. To the third-party component this will appear as an empty object.
 </Callout>
 
 ## Handling components with style attribute props
@@ -71,7 +71,7 @@ Some components may require style attributes to be passed as props (for example,
 
 ```tsx
 /*
- * This component will not work as expected with NativeWind
+ * This component will not work as expected with Nativewind
  *   - borderColor will not work as it is a prop
  *   - backgroundColor will not work as it is based on the style.color value
  */
@@ -90,10 +90,10 @@ function ThirdPartyComponent({ borderColor, style, ...props }) {
 }
 ```
 
-To support these components, you can use the [`cssInterop`](./../api/css-interop) function. You can think of `cssInterop` as a "className termination". It a marker that NativeWind needs to convert the `className` props into style objects.
+To support these components, you can use the [`cssInterop`](./../api/css-interop) function. You can think of `cssInterop` as a "className termination". It a marker that Nativewind needs to convert the `className` props into style objects.
 
 <Callout type="warn" title="CAUTION">
-Enabling the `cssInterop` for a component comes at a performance cost. NativeWind will need to resolve the styles, add event handlers, inject context, etc.
+Enabling the `cssInterop` for a component comes at a performance cost. Nativewind will need to resolve the styles, add event handlers, inject context, etc.
 </Callout>
 
 ## Handling multiple props with similar properties
@@ -189,7 +189,7 @@ declare module "<3rd party package>" {
 
 Setting global types requires in-depth knowledge of TypeScript. Your interface declaration needs to **exactly match** the 3rd party declaration (including `extends` and generics).
 
-For example, NativeWind uses the follow types for React Native's `<FlatList />`, which uses multiple interfaces for its props, across multiple packages.
+For example, Nativewind uses the follow types for React Native's `<FlatList />`, which uses multiple interfaces for its props, across multiple packages.
 
 ```tsx title=custom-components-env.d.ts
 import {

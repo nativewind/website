@@ -36,7 +36,7 @@ export default function ComponentKitsSection() {
             <h2 className="text-lg font-semibold mt-8 relative flex gap-2">Gluestack
               <ExternalLink className="mt-1 h-4.5 w-4.5 group-hover:translate-0 -translate-x-2 translate-y-2 opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 duration-300" />
             </h2>
-            <p className="text-sm opacity-50 mt-4 text-pretty">Comprehensive React and React Native component library for building modern, high-performance web and mobile apps. Copy-paste UI components library & patterns crafted with Tailwind CSS (NativeWind).</p>
+            <p className="text-sm opacity-50 mt-4 text-pretty">Comprehensive React and React Native component library for building modern, high-performance web and mobile apps. Copy-paste UI components library & patterns crafted with Tailwind CSS (Nativewind).</p>
           </a>
         </div>
       </section>

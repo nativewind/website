@@ -10,7 +10,7 @@ You can customize your colors in the same manner as Tailwind CSS. Please refer t
 
 Unlike the web, which uses a common color palette, native platforms have their own unique system colors which are accessible through [PlatformColor](https://reactnative.dev/docs/platformcolor).
 
-NativeWind allows you to use access PlatformColor via the `platformColor()` utility.
+Nativewind allows you to use access PlatformColor via the `platformColor()` utility.
 
 ```js
 // tailwind.config.js

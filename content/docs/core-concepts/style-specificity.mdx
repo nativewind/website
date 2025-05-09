@@ -4,7 +4,7 @@ title: Style Specificity
 
 {  /* # Style Specificity */}
 
-NativeWind employs a specificity model that aligns with CSS rules, augmented to accommodate the inline-style characteristic of React Native and its existing ecosystem.
+Nativewind employs a specificity model that aligns with CSS rules, augmented to accommodate the inline-style characteristic of React Native and its existing ecosystem.
 
 ## Problem Identification
 
@@ -31,7 +31,7 @@ Different platforms interpret this differently due to variations in style specif
 
 ## Specificity Order
 
-NativeWind has defined the following order of specificity (highest to lowest):
+Nativewind has defined the following order of specificity (highest to lowest):
 
 - Styles marked as important (following CSS specificity order)
 - Inline & remapped styles (applied in right-to-left order)
@@ -39,11 +39,11 @@ NativeWind has defined the following order of specificity (highest to lowest):
 
 ## Concept of Remapped Styles
 
-Remapped styles are a novel concept introduced by NativeWind, not present in traditional CSS. They refer to styles translated from a className to a prop, and applied inline. This approach maintains the order of styles, ensuring consistency with existing React Native components.
+Remapped styles are a novel concept introduced by Nativewind, not present in traditional CSS. They refer to styles translated from a className to a prop, and applied inline. This approach maintains the order of styles, ensuring consistency with existing React Native components.
 
 ## Addressing Styling Differences
 
-To address styling discrepancies across platforms, NativeWind allows the use of the !important modifier. This returns the styles to a specificity-based order, facilitating consistency.
+To address styling discrepancies across platforms, Nativewind allows the use of the !important modifier. This returns the styles to a specificity-based order, facilitating consistency.
 
 ## Examples
 

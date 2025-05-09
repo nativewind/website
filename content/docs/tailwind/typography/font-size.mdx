@@ -13,7 +13,7 @@ import Usage from "../_usage.tsx";
 
 ## `rem` scaling
 
-Tailwind CSS using `rem` units for font sizes by default. To improve performance NativeWind will inline `rem` values on all platforms, except for Web. NativeWind uses the following `rem` for each platform
+Tailwind CSS using `rem` units for font sizes by default. To improve performance Nativewind will inline `rem` values on all platforms, except for Web. Nativewind uses the following `rem` for each platform
 
 - **Web**: `16px`
 - **All other platforms**: `14px` (matches React Native's default Text size)
@@ -36,7 +36,7 @@ module.exports = {
 
 A common use case for dynamically scaling text is to scale text based upon the screen width. You can do this by using CSS variables and media queries.
 
-> NativeWind currently does not support media queries on `:root`, so you'll need to use a class.
+> Nativewind currently does not support media queries on `:root`, so you'll need to use a class.
 
 ```css title="global.css"
 @media (min-width: 640px) {

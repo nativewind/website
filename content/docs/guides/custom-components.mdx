@@ -5,14 +5,14 @@ title: How to write custom components
 {/* # How to write custom components */}
   
 <Callout type="tip">
-This guide is about writing your own components. If you are looking for a guide on how to use NativeWind with third-party components, see the [third-party components](./third-party-components) guide.
+This guide is about writing your own components. If you are looking for a guide on how to use Nativewind with third-party components, see the [third-party components](./third-party-components) guide.
 
 Unless you are styling a custom native component, you should never have to use `cssInterop` or `remapProps` when writing your own components. These are only used when working with third-party components.
 </Callout>
 
 ## Your first component
 
-NativeWind works by passing class names to components. This is the same pattern as Tailwind CSS, which uses utility classes to style elements.
+Nativewind works by passing class names to components. This is the same pattern as Tailwind CSS, which uses utility classes to style elements.
 
 To create a component with default styles, simply merge the className string.
 
@@ -58,7 +58,7 @@ Creating your own variants can quickly become complex. We recommend using a clas
 
 ## Merging with inline styles
 
-NativeWind will automatically merge with inline-styles. [Read more about style specificity](./../core-concepts/style-specificity) documentation.
+Nativewind will automatically merge with inline-styles. [Read more about style specificity](./../core-concepts/style-specificity) documentation.
 
 ```tsx
 <Text className="text-white" style={{ color: "black" }} /> // Will be black
@@ -72,7 +72,7 @@ Custom components can have multiple style props. For example, a `Button` compone
 function MyComponent({ className, textClassName }) {
   return (
     <View className={className}>
-      <Text className={textClassName}>Hello, NativeWind!</Text>
+      <Text className={textClassName}>Hello, Nativewind!</Text>
     </View>
   );
 }

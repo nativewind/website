@@ -4,11 +4,11 @@ title: Themes
 
 {/* # Themes */}
 
-As NativeWind uses Tailwind CLI, it supports all the theming options Tailwind CSS does. Read the Tailwind CSS docs on each className to learn more about the possible theming values.
+As Nativewind uses Tailwind CLI, it supports all the theming options Tailwind CSS does. Read the Tailwind CSS docs on each className to learn more about the possible theming values.
 
 ## Dynamic themes
 
-To transition from a static theme to a dynamic one in NativeWind, utilize [CSS Variables as colors](https://tailwindcss.com/docs/customizing-colors#using-css-variables). This approach ensures flexibility and adaptability in theme application, catering to user preferences.
+To transition from a static theme to a dynamic one in Nativewind, utilize [CSS Variables as colors](https://tailwindcss.com/docs/customizing-colors#using-css-variables). This approach ensures flexibility and adaptability in theme application, catering to user preferences.
 
 ```js title="tailwind.config.js"
 module.exports = {
@@ -57,7 +57,7 @@ export default App() {
 
 ## Switching themes
 
-NativeWind is unopinionated on how you implement your theming. This is an example implementation that supports two themes with both a light/dark mode.
+Nativewind is unopinionated on how you implement your theming. This is an example implementation that supports two themes with both a light/dark mode.
 
 ```tsx title="App.jsx"
 import { vars, useColorScheme } from 'nativewind'

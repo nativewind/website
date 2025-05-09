@@ -4,9 +4,9 @@ title: Theme
 
 <!-- # Theme -->
 
-NativeWind uses the same theme values as as Tailwind CSS. You can read more about how to configure your project [through the Tailwind CSS documentation](https://tailwindcss.com/docs/theme).
+Nativewind uses the same theme values as as Tailwind CSS. You can read more about how to configure your project [through the Tailwind CSS documentation](https://tailwindcss.com/docs/theme).
 
-Fully dynamic React Native applications often make use of helper functions such as `Platform.select` and `PixelRatio`. NativeWind exports helpers allowing you to embed these functions into your theme.
+Fully dynamic React Native applications often make use of helper functions such as `Platform.select` and `PixelRatio`. Nativewind exports helpers allowing you to embed these functions into your theme.
 
 ## platformSelect
 

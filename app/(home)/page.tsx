@@ -12,7 +12,7 @@ export default function HomePage() {
         <HeroSection />
         <WhyNativewindSection />
         <section>
-        {/* How does NativeWind work?
+        {/* How does Nativewind work?
             - Title
             - Subtitle
             - Visual

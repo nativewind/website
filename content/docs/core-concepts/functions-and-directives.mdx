@@ -6,11 +6,11 @@ title: Functions & Directives
 
 ## Overview
 
-NativeWind allows the same functions and directives as Tailwind CSS. Please refer to the [Tailwind CSS documentation](https://tailwindcss.com/docs/functions-and-directives).
+Nativewind allows the same functions and directives as Tailwind CSS. Please refer to the [Tailwind CSS documentation](https://tailwindcss.com/docs/functions-and-directives).
 
 These functions can be used within your theme, arbitrary class names, or within your custom CSS.
 
-In addition to the functions and directives provided by Tailwind CSS, NativeWind polyfills the following CSS functions:
+In addition to the functions and directives provided by Tailwind CSS, Nativewind polyfills the following CSS functions:
 
 ## var()
 
@@ -66,7 +66,7 @@ Support for `calc()` is limited and will be improved in the future.
 
 #### Mixing Units
 
-On the web, `calc()` is a powerful tool that allows you to perform calculations with multiple units. However, React Native's layout engine is more limited and does not support mixing units. As a result, NativeWind only supports `calc()` in two modes: `numerical` and `percentage`.
+On the web, `calc()` is a powerful tool that allows you to perform calculations with multiple units. However, React Native's layout engine is more limited and does not support mixing units. As a result, Nativewind only supports `calc()` in two modes: `numerical` and `percentage`.
 
 ```css
 .element {
@@ -95,7 +95,7 @@ On the web, `calc()` is a powerful tool that allows you to perform calculations 
 
 #### Custom Properties
 
-NativeWind does not support operations in custom properties. Instead, you can use `calc()` with custom properties by first defining the custom property and then using `calc()` to perform the operation.
+Nativewind does not support operations in custom properties. Instead, you can use `calc()` with custom properties by first defining the custom property and then using `calc()` to perform the operation.
 
 ```css
 .element {
@@ -111,13 +111,13 @@ NativeWind does not support operations in custom properties. Instead, you can us
 }
 ```
 
-> Looking to contribute? We're looking for contributors to help improve support for `calc()` in NativeWind, such as adding support for other modes (e.g `deg`)
+> Looking to contribute? We're looking for contributors to help improve support for `calc()` in Nativewind, such as adding support for other modes (e.g `deg`)
 
 ## env()
 
 `env()` is a CSS function that allows you to access device specific environment information.
 
-NativeWind supports:
+Nativewind supports:
 
 ```css
 env(safe-area-inset-top);
