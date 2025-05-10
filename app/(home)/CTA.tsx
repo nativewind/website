@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function CTA() {
   return (
-    <Link href="/docs" className="group relative box-content pl-4 pr-2 py-2 -my-[1px] text-fd-background">
+    <Link href="/docs/getting-started/installation" className="group relative box-content pl-4 pr-2 py-2 -my-[1px] text-fd-background">
       <div>Get Started</div>
       <div className="-z-10 absolute top-0 left-0 h-[80%] w-full bg-fd-foreground/80 group-hover:translate-1 duration-300 border-t border-dashed"/>
       <div className="-z-10 absolute top-0.5 left-0.5 h-[80%] w-full bg-fd-foreground/80 group-hover:translate-0.5 duration-300"/>
