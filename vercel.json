@@ -1,5 +1,19 @@
 {
   "buildCommand": "pnpm build",
   "installCommand": "pnpm install",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "redirects": [
+    {
+      "source": "/discord",
+      "destination": "https://discord.gg/ypNakAFQ65"
+    },
+    {
+      "source": "/issue",
+      "destination": "https://github.com/nativewind/nativewind/blob/main/contributing.md#opening-an-issue"
+    },
+    {
+      "source": "/repro",
+      "destination": "https://stackblitz.com/edit/nativewind-test?file=README.md&view=editor"
+    }
+  ]
 } 
