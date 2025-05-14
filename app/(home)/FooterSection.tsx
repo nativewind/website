@@ -74,7 +74,7 @@ export default function FooterSection() {
           
           <div className="flex-col items-start gap-3 flex sm:hidden">
             <Socials />
-            <Wordmark className="text-fd-foreground h-7 w-fit" />
+            <Wordmark className="text-fd-foreground h-7" />
             <div className="text-xs">
               <div className="inline-block -scale-x-100 mr-1">©</div>
               Copyright {new Date().getFullYear()}
