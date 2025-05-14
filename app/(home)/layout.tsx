@@ -84,7 +84,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             icon: <Server />,
             text: 'API',
             description: 'Nativewind ApI',
-            url: '/docs/layouts',
+            url: '/docs/api/with-nativewind',
           },
           {
             icon: <LayoutIcon />,
