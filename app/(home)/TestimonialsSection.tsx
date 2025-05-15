@@ -22,6 +22,7 @@ import FocusminnyLogo from "../assets/focusminny.png";
 import GoTogetherLogo from "../assets/gotogether.png";
 import ShutterMateLogo from "../assets/shuttermate.png";
 import FoloLogo from "../assets/folo.png";
+import VibeCodeLogo from "../assets/vibecode.png"
 import ShowcaseItem, { ShowcaseItemProps } from "./ShowcaseItem";
 
 export default function ComponentKitsSection() {
@@ -236,5 +237,12 @@ const items : ShowcaseItemProps[] = [
     logo: FoloLogo,
     website: "https://follow.is/",
     appstore: "https://apps.apple.com/us/app/folo-follow-everything/id6739802604",
+  },
+    {
+    name: "VibeCode",
+    description: "The mobile app that builds mobile apps",
+    logo: VibeCodeLogo,
+    website: "https://vibecodeapp.com/",
+    appstore: "https://apps.apple.com/us/app/vibecode/id6742912146",
   }
 ];
