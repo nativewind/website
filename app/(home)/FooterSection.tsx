@@ -15,11 +15,11 @@ export default function FooterSection() {
         <SectionLink className="z-30 pl-14 lg:pl-0" href="#footer" name="border-t px-12 grid grid-cols-2 sm:flex justify-between" />
         <div className="border-t bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto px-12 pt-10 pb-6 grid grid-cols-2 sm:flex justify-between">
           
-          <div className="flex-col gap-3 hidden sm:flex pl-2">
+          <div className="flex-col gap-4 hidden sm:flex pl-2">
             <Wordmark className="text-fd-foreground h-7" />
             <Socials />
             <div className="text-xs">
-              <div className="inline-block -scale-x-100 mr-1">©</div>
+              <div className="inline-block -scale-x-100 mx-1">©</div>
               Copyright {new Date().getFullYear()}
             </div>
           </div>
@@ -39,11 +39,11 @@ export default function FooterSection() {
             <a href="https://gluestack.io/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Gluestack <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
           </div>
           
-          <div className="flex-col items-start gap-3 flex sm:hidden">
+          <div className="flex-col items-start gap-4 flex sm:hidden">
             <Socials />
-            <Wordmark className="text-fd-foreground h-7" />
+            {/* <Wordmark className="text-fd-foreground h-7" /> */}
             <div className="text-xs">
-              <div className="inline-block -scale-x-100 mr-1">©</div>
+              <div className="inline-block -scale-x-100 mx-1">©</div>
               Copyright {new Date().getFullYear()}
             </div>
           </div>
