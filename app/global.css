@@ -66,6 +66,7 @@
   background-position: 0 0, 10px 10px;
 }
 
+/* TODO: pass size by var */
 .bg-grid-lines {
   background-position: -10px -10px;
   background-size: 20px 20px;
@@ -79,6 +80,29 @@
   background-image:
     linear-gradient(to right, #8884 1px, transparent 1px),
     linear-gradient(to bottom, #8884 1px, transparent 1px);
+}
+
+.bg-grid-lines-xl {
+  background-position: -30px -30px;
+  background-size: 60px 60px;
+  background-image:
+    linear-gradient(to right, #8884 1px, transparent 1px),
+    linear-gradient(to bottom, #8884 1px, transparent 1px);
+}
+
+
+.bg-grid-lines-y-lg {
+  background-position: -20px -20px;
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, #8884 1px, transparent 1px);
+}
+
+.bg-grid-lines-y-xl {
+  background-position: -30px -30px;
+  background-size: 60px 60px;
+  background-image:
+    linear-gradient(to right, #8884 1px, transparent 1px);
 }
 
 .hide-scrollbar {
