@@ -81,7 +81,9 @@ function Header({
   themeSwitch,
 }: HomeLayoutProps & {
   finalLinks: LinkItemType[];
-}) {
+  }) {
+  // const currentPath = usePathname();
+  // const isBlog = currentPath.startsWith('/blog');
   const navItems = finalLinks.filter((item) =>
     ['nav', 'all'].includes(item.on ?? 'all'),
   );
@@ -90,7 +92,11 @@ function Header({
   );
 
   return (
-    <Navbar>
+    // style={{
+    //   '--spacing-fd-container': isBlog && '800px',
+    // } as React.CSSProperties}
+    <Navbar
+    >
       <Link
         href={nav.url ?? '/'}
         className="inline-flex items-center gap-2.5 font-semibold group"

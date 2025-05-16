@@ -72,30 +72,29 @@ export default function Layout({ children }: { children: ReactNode }) {
           },
         },
         // NOTE: stays pinned when scrolling the sidebar
-        banner: (
-          <div className="flex flex-col gap-4 pt-2">
-            {/* <div className="flex flex-col pt-2 gap-2 w-full rounded-xl bg-gradient-to-b from-fd-primary/20 to-cyan-300/50 backdrop-blur p-4">
-              <h1 className="text-xl font-bold mt-1">Nativewind v5 <i className="opacity-50">beta</i></h1>
-              <p className="text-sm text-fd-foreground/60">
-                Check out the new features and improvements in the latest version of Nativewind.
-              </p>
-              <Link
-                href="/docs/overview"
-                className="relative flex bg-white w-fit mt-1 text-black flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none"
-                style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }}
-              >
-                <BookOpen />
-                Read more
-              </Link>
-            </div> */}
-            <Link href="/docs" className="relative flex flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 bg-fd-primary/10 text-fd-primary" style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }} >
-              <BookOpen />
-              Docs
-            </Link>
-          </div>
-        ),
+        // banner: (
+        //   <div className="flex flex-col gap-4 pt-2">
+        //     <div className="flex flex-col pt-2 gap-2 w-full rounded-xl bg-gradient-to-b from-fd-primary/20 to-cyan-300/50 backdrop-blur p-4">
+        //       <h1 className="text-xl font-bold mt-1">Nativewind v5 <i className="opacity-50">beta</i></h1>
+        //       <p className="text-sm text-fd-foreground/60">
+        //         Check out the new features and improvements in the latest version of Nativewind.
+        //       </p>
+        //       <Link
+        //         href="/docs/overview"
+        //         className="relative flex bg-white w-fit mt-1 text-black flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none"
+        //         style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }}
+        //       >
+        //         <BookOpen />
+        //         Read more
+        //       </Link>
+        //     </div>
+        //   </div>
+        // ),
       }}
     >
+      <div className="absolute top-0 lg:right-1/2 right-0 lg:translate-x-1/2 -z-10 -translate-y-1/2 w-[64rem] h-[64rem] rounded-full bg-fd-primary/10 max-md:hidden [--mask:radial-gradient(circle_at_center,red,transparent_69%)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)] pointer-events-none" />
+      <div className="fixed top-0 lg:right-1/2 right-0 lg:translate-x-1/2 -z-10 -translate-y-1/2 w-[64rem] h-[64rem] rounded-full bg-fd-primary/5 max-md:hidden [--mask:radial-gradient(circle_at_center,red,transparent_69%)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)] pointer-events-none" />
+      <div className="absolute top-0 lg:right-1/2 right-0 lg:translate-x-1/2 -z-10 h-[64rem] w-[64rem] bg-grid-lines-xl dark:opacity-80 -translate-y-1/2 max-md:hidden [--mask:radial-gradient(circle_at_center_top,red,transparent)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)] -skew-20 pointer-events-none"/>
       {children}
     </DocsLayout>
   );

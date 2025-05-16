@@ -57,7 +57,7 @@ export function LargeSearchToggle({
       data-search-full=""
       {...props}
       className={cn(
-        `inline-flex items-center gap-2 border ${onHeroSection ? 'border-dashed box-content bg-white/90 dark:bg-black/80 hover:border-fd-accent' : 'bg-fd-secondary/50 hover:bg-fd-accent'} p-1.5 text-sm text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground`,
+        `inline-flex items-center gap-2 border ${onHeroSection ? 'border-dashed box-content bg-white/90 dark:bg-black/80 hover:border-fd-accent' : 'bg-white/30 dark:bg-black/30 hover:bg-white/30 dark:hover:bg-black/30 border border-dashed border-fd-foreground/10 hover:border-fd-foreground/20 cursor-pointer'} p-1.5 text-sm text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground`,
         props.className,
       )}
       onClick={() => {

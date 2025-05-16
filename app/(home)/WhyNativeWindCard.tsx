@@ -75,9 +75,9 @@ export default function WhyNativewindCard({
             className="relative flex items-center gap-2 opacity-90 duration-300 cut-corners py-2 pl-6 pr-4 rounded-tr-md rounded-bl-md bg-black text-black dark:text-white sm:text-white sm:dark:text-black group-hover:text-black dark:group-hover:text-white dark:bg-white font-bold group-hover:opacity-100 mt-4"
             >
             <div className={`absolute -z-10 inset-0 ${colorVariants[color as keyof typeof colorVariants]} sm:translate-y-full sm:-translate-x-full group-hover:translate-0 duration-300 rounded-md`} />
-              Read the Docs
-              <ArrowRight className="w-5 h-5 duration-300 group-hover:translate-x-0.5 -translate-x-0.5" />
-            </div>
+            Read the Docs
+            <ArrowRight className="w-5 h-5 duration-300 group-hover:translate-x-0.5 -translate-x-0.5" />
+          </div>
           <div className={`text-2xl lg:text-4xl font-mono ${textVariants[color as keyof typeof textVariants]} duration-300`}>
            [{ number }]
           </div>

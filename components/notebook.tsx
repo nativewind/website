@@ -13,7 +13,7 @@ import {
   SidebarViewport,
   SidebarPageTree,
 } from './layout/sidebar';
-import { TreeContextProvider } from 'fumadocs-ui/provider';
+import { NavProvider, TreeContextProvider } from 'fumadocs-ui/provider';
 import {
   LargeSearchToggle,
   SearchToggle,
@@ -21,7 +21,7 @@ import {
 import { cn } from '../lib/cn';
 import Link from 'next/link';
 import { buttonVariants } from './ui/button';
-import { ChevronDown, Languages, SidebarIcon } from 'lucide-react';
+import { BookOpen, ChevronDown, Languages, SidebarIcon } from 'lucide-react';
 import { BaseLinkItem, type LinkItemType } from './links';
 import { LanguageToggle } from './layout/language-toggle';
 import { ThemeToggle } from './layout/theme-toggle';
@@ -101,7 +101,7 @@ export function DocsLayout({
 
   return (
     <TreeContextProvider tree={props.tree}>
-      {/* <NavProvider transparentMode='top'> */}
+      <NavProvider transparentMode='top'>
         <main
           id="nd-docs-layout"
           {...props.containerProps}
@@ -206,7 +206,7 @@ export function DocsLayout({
           />
           <StylesProvider {...pageStyles}>{props.children}</StylesProvider>
         </main>
-      {/* </NavProvider> */}
+      </NavProvider>
     </TreeContextProvider>
   );
 }
@@ -238,7 +238,7 @@ function DocsNavbar({
     >
       <div
         className={cn(
-          'flex flex-row border-b border-fd-foreground/10 px-4 h-14',
+          'flex flex-row border-b border-fd-foreground/10 px-4 h-14 lg:px-36',
           navMode === 'auto' && 'md:px-6',
         )}
       >
@@ -261,8 +261,7 @@ function DocsNavbar({
               <SidebarIcon />
             </SidebarCollapseTrigger>
           ) : null}
-          {/* TODO: move */}
-          {sidebarCollapsible && navMode === 'top' ? (
+          {/* {sidebarCollapsible && navMode === 'top' ? (
             <SidebarCollapseTrigger
               className={cn(
                 buttonVariants({
@@ -274,7 +273,11 @@ function DocsNavbar({
             >
               <SidebarIcon />
             </SidebarCollapseTrigger>
-          ) : null}
+          ) : null} */}
+          <Link href="/docs" className="lg:flex absolute left-4 hidden top-3 text-sm flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 bg-fd-primary/10 text-fd-primary" style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }} >
+            <BookOpen />
+            Docs
+          </Link>
           <Link
             href={nav.url ?? '/'}
             className={cn(
