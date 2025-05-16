@@ -12,7 +12,7 @@ export default function FooterSection() {
         <div className="border-t border-dashed border-fd-primary opacity-20 hidden md:block absolute top-20 z-50 w-full" />
         <div className="-z-10 h-24 w-[33rem] bg-cyan-500/50 rounded-[100%] max-w-screen absolute top-1/2 left-1/2 -translate-x-1/2 blur-3xl" />
         {/* -mb-[calc(1.25rem+1px)] */}
-        <SectionLink className="z-30" href="#footer" name="border-t p-12 grid grid-cols-2 sm:flex justify-around" />
+        <SectionLink className="z-30 pl-14 lg:pl-0" href="#footer" name="border-t px-12 grid grid-cols-2 sm:flex justify-between" />
         <div className="border-t bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto px-12 pt-10 pb-6 grid grid-cols-2 sm:flex justify-between">
           
           <div className="flex-col gap-3 hidden sm:flex pl-2">
@@ -24,7 +24,7 @@ export default function FooterSection() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 text-xs lg:text-sm">
+          <div className="flex flex-col gap-3 text-sm">
             <b className="text-fd-foreground font-semibold mt-2">Learn</b>
             <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/docs">Documentation</Link>
             <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="#showcase">Showcase</Link>
@@ -32,7 +32,7 @@ export default function FooterSection() {
             {/* <a>Playground</a> */}
           </div>
 
-          <div className="flex flex-col gap-3 text-xs lg:text-sm">
+          <div className="flex flex-col gap-3 text-sm">
             <b className="text-fd-foreground font-semibold mt-2">Component Kits</b>
             <a href="https://rnr-docs.vercel.app/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">React Native Reusables <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
             <a href="https://nativewindui.com" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">NativewindUI <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>

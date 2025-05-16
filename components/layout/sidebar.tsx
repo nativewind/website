@@ -62,7 +62,7 @@ const itemVariants = cva(
   {
     variants: {
       active: {
-        true: 'bg-fd-primary/10 text-fd-primary sticky -top-4 bg-fd-background/70 backdrop-blur z-10',
+        true: 'bg-fd-primary/10 text-fd-primary sticky top-0 lg:-top-4 bg-fd-background/70 backdrop-blur z-10',
         false:
           'transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none',
       },
@@ -208,7 +208,7 @@ export function SidebarViewport(props: ScrollAreaProps) {
   return (
     <ScrollArea {...props} className={cn('h-full', props.className)}>
       <ScrollViewport
-        className="p-4"
+        className="p-4 max-lg:pt-0"
       >
         {/* TODO: re-enable fade on scroll when animation-timeline is supported in Safari */}
         {/* style={{
