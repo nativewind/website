@@ -1,5 +1,5 @@
 import { docs } from '@/.source';
-import { loader } from 'fumadocs-core/source';
+import { InferMetaType, InferPageType, loader } from 'fumadocs-core/source';
 
 import { icons } from "lucide-react";
 import { createElement } from "react";
@@ -14,3 +14,14 @@ export const source = loader({
     return undefined;
   },
 });
+
+import { blog as blogPosts } from '@/.source';
+import { createMDXSource } from 'fumadocs-mdx';
+
+export const blog = loader({
+  baseUrl: '/blog',
+  source: createMDXSource(blogPosts),
+});
+
+// export type Page = InferPageType<typeof source>;
+// export type Meta = InferMetaType<typeof source>;
