@@ -11,6 +11,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/page';
 import { ArrowLeft } from 'lucide-react';
+import FooterSection from '../../FooterSection';
 
 export default async function Page(props: {
   params: Promise<{ slug: string }>;
@@ -97,11 +98,16 @@ export default async function Page(props: {
           }} />
         </DocsBody>
       </DocsPage> */}
-      <article className="w-full mx-auto flex flex-col max-md:px-4 py-8 max-w-fd-container">
+      <article className="w-full mx-auto flex flex-col max-md:px-4 max-lg:px-8 py-8 max-w-fd-container">
         <div className="prose min-w-0">
           <MDX components={defaultMdxComponents} />
         </div>
       </article>
+
+      <div className="relative">
+        <div className="absolute max-w-fd-container lg:w-[calc(100%-1rem)] box-content lg:border-x border-dashed top-0 left-1/2 -translate-x-1/2 h-full pointer-events-none" />
+        <FooterSection />
+      </div>
     </>
   );
 }

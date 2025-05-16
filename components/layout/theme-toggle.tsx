@@ -38,7 +38,7 @@ export function ThemeToggle({
   }, []);
 
   const container = cn(
-    'inline-flex items-center rounded-full border p-1',
+    'inline-flex items-center rounded-full border border-fd-foreground/10 p-1 bg-white/20 dark:bg-black/20 backdrop-blur',
     className,
   );
 

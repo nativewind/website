@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { blog } from '@/lib/source';
 import SectionTitle from '../SectionTitle';
+import FooterSection from '../FooterSection';
 
 export default function Home() {
   const posts = blog.getPages();
@@ -21,13 +22,13 @@ export default function Home() {
         </div>
         <SectionTitle id="blog" title="Latest Blog Posts" className="sticky top-14 z-10 border-t-0 backdrop-blur-none border-b " />
       </div>
-      <div className="relative min-h-[calc(100vh-16rem-6.5625rem)] flex flex-col mx-auto w-full bg-fd-background border-t border-dashed">
+      <div className="relative min-h-[calc(100vh-16rem-6.5625rem)] flex flex-col mx-auto w-full border-t border-dashed">
       
         {posts.map((post) => (
           <Link
             key={post.url}
             href={post.url}
-            className="group block border-bashed border-b overflow-hidden p-6 hover:bg-fd-accent duration-300 transition-colors ease-in-out"
+            className="group block border-bashed border-b overflow-hidden p-6 bg-fd-background hover:bg-fd-accent duration-300 transition-colors ease-in-out"
           >
             <div className="max-w-fd-container mx-auto w-full flex-col gap-2">
               <p className="text-xs text-fd-muted-foreground/50 font-mono">{new Date(post.data.date).toDateString()}</p>
@@ -65,6 +66,7 @@ export default function Home() {
           </Link>
         ))}
       </div>
+      <FooterSection />
     </main>
   );
 }
