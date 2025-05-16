@@ -62,7 +62,7 @@ const itemVariants = cva(
   {
     variants: {
       active: {
-        true: 'bg-fd-primary/10 text-fd-primary',
+        true: 'bg-fd-primary/10 text-fd-primary sticky top-0 bg-fd-background z-10',
         false:
           'transition-colors hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none',
       },
@@ -208,11 +208,12 @@ export function SidebarViewport(props: ScrollAreaProps) {
   return (
     <ScrollArea {...props} className={cn('h-full', props.className)}>
       <ScrollViewport
-        className="p-4"
-        style={{
-          maskImage: 'linear-gradient(to bottom, transparent, white 12px)',
-        }}
+        className="p-4 pt-0"
       >
+        {/* TODO: re-enable fade on scroll when animation-timeline is supported in Safari */}
+        {/* style={{
+          maskImage: 'linear-gradient(to bottom, transparent, white 12px)',
+        }} */}
         {props.children}
       </ScrollViewport>
     </ScrollArea>

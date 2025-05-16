@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { HomeLayout } from '@/components/home';
 import { Wordmark } from '../assets';
-import { BookText, Book, Cpu, Heart, Layout as LayoutIcon, LayoutTemplate, Server, UsersRound } from 'lucide-react';
+import { BookText, Book, Cpu, Heart, Layout as LayoutIcon, LayoutTemplate, Server, UsersRound, BookDown } from 'lucide-react';
 import { RootToggle } from '@/components/layout/root-toggle';
 
 import Image from 'next/image';
@@ -16,6 +16,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     nav={{
       transparentMode: 'always',
       title: (
+        // TODO: animated wordmark on hover, dropdown on rightclick to save
         // <div className="relative group">
         //   <Image className="absolute top-1/2 -translate-y-1/2 -left-2 h-11 w-11 opacity-0 group-hover:opacity-100 duartion-500" src={LogoAnimated} alt="animated-logo" />
         // </div>
@@ -69,10 +70,10 @@ export default function Layout({ children }: { children: ReactNode }) {
             url: '/docs/',
           },
           {
-            icon: <Book />,
-            text: 'Guides',
-            description: 'Troubleshooting',
-            url: '/docs/guides/troubleshooting',
+            icon: <BookDown />,
+            text: 'Getting Started',
+            description: 'Installation',
+            url: '/docs/getting-started/installation',
           },
           {
             icon: <Cpu />,
@@ -81,10 +82,10 @@ export default function Layout({ children }: { children: ReactNode }) {
             url: '/docs/core-concepts/tailwindcss',
           },
           {
-            icon: <Server />,
-            text: 'API',
-            description: 'Nativewind ApI',
-            url: '/docs/api/with-nativewind',
+            icon: <Book />,
+            text: 'Guides',
+            description: 'Troubleshooting',
+            url: '/docs/guides/troubleshooting',
           },
           {
             icon: <LayoutIcon />,
@@ -94,12 +95,18 @@ export default function Layout({ children }: { children: ReactNode }) {
           },
         ],
       },
-      // {
-      //   icon: <BookText />,
-      //   text: 'Blog',
-      //   url: '/blog',
-      //   active: 'nested-url',
-      // },
+      {
+        text: 'Showcase',
+        url: '/#showcase',
+        icon: <LayoutTemplate />,
+        active: 'url',
+      },
+      {
+        icon: <BookText />,
+        text: 'Blog',
+        url: '/blog',
+        active: 'nested-url',
+      },
       // {
       //   text: 'Community',
       //   // TODO: GH Discussions / Discord Link?
@@ -107,12 +114,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       //   icon: <UsersRound />,
       //   external: true,
       // },
-      {
-        text: 'Showcase',
-        url: '/#showcase',
-        icon: <LayoutTemplate />,
-        active: 'url',
-      },
       // {
       //   text: 'Sponsors',
       //   url: '/sponsors',
