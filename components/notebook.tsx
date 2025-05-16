@@ -170,7 +170,7 @@ export function DocsLayout({
                 <SidebarLinkItem
                   key={i}
                   item={item}
-                  className={cn('lg:hidden', i === links.length - 1 && 'mb-4')}
+                  className={cn('lg:hidden', i === links.length - 1 && '')}
                 />
               ))}
 
