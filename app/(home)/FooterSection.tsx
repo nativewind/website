@@ -3,6 +3,56 @@ import Link from "next/link";
 import SectionLink from "./SectionLink";
 import { ExternalLink } from "lucide-react";
 
+export default function FooterSection() {
+  return (
+    <>
+      <div className="border-t border-dashed w-full pt-8 md:pt-12 backdrop-blur -mb-4" />
+      <footer id="footer" className="relative w-full max-w-fd-container mx-auto text-fd-muted-foreground">
+        {/* debug line to align the headings with wordmark at baseline */}
+        <div className="border-t border-dashed border-fd-primary opacity-20 hidden md:block absolute top-20 z-50 w-full" />
+        <div className="-z-10 h-24 w-[33rem] bg-cyan-500/50 rounded-[100%] max-w-screen absolute top-1/2 left-1/2 -translate-x-1/2 blur-3xl" />
+        {/* -mb-[calc(1.25rem+1px)] */}
+        <SectionLink className="z-30" href="#footer" name="border-t p-12 grid grid-cols-2 sm:flex justify-around" />
+        <div className="border-t bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto px-12 pt-10 pb-6 grid grid-cols-2 sm:flex justify-between">
+          
+          <div className="flex-col gap-3 hidden sm:flex pl-2">
+            <Wordmark className="text-fd-foreground h-7" />
+            <Socials />
+            <div className="text-xs">
+              <div className="inline-block -scale-x-100 mr-1">©</div>
+              Copyright {new Date().getFullYear()}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 text-xs lg:text-sm">
+            <b className="text-fd-foreground font-semibold mt-2">Learn</b>
+            <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/docs">Documentation</Link>
+            <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="#showcase">Showcase</Link>
+            {/* <a>Blog</a> */}
+            {/* <a>Playground</a> */}
+          </div>
+
+          <div className="flex flex-col gap-3 text-xs lg:text-sm">
+            <b className="text-fd-foreground font-semibold mt-2">Component Kits</b>
+            <a href="https://rnr-docs.vercel.app/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">React Native Reusables <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
+            <a href="https://nativewindui.com" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">NativewindUI <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
+            <a href="https://gluestack.io/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Gluestack <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
+          </div>
+          
+          <div className="flex-col items-start gap-3 flex sm:hidden">
+            <Socials />
+            <Wordmark className="text-fd-foreground h-7" />
+            <div className="text-xs">
+              <div className="inline-block -scale-x-100 mr-1">©</div>
+              Copyright {new Date().getFullYear()}
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  )
+}
+
 const socials = [
   {
     name: "Github",
@@ -37,52 +87,6 @@ function Socials() {
         </a>
       ))}
     </div>
-  )
-}
-
-export default function FooterSection() {
-  return (
-    <>
-      <footer id="footer" className="relative w-full max-w-fd-container mx-auto text-fd-muted-foreground">
-        <div className="-z-10 h-24 w-[33rem] bg-cyan-500/50 rounded-[100%] max-w-screen absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-3xl"/>
-        <SectionLink className="-mb-[calc(1.25rem+1px)] z-30" href="#footer" name="border-t p-12 grid grid-cols-2 sm:flex justify-around" border />
-        <div className="border-t bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto p-12 grid grid-cols-2 sm:flex justify-between">
-          
-          <div className="flex-col gap-3 hidden sm:flex my-auto">
-            <Wordmark className="text-fd-foreground h-7" />
-            <Socials />
-            <div className="text-xs">
-              <div className="inline-block -scale-x-100 mr-1">©</div>
-              Copyright {new Date().getFullYear()}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3 text-xs lg:text-sm">
-            <b className="text-fd-foreground font-semibold">Learn</b>
-            <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/docs">Documentation</Link>
-            <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="#showcase">Showcase</Link>
-            {/* <a>Blog</a> */}
-            {/* <a>Playground</a> */}
-          </div>
-
-          <div className="flex flex-col gap-3 text-xs lg:text-sm">
-            <b className="text-fd-foreground font-semibold">Component Kits</b>
-            <a href="https://rnr-docs.vercel.app/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">React Native Reusables <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
-            <a href="https://nativewindui.com" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">NativewindUI <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
-            <a href="https://gluestack.io/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Gluestack <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
-          </div>
-          
-          <div className="flex-col items-start gap-3 flex sm:hidden">
-            <Socials />
-            <Wordmark className="text-fd-foreground h-7" />
-            <div className="text-xs">
-              <div className="inline-block -scale-x-100 mr-1">©</div>
-              Copyright {new Date().getFullYear()}
-            </div>
-          </div>
-        </div>
-      </footer>
-    </>
   )
 }
 
