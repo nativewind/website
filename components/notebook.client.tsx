@@ -5,7 +5,7 @@ import { useSidebar } from 'fumadocs-ui/provider';
 import { useNav } from 'fumadocs-ui/provider';
 import { SidebarTrigger } from 'fumadocs-core/sidebar';
 import { buttonVariants } from './ui/button';
-import { Menu, X } from 'lucide-react';
+import { BookOpen, BookText, Menu, X } from 'lucide-react';
 import Link from 'fumadocs-core/link';
 import { usePathname } from 'next/navigation';
 import { isActive } from '../lib/is-active';
@@ -124,4 +124,15 @@ export function SidebarLayoutTab({
       {item.title}
     </Link>
   );
+}
+
+export function DynamicLabel() {
+  const currentPath = usePathname();
+  const isDocs = currentPath.startsWith('/docs');
+  return (
+    <Link href={isDocs ? '/docs' : '/blog'} className={`lg:flex absolute ${isDocs ? 'left-4' : 'left-[calc((100vw-var(--fd-layout-width))/2_+_1rem)]'} hidden top-3 text-sm flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 bg-fd-primary/10 text-fd-primary`} style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }} >
+      {isDocs ? <BookOpen /> : <BookText />}
+      {isDocs ? 'Docs' : 'Blog'}
+    </Link>
+  )
 }
