@@ -17,10 +17,16 @@ export const source = loader({
 });
 
 // blog
-import { blog as blogPosts } from '@/.source';
+import { blog as blogPosts, blogMeta } from '@/.source';
 import { createMDXSource } from 'fumadocs-mdx';
 
 export const blog = loader({
   baseUrl: '/blog',
-  source: createMDXSource(blogPosts),
+  source: createMDXSource(blogPosts, blogMeta),
+  // NOTE: adds icon support to meta.json
+  icon(icon) {
+    if (!icon) return undefined;
+    if (icon in icons) return createElement(icons[icon as keyof typeof icons]);
+    return undefined;
+  },
 });
