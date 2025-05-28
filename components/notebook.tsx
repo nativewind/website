@@ -39,6 +39,7 @@ import {
 } from './docs/shared';
 import type { PageTree } from 'fumadocs-core/server';
 import {
+  DynamicLabel,
   LayoutTab,
   LayoutTabs,
   Navbar,
@@ -274,11 +275,7 @@ function DocsNavbar({
               <SidebarIcon />
             </SidebarCollapseTrigger>
           ) : null} */}
-          {/* TODO: use currentPathname (blog|docs) */}
-          <Link href="/docs" className="lg:flex absolute left-4 hidden top-3 text-sm flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 bg-fd-primary/10 text-fd-primary" style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }} >
-            <BookOpen />
-            Docs
-          </Link>
+          <DynamicLabel />
           <Link
             href={nav.url ?? '/'}
             className={cn(
