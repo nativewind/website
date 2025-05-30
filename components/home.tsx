@@ -103,6 +103,7 @@ function Header({
       >
         {nav.title}
       </Link>
+      {/* TODO: skip navigation */}
       {afterTitle}
       {nav.children}
       <ul className="flex flex-row items-center justify-center flex-1 gap-2 pr-12 max-sm:hidden">

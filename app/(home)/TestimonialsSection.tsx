@@ -273,9 +273,11 @@ function shuffleArray(array : ShowcaseItemProps[]) {
   return array;
 }
 
-const col11 = shuffleArray(items);
-const col21 = shuffleArray(items.slice(0, items.length / 2));
-const col22 = shuffleArray(items.slice(items.length / 2, items.length));
-const col31 = shuffleArray(items.slice(0, items.length / 3));
-const col32 = shuffleArray(items.slice(items.length / 3, 2 * items.length / 3));
-const col33 = shuffleArray(items.slice(2 * items.length / 3, items.length));
+// TODO: shuffleArray causes a Next hydration error
+// TODO: separate into a child server component
+const col11 = items;
+const col21 = items.slice(0, items.length / 2);
+const col22 = items.slice(items.length / 2, items.length);
+const col31 = items.slice(0, items.length / 3);
+const col32 = items.slice(items.length / 3, 2 * items.length / 3);
+const col33 = items.slice(2 * items.length / 3, items.length);
