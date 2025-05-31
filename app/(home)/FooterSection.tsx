@@ -1,52 +1,48 @@
 import { Wordmark } from "../assets";
 import Link from "next/link";
-import SectionLink from "./SectionLink";
 import { ExternalLink } from "lucide-react";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export default function FooterSection() {
   return (
     <>
-      <div className="border-t border-dashed w-full pt-8 md:pt-12 backdrop-blur -mb-4" />
-      <footer id="footer" className="relative w-full max-w-fd-container mx-auto text-fd-muted-foreground">
-        {/* debug line to align the headings with wordmark at baseline */}
-        <div className="border-t border-dashed border-fd-primary opacity-20 hidden md:block absolute top-20 z-50 w-full" />
-        <div className="-z-10 h-24 w-[33rem] bg-cyan-500/50 rounded-[100%] max-w-screen absolute top-1/2 left-1/2 -translate-x-1/2 blur-3xl" />
-        {/* -mb-[calc(1.25rem+1px)] */}
-        <SectionLink className="z-30 pl-14 lg:pl-0" href="#footer" name="border-t px-12 grid grid-cols-2 sm:flex justify-between" />
-        <div className="border-t bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto px-12 pt-10 pb-6 grid grid-cols-2 sm:flex justify-between">
-          
-          <div className="flex-col gap-4 hidden sm:flex pl-2">
-            <Wordmark className="text-fd-foreground h-7" />
-            <Socials />
-            <div className="text-xs">
-              <div className="inline-block -scale-x-100 mx-1">©</div>
-              Copyright {new Date().getFullYear()}
+      <footer id="footer" className="relative w-full mx-auto text-fd-muted-foreground overflow-hidden">
+
+        <div className="absolute w-full h-full inset-0 backdrop-blur"/>
+        <div className="-z-10 h-24 w-[33rem] bg-cyan-500/50 rounded-[100%] max-w-screen absolute bottom-0 right-1/2 translate-1/2 blur-3xl" />
+
+        <div className="bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto pt-10">
+          <div className="grid grid-cols-2 sm:flex justify-between px-8 lg:px-0">
+            <div className="flex-row sm:flex-col gap-4 flex items-start col-span-2 w-full sm:w-auto justify-between pb-10">
+              <Wordmark className="text-fd-foreground h-7" />
+              <Socials />
+            </div>
+
+            <div className="flex flex-col gap-3 text-sm">
+              <b className="text-fd-foreground font-semibold mt-2">Learn</b>
+              <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/docs">Documentation</Link>
+              <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="#showcase">Showcase</Link>
+              <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/blog">Blog</Link>
+              {/* <a>Playground</a> */}
+              {/* <a>Community</a> */}
+            </div>
+
+            <div className="flex flex-col gap-3 text-sm">
+              <b className="text-fd-foreground font-semibold mt-2">Component Kits</b>
+              <a href="https://rnr-docs.vercel.app/" target="_blank" rel="noopener noreferrer" className="group -mr-5 flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">React Native Reusables <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
+              <a href="https://nativewindui.com" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">NativewindUI <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
+              <a href="https://gluestack.io/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Gluestack <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 text-sm">
-            <b className="text-fd-foreground font-semibold mt-2">Learn</b>
-            <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/docs">Documentation</Link>
-            <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="#showcase">Showcase</Link>
-            {/* <a>Blog</a> */}
-            {/* <a>Playground</a> */}
-          </div>
-
-          <div className="flex flex-col gap-3 text-sm">
-            <b className="text-fd-foreground font-semibold mt-2">Component Kits</b>
-            <a href="https://rnr-docs.vercel.app/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">React Native Reusables <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
-            <a href="https://nativewindui.com" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">NativewindUI <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
-            <a href="https://gluestack.io/" target="_blank" rel="noopener noreferrer" className="group flex gap-1 hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Gluestack <ExternalLink className="h-4 w-4 group-hover:opacity-100 group-hover:translate-0 -translate-x-2 translate-y-2 scale-50 group-hover:scale-100 opacity-0 duration-300"/></a>
-          </div>
-          
-          <div className="flex-col items-start gap-4 flex sm:hidden">
-            <Socials />
-            {/* <Wordmark className="text-fd-foreground h-7" /> */}
+          <div className="flex items-center w-full justify-between py-4 border-t border-fd-foreground/10 mix-blend-plus-darker dark:mix-blend-plus-lighter mt-10 max-lg:px-8">
             <div className="text-xs">
-              <div className="inline-block -scale-x-100 mx-1">©</div>
+              <div className="inline-block -scale-x-100 mr-1">©</div>
               Copyright {new Date().getFullYear()}
             </div>
+            <ThemeToggle mode="light-dark-system" />
           </div>
+
         </div>
       </footer>
     </>
