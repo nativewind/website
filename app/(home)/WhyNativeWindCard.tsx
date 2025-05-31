@@ -46,7 +46,7 @@ export default function WhyNativewindCard({
   return (
     <a href={href} className="flex-1 min-w-[50%] relative group overflow-x-clip" draggable="false">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="absolute -top-0.75 -right-0.75 z-20 duration-300 group-hover:-translate-x-8.5 group-hover:translate-y-8.5 group-hover:scale-200"><path d="M21 8V5a2 2 0 0 0-2-2h-3" /></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="absolute -bottom-0.75 -left-0.75 duration-300 group-hover:-translate-y-8.5 group-hover:translate-x-8.5 group-hover:scale-200 z-20"><path d="M3 16v3a2 2 0 0 0 2 2h3" /></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="absolute -bottom-0.75 -left-0.75 duration-300 group-hover:-translate-y-10.5 group-hover:translate-x-10.5 group-hover:scale-200 z-20"><path d="M3 16v3a2 2 0 0 0 2 2h3" /></svg>
       {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="absolute -bottom-0.75 -right-0.75 z-10"><path d="M16 21h3a2 2 0 0 0 2-2v-3" /></svg> */}
       {/* duration-300 group-hover:-translate-8 group-hover:scale-200 */}
       {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="absolute -top-0.75 -left-0.75 z-10"><path d="M8 3H5a2 2 0 0 0-2 2v3" /></svg> */}
@@ -54,12 +54,12 @@ export default function WhyNativewindCard({
       
       <div className="bg-grid-lines absolute inset-0 ease-out duration-300 group-hover:opacity-50 opacity-0" />
       <div className={`bg-gradient-to-b from-transparent via-transparent ${gradientVariants[color as keyof typeof gradientVariants]} absolute inset-0 opacity-5 group-hover:opacity-20 duration-300`} />
-      <div className="w-full h-full z-10 p-6 relative flex flex-col items-start">
+      <div className="w-full h-full z-10 p-8 relative flex flex-col items-start">
 
         <div className={`text-2xl -mt-4 font-mono text-right ${textVariants[color as keyof typeof textVariants]} translate-y-1/2 px-4 w-full duration-300 lg:text-4xl z-10`}>
           {title}
         </div>
-        <div className={`text-2xl -mt-4 font-mono text-right ${textVariants[color as keyof typeof textVariants]} translate-y-1/2 px-4 w-full duration-300 lg:text-4xl absolute top-6 right-6 font-bold`}>
+        <div className={`text-2xl -mt-4 font-mono text-right ${textVariants[color as keyof typeof textVariants]} translate-y-1/2 px-4 w-full duration-300 lg:text-4xl absolute top-8 right-8 font-bold`}>
           {title}
         </div>
         <div className={`relative w-full max-h-[28rem] grid place-items-center aspect-square rounded-2xl border bg-fd-background/50 backdrop-blur text-left text-fd-foreground/50 ${borderVariants[color as keyof typeof borderVariants]} duration-300 overflow-clip min-h-[calc(100%-5rem)]`}>
