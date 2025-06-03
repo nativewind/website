@@ -114,8 +114,10 @@ export default function HeroSectionVisual() {
   }, []);
 
   return (
-    <div className="h-full w-full max-w-screen max-h-screen sm:max-h-[min(50vh,600px)] flex-1 flex justify-center border-t border-dashed">
+    <div className="h-full w-full max-w-screen max-h-screen sm:max-h-[min(50vh,600px)] flex-1 flex justify-center border-t border-dashed -mt-1">
       <div className="flex relative w-fit justify-center max-w-[calc(var(--spacing-fd-container)+0rem)]">
+        <div className="z-20 absolute bottom-0 mt-auto border-b border-dashed max-w-fd-container mx-auto w-full"/>
+
 
         <div className="z-10 pointer-events-none absolute w-full h-full inset-0 bg-gradient-to-b from-fd-background/0 to-fd-background from-[calc(100%-15rem)]" />
         
@@ -231,7 +233,7 @@ const FEATURES = [
   `}
         </pre>
         {/* <div className="absolute h-full border-r border-dashed right-[42px] top-0"/> */}
-          <div className={`h-full relative min-h-96 overflow-clip sm:absolute sm:-right-20 sm:mt-2 xl:h-[50rem] xl:sticky xl:top-20 xl:-mt-[47.25rem] xl:-mb-[19rem] -mt-32 sm:translate-y-1/4 sm:-translate-x-1/3 lg:translate-x-0 lg:translate-y-0 md:right-0 w-96 min-w-96 ${platform ? 'rounded-t-[4rem] xl:rounded-[4rem]' : 'rounded-t-[3rem] xl:rounded-[3rem]'} xl:!border-b-8 lg:ml-2 border-8 border-black lg:relative bg-gradient-to-b from-fd-accent/20 backdrop-blur to-white dark:to-fd-card p-7 pt-24 text-start !border-b-0 duration-300`}>
+          <div className={`h-full relative min-h-96 overflow-clip sm:absolute sm:-right-20 sm:mt-2 -mt-32 sm:translate-y-1/4 sm:-translate-x-1/3 lg:translate-x-0 lg:translate-y-0 md:right-0 w-96 min-w-96 ${platform ? 'rounded-t-[4rem]' : 'rounded-t-[3rem]'} lg:ml-2 border-8 border-black lg:relative bg-gradient-to-b from-fd-accent/20 backdrop-blur to-white dark:to-fd-card p-7 pt-24 text-start !border-b-0 duration-300`}>
             
           {/* dynamic island / selfie hole */}
           <div className={`${platform ? 'w-24 h-8' : 'w-6 h-6' } rounded-full bg-black absolute top-4 left-1/2 -translate-x-1/2 duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]`} />
@@ -256,11 +258,11 @@ const FEATURES = [
               </div>
             ))}
           </div>
-            <div className={`absolute bottom-40 left-1/2 -translate-x-1/2 hidden xl:flex items-baseline duration-300 ${platform ? 'translatey-0' : 'translate-y-4'}`}>
+          {/* <div className={`absolute bottom-40 left-1/2 -translate-x-1/2 hidden xl:flex items-baseline duration-300 ${platform ? 'translatey-0' : 'translate-y-4'}`}>
             <UserRound className={`stroke-fd-background size-5 duration-300 ${platform ? 'translate-x-1/4 fill-fd-primary/50' : 'translate-x-2/3 fill-fd-primary'}`} />
             <UserRound className={`stroke-fd-background fill-fd-primary duration-300 ${platform ? '-translate-x-1/4 size-6' : '-translate-x-2/3 size-5'}`} />
           </div>
-            <div className={`absolute bottom-28 text-center text-[0.6rem] w-4/5 px-2 hidden xl:block duration-300 ${platform ? 'translatey-0' : 'translate-y-4'}`}>
+          <div className={`absolute bottom-28 text-center text-[0.6rem] w-4/5 px-2 hidden xl:block duration-300 ${platform ? 'translatey-0' : 'translate-y-4'}`}>
             By pressing continue, you agree to our{' '}
               <span className="text-fd-primary">
                 Terms of Service
@@ -272,9 +274,9 @@ const FEATURES = [
           </div>
           <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 ${platform ? 'rounded-xl' : 'rounded-3xl text-sm font-medium translate-y-4'} bg-fd-primary p-2 w-4/5 text-center text-fd-primary-foreground hidden xl:block duration-300`}>
             Continue
-          </div>
+          </div> */}
           {/* nav pill */}
-          <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full h-1.5 w-1/3 bg-black dark:bg-fd-muted-foreground hidden xl:block duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${platform ? 'translate-y-0' : 'translate-y-20'}`} />
+          {/* <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full h-1.5 w-1/3 bg-black dark:bg-fd-muted-foreground hidden xl:block duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] ${platform ? 'translate-y-0' : 'translate-y-20'}`} /> */}
             
           </div>
         </div>
