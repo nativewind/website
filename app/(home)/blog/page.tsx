@@ -3,7 +3,7 @@ import { blog } from '@/lib/source';
 import SectionTitle from '../SectionTitle';
 import FooterSection from '../FooterSection';
 
-export default function Home() {
+export default function Blog() {
   const posts = blog.getPages();
 
   return (
@@ -65,6 +65,8 @@ export default function Home() {
             </div>
           </Link>
         ))}
+
+        <div className="mt-auto border-b border-dashed max-w-fd-container mx-auto w-full"/>
       </div>
       <FooterSection />
     </main>

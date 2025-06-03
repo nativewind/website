@@ -12,7 +12,7 @@ export default function WhyNativewindSection() {
     <>
       <SectionTitle id="why-nativewind" title="Why Nativewind?" />
 
-      <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px]">      
+      <section className="relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-b border-dashed">      
 
         <div className="flex-1 flex max-sm:flex-col w-full border-t border-dashed">
           <WhyNativewindCard href="/docs/core-concepts/dark-mode" title="Dark/Light mode" number="00" color="cyan" visual={<DarkModeVisual/>} />

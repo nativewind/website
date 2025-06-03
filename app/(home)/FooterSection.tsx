@@ -13,7 +13,7 @@ export default function FooterSection() {
 
         <div className="bg-fd-background/50 backdrop-blur-lg w-full max-w-fd-container mx-auto pt-10">
           <div className="grid grid-cols-2 sm:flex justify-between px-8 lg:px-0">
-            <div className="flex-row sm:flex-col gap-4 flex items-start col-span-2 w-full sm:w-auto justify-between pb-10">
+            <div className="flex-row sm:flex-col gap-4 flex items-start col-span-2 w-full sm:w-auto max-sm:justify-between pb-10">
               <Wordmark className="text-fd-foreground h-7" />
               <Socials />
             </div>
@@ -22,6 +22,7 @@ export default function FooterSection() {
               <b className="text-fd-foreground font-semibold mt-2">Learn</b>
               <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/docs">Documentation</Link>
               <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="#showcase">Showcase</Link>
+              <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="#showcase">Resources</Link>
               <Link className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300" href="/blog">Blog</Link>
               {/* <a>Playground</a> */}
               {/* <a>Community</a> */}
@@ -49,7 +50,7 @@ export default function FooterSection() {
   )
 }
 
-const socials = [
+export const socials = [
   {
     name: "Github",
     href: "https://github.com/nativewind/nativewind",

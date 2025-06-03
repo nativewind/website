@@ -2,6 +2,7 @@
   "pages": [
     "[BookText][Blog](/blog/)",
     "[LayoutTemplate][Showcase](/#showcase)",
+    "[Box][Resources](/resources/)",
 
     "---Overview---",
     "index",

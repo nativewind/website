@@ -44,7 +44,7 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <HeroSectionVisual />
+      <HeroSectionVisual />      
     </section>
   )
 }

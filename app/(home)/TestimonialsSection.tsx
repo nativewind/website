@@ -15,7 +15,7 @@ export default function TestimonialsSection({
     <>
       <SectionTitle id="showcase" title="Who is using Nativewind?" />
 
-      <section className={`relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-t border-dashed ${
+      <section className={`relative flex flex-col w-full max-w-fd-container mx-auto -mt-[1px] border-y border-dashed ${
         showMore ? 'overflow-clip' : 'max-h-[50vh] overflow-hidden'
         }`}>
         {children}

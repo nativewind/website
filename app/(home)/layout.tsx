@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { HomeLayout } from '@/components/home';
 import { Wordmark } from '../assets';
-import { BookText, Book, Cpu, Heart, Layout as LayoutIcon, LayoutTemplate, Server, UsersRound, BookDown } from 'lucide-react';
+import { BookText, Book, Cpu, Heart, Layout as LayoutIcon, LayoutTemplate, Server, UsersRound, BookDown, Box } from 'lucide-react';
 import { RootToggle } from '@/components/layout/root-toggle';
 
 import Image from 'next/image';
@@ -99,6 +99,12 @@ export default function Layout({ children }: { children: ReactNode }) {
         text: 'Showcase',
         url: '/#showcase',
         icon: <LayoutTemplate />,
+        active: 'url',
+      },
+      {
+        text: 'Resources',
+        url: '/resources',
+        icon: <Box />,
         active: 'url',
       },
       {
