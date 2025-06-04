@@ -14,13 +14,13 @@
     "getting-started/using-with-monorepos",
 
     "---Guides---",
+    "guides/upgrade-v5",
     "guides/troubleshooting",
     "guides/custom-components",
     "guides/third-party-components",
     "guides/themes",
     "guides/editor-setup",
 
-    
     "---Core concepts---",
     "core-concepts/tailwindcss",
     "core-concepts/quirks",
@@ -89,6 +89,5 @@
 
     "---Plugins---",
     "...tailwind/plugins"
-
   ]
 }
