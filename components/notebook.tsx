@@ -107,7 +107,7 @@ export function DocsLayout({
           id="nd-docs-layout"
           {...props.containerProps}
           className={cn(
-            'flex w-full flex-1 flex-row pe-(--fd-layout-offset)',
+            'flex w-full overflow-x-clip flex-1 flex-row pe-(--fd-layout-offset)',
             variables,
             props.containerProps?.className,
           )}
