@@ -1,10 +1,10 @@
 import { DocsLayout } from '@/components/notebook';
-import type { ReactNode } from 'react';
 import { source } from '@/lib/source';
 import { Wordmark } from '../assets';
 import { RootToggle } from '@/components/layout/root-toggle';
+import { BookOpen } from 'lucide-react';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { BookOpen, BookText, Heart, LayoutTemplate, UserRound } from 'lucide-react';
 
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -39,38 +39,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         ),
         mode: 'top',
       }}
-      // TODO: remove, probably won't be used...
-      // tabMode: 'navbar',
       sidebar={{
         collapsible: true,
-        // NOTE: for 2+ root:true metas https://fumadocs.vercel.app/docs/ui/layouts/docs#sidebar-tabs
-        // TODO: remove, probably won't be used
-        tabs: {
-          transform(option, node) {
-            const meta = source.getNodeMeta(node);
-            if (!meta) return option;
-
-            const color = `var(--${meta.file.dirname}-color, var(--color-fd-foreground))`;
-
-            return {
-              ...option,
-              icon: (
-                <div
-                  className="rounded-md p-1 shadow-lg ring-2 [&_svg]:size-5"
-                  style={
-                    {
-                      color,
-                      border: `1px solid color-mix(in oklab, ${color} 50%, transparent)`,
-                      '--tw-ring-color': `color-mix(in oklab, ${color} 20%, transparent)`,
-                    } as object
-                  }
-                >
-                  {node.icon}
-                </div>
-              ),
-            };
-          },
-        },
         // NOTE: stays pinned when scrolling the sidebar
         banner: (
           <div className="flex flex-col gap-4 pt-2 lg:hidden">
@@ -96,9 +66,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         ),
       }}
     >
-      <div className="absolute top-0 xl:right-1/2 right-0 translate-x-1/2 -z-10 -translate-y-1/2 w-[64rem] h-[64rem] rounded-full bg-fd-primary/10 max-md:hidden [--mask:radial-gradient(circle_at_center,red,transparent_69%)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)] pointer-events-none" />
-      <div className="fixed top-0 xl:right-1/2 right-0 translate-x-1/2 -z-10 -translate-y-1/2 w-[64rem] h-[64rem] rounded-full bg-fd-primary/5 max-md:hidden [--mask:radial-gradient(circle_at_center,red,transparent_69%)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)] pointer-events-none" />
-      <div className="absolute top-0 xl:right-1/2 right-0 translate-x-1/2 -z-10 h-[64rem] w-[64rem] bg-grid-lines-xl dark:opacity-80 -translate-y-1/2 max-md:hidden [--mask:radial-gradient(circle_at_center_top,red,transparent)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)] -skew-20 pointer-events-none"/>
       {children}
     </DocsLayout>
   );

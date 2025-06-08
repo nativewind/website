@@ -10,7 +10,7 @@ export default function Blog() {
     <main className="flex flex-1 flex-col overflow-x-clip">
       <div className="fixed max-w-fd-container lg:w-[calc(100%-1rem)] box-content lg:border-x border-dashed top-0 left-1/2 -translate-x-1/2 h-screen pointer-events-none" />
       <div className="bg-fd-background/50 pt-56 backdrop-blur relative">
-        {/* outlide */}
+        {/* outside */}
         <div className="left-1/2 -translate-x-1/2 bottom-0 w-full max-w-fd-container absolute h-full pointer-events-none">
           <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-[64rem] h-[64rem] rounded-full bg-fd-primary/5 max-md:hidden [--mask:radial-gradient(circle_at_center,red,transparent_69%)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)]" />
         </div>
@@ -20,7 +20,7 @@ export default function Blog() {
           <div className="absolute bottom-0 right-0 translate-x-1/2 h-[64rem] w-screen bg-grid-lines-y-lg translate-y-1/2 max-md:hidden [--mask:radial-gradient(circle_at_center,red,transparent)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)] -skew-20" />
           <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-[64rem] h-[64rem] rounded-full bg-fd-primary/5 max-md:hidden [--mask:radial-gradient(circle_at_center,red,transparent_69%)] [mask-image:var(--mask)] [webkit-mask-image:var(--mask)]" />
         </div>
-        <SectionTitle id="blog" title="Latest Blog Posts" className="sticky top-14 z-10 border-t-0 backdrop-blur-none border-b " />
+        <SectionTitle id="blog" title="Latest Blog Posts" className="backdrop-blur-none" />
       </div>
       <div className="relative min-h-[calc(100vh-16rem-6.5625rem)] flex flex-col mx-auto w-full border-t border-dashed">
       

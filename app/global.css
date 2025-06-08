@@ -12,6 +12,12 @@
   --spacing-fd-container: 1000px;
 }
 
+/* debugger */
+/* * {
+  outline: 1px solid #f4488888;
+  outline-offset: -1px;
+} */
+
 @media (min-width: 1200px) {
   :root {
     --spacing-fd-container: 1100px;
