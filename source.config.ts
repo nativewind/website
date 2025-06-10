@@ -1,4 +1,4 @@
-import { defineDocs } from 'fumadocs-mdx/config';
+import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import { defineCollections } from 'fumadocs-mdx/config';
 
 export const docs = defineDocs({
@@ -13,4 +13,8 @@ export const blogMeta = defineCollections({
 export const blog = defineCollections({
   type: 'doc',
   dir: 'content/blog',
+});
+
+export default defineConfig({
+  lastModifiedTime: 'git',
 });

@@ -32,6 +32,11 @@ export default async function Page(props: {
     >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
+      {page.data.lastModified && (
+        <p className="text-sm text-muted-foreground mb-4 italic">
+          Last updated on {formatFullDateWithOrdinal(page.data.lastModified)}
+        </p>
+      )}
       <DocsBody>
         <MDX components={{
           ...defaultMdxComponents as any,
@@ -60,4 +65,21 @@ export async function generateMetadata(props: {
     title: page.data.title,
     description: page.data.description,
   };
+}
+
+function formatFullDateWithOrdinal(dateInput: string | number | Date) {
+  const date = new Date(dateInput);
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'long' });
+  const year = date.getFullYear();
+  const ordinal = (n: number) => {
+    if (n > 3 && n < 21) return 'th';
+    switch (n % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+  return `${month} ${day}${ordinal(day)}, ${year}`;
 }
