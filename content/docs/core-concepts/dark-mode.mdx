@@ -56,13 +56,11 @@ export default function App() {
     const newTheme = currentTheme === "light" ? "dark" : "light";
     setCurrentTheme(newTheme);
     colorScheme.set(newTheme);
-};
+  };
 
   return (
     <SafeAreaView
-      className={`flex-1 ${
-        currentTheme === 'dark' ? 'bg-gray-900' : currentTheme === 'light' ? 'bg-white' : 'bg-white dark:bg-gray-900'
-      } justify-center items-center`}
+      className={`flex-1 ${currentTheme === 'dark' ? 'bg-gray-900' : 'bg-white'} justify-center items-center`}
     >
       <StatusBar style={currentTheme === 'dark' ? 'light' : 'dark'} />
       <Pressable
