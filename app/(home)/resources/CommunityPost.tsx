@@ -26,7 +26,7 @@ export default function CommunityPost({
 }: CommunityPostProps) {  
   return (
   <div className="flex flex-col border-r border-dashed shrink-0 relative group/card">
-    <div className="flex m-2 rounded-2xl hover:shadow-xl flex-col-reverse hover:bg-white dark:hover:bg-fd-muted duration-300">
+    <div className="flex m-6 sm:m-2 rounded-2xl hover:shadow-xl flex-col-reverse hover:bg-white dark:hover:bg-fd-muted duration-300">
       <Link
         target="_blank"
         href={url}
