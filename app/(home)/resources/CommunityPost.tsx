@@ -36,7 +36,7 @@ export default function CommunityPost({
         {/* <div className="absolute bottom-0 left-0 w-4 h-5 rounded-r-2xl bg-fd-background border-b-2 -translate-x-1/2 translate-y-[1px]"/>
         <div className="absolute bottom-0 left-0 w-2 h-8 rounded-br-2xl bg-white border-r -translate-x-full translate-y-[1px]"/> */}
         {/* </div> */}
-        <img src={image} alt={`${title} Thumbnail`} className="aspect-video rounded-t-lg h-auto w-76 mb-4" />
+        <img src={image} alt={`${title} Thumbnail`} className="aspect-video object-cover rounded-t-lg h-auto w-76 mb-4" />
         <h2 className="text-lg font-semibold flex gap-2 group-hover/card:translate-x-4 duration-300">
           {title}
           <ExternalLink className="mt-1 h-4.5 w-4.5 group-hover/card:translate-0 -translate-x-2 translate-y-2 opacity-0 scale-75 group-hover/card:opacity-100 group-hover/card:scale-100 duration-300" />
