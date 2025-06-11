@@ -2,6 +2,14 @@ import ExpoAutoResizingInput from "@/app/assets/expo-auto-resizing-input.png";
 import ExpoBottomMenu from "@/app/assets/expo-bottom-menu.png";
 import ExpoPlayground from "@/app/assets/expo-playground.png";
 
+function shuffleArray<T>(array: T[]): T[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 export const posts = [
   {
     title: "Make It Animated",
@@ -82,3 +90,5 @@ export const posts = [
     }
   }
 ]
+
+export const shuffledPosts = shuffleArray(posts);
