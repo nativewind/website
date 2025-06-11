@@ -10,6 +10,10 @@ export default function StateOfNativewindSection() {
         {stateOfNativewind.map((item) => (
           <StateOfNativewindCard key={item.url} {...item} />
         ))}
+        {/* spacer for last item to not be covered by mask-image */}
+        <div className="my-auto px-12 text-4xl">
+          💨
+        </div>
       </div>
     </>
   )
