@@ -48,7 +48,7 @@ export default function CommunityPost({
       </Link>
       <div className="p-3 flex gap-8 justify-between items-center">
         <Link href={author.github} target="_blank" className="flex items-center gap-2 group">
-          <img src={author.avatar} className="w-8 h-8 rounded-full mr-2" />
+          <img src={author.avatar} className="w-8 h-8 rounded-full" />
           <div className="flex flex-col">
             <div className="text-sm font-semibold underline group-hover:underline-offset-2 truncate decoration-transparent group-hover:decoration-fd-primary">{author.name}</div>
             <div className="text-xs text-fd-muted-foreground truncate">@{author.username}</div>

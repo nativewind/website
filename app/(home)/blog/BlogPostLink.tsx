@@ -40,7 +40,7 @@ export default function BlogPostLink({ post }: { post: BlogPost }) {
       )}
       <p className="mb-4 line-clamp-3 text-fd-muted-foreground">{post.data.description}</p>
       {post.data.authors && (
-        <div className="flex gap-2 mt-2">
+        <div className="flex gap-6 mt-2">
           {post.data.authors.map((author: {
             name: string,
             title: string,
