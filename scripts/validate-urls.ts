@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { URL } from 'url';
 
 interface ValidationResult {
   file: string;
@@ -13,7 +12,6 @@ interface ValidationResult {
 
 async function validateUrl(url: string): Promise<boolean> {
   try {
-    const parsedUrl = new URL(url);
     const response = await fetch(url, { 
       method: 'GET',
       headers: {
