@@ -20,6 +20,7 @@ export default function StateOfNWCard({ title, image, date, time, url }: { title
           {time}
         </div>
       </div>
+      {/* participants list TBD */}
       {/* <div className="flex -space-x-2 mb-1">
         <div className="size-8 bg-gray-500 rounded-full border-fd-background border-2" />
         <div className="size-8 bg-gray-500 rounded-full border-fd-background border-2" />
