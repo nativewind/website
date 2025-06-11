@@ -14,6 +14,10 @@ export default function CommunityPostsSection() {
         {posts.map((p) => (
           <CommunityPost key={p.url} {...p}/>
         ))}
+        {/* spacer for last item to not be covered by mask-image */}
+        <div className="my-auto px-12 text-4xl">
+          🎉
+        </div>
       </div>
     </>
   );

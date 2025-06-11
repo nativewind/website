@@ -1,3 +1,7 @@
+import ExpoAutoResizingInput from "@/app/assets/expo-auto-resizing-input.png";
+import ExpoBottomMenu from "@/app/assets/expo-bottom-menu.png";
+import ExpoPlayground from "@/app/assets/expo-playground.png";
+
 export const posts = [
   {
     title: "Make It Animated",
@@ -36,6 +40,45 @@ export const posts = [
       avatar: 'https://avatars.githubusercontent.com/u/4378611?v=4',
       github: "https://github.com/thomino",
       twitter: "https://x.com/thomino",
+    }
+  },
+  {
+    title: "expo-auto-resizing-input",
+    url: "https://github.com/rs-4/expo-auto-resizing-input",
+    image: ExpoAutoResizingInput,
+    description: "A React Native component that provides an auto-resizing text input with animated expansion, similar to modern messaging apps like iMessage or WhatsApp.",
+    author: {
+      name: 'Rayan',
+      username: 'rs-4',
+      avatar: 'https://avatars.githubusercontent.com/u/72416925?v=4',
+      github: "https://github.com/rs-4",
+      twitter: "https://x.com/rsStats_",
+    }
+  },
+  {
+    title: "expo-bottom-menu",
+    url: "https://github.com/rs-4/expo-bottom-menu",
+    image: ExpoBottomMenu,
+    description: "A modern React Native floating bottom menu component with smooth animations, haptic feedback, blur overlay, and theme support. Features an expandable interface that transforms from a compact chat button to a full menu with customizable items.",
+    author: {
+      name: 'Rayan',
+      username: 'rs-4',
+      avatar: 'https://avatars.githubusercontent.com/u/72416925?v=4',
+      github: "https://github.com/rs-4",
+      twitter: "https://x.com/rsStats_",
+    }
+  },
+  {
+    title: "playground-expo",
+    url: "https://github.com/rs-4/playground-expo",
+    image: ExpoPlayground,
+    description: "This playground is a section of the application dedicated to demonstrating and testing custom React Native components. It serves as an interactive showcase for components that can be reused in other projects.",
+    author: {
+      name: 'Rayan',
+      username: 'rs-4',
+      avatar: 'https://avatars.githubusercontent.com/u/72416925?v=4',
+      github: "https://github.com/rs-4",
+      twitter: "https://x.com/rsStats_",
     }
   }
 ]
