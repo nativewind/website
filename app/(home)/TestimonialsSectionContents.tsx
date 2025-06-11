@@ -21,6 +21,7 @@ import GoTogetherLogo from "../assets/gotogether.png";
 import ShutterMateLogo from "../assets/shuttermate.png";
 import FoloLogo from "../assets/folo.png";
 import VibeCodeLogo from "../assets/vibecode.png"
+import NeonCityLogo from "../assets/neoncity.png"
 import ShowcaseItem, { ShowcaseItemProps } from "./ShowcaseItem";
 
 export default function TestimonialsSectionContents() {
@@ -67,6 +68,14 @@ export default function TestimonialsSectionContents() {
 }
 
 const items : ShowcaseItemProps[] = [
+	{
+		name: "NeonCity",
+		description:
+			"NeonCity: CityRunner is a high-quality mobile game built with React Native created by Daehyeon Mun.",
+		logo: NeonCityLogo,		
+		appstore:
+			"https://apps.apple.com/us/app/neoncity-cityrunner/id6477771151?platform=iphone",
+	},
   {
     name: "Noona",
     description: "Noona is a marketplace for services and experiences.",
