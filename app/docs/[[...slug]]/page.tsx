@@ -35,13 +35,15 @@ export default async function Page(props: {
           single: false,
         }}
       >
-        <DocsTitle>{page.data.title}</DocsTitle>
-        <DocsDescription>{page.data.description}</DocsDescription>
+        {/* TODO: install DocsPage FumaDocsv15 and reorder contents */}
+        {/* lastUpdate={page.data.lastModified && new Date(page.data.lastModified)} */}
         {page.data.lastModified && (
-          <p className="text-sm text-muted-foreground mb-4 italic">
-            Last updated on {formatFullDateWithOrdinal(page.data.lastModified)}
+          <p className="text-sm text-fd-muted-foreground -mb-4">
+            Last updated on {Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(new Date(page.data.lastModified))}
           </p>
         )}
+        <DocsTitle>{page.data.title}</DocsTitle>
+        <DocsDescription>{page.data.description}</DocsDescription>
         <DocsBody>
           <MDX components={{
             ...defaultMdxComponents as any,
@@ -72,21 +74,4 @@ export async function generateMetadata(props: {
     title: page.data.title,
     description: page.data.description,
   };
-}
-
-function formatFullDateWithOrdinal(dateInput: string | number | Date) {
-  const date = new Date(dateInput);
-  const day = date.getDate();
-  const month = date.toLocaleString('en-US', { month: 'long' });
-  const year = date.getFullYear();
-  const ordinal = (n: number) => {
-    if (n > 3 && n < 21) return 'th';
-    switch (n % 10) {
-      case 1: return 'st';
-      case 2: return 'nd';
-      case 3: return 'rd';
-      default: return 'th';
-    }
-  };
-  return `${month} ${day}${ordinal(day)}, ${year}`;
 }
