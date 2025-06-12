@@ -8,9 +8,17 @@ import StateOfNW416 from '@/app/assets/state-of-nw-416.png'
 import StateOfNW430 from '@/app/assets/state-of-nw-430.png'
 import StateOfNW57 from '@/app/assets/state-of-nw-57.png'
 import StateOfNW514 from '@/app/assets/state-of-nw-514.png'
+import StateOfNW611 from '@/app/assets/state-of-nw-611.png'
 import StateOfNWNew from '@/public/og.png'
 
 export const stateOfNativewind = [
+    {
+    title: 'State of Nativewind',
+    image: StateOfNW611,
+    date: '2025-06-11',
+    time: '24:02',
+    url: 'https://www.youtube.com/watch?v=6PH1wvhR_Qk',
+  },
   {
     title: 'State of Nativewind',
     image: StateOfNWNew,
