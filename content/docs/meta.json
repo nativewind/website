@@ -3,34 +3,29 @@
     "[BookText][Blog](/blog/)",
     "[LayoutTemplate][Showcase](/#showcase)",
     "[Box][Resources](/resources/)",
-
-    "---Overview---",
-    "index",
-    "guides/goals",
+    "[Community](https://discord.gg/nativewind)",
 
     "---Getting Started---",
+    "index",
     "getting-started/installation/index",
-    "getting-started/typescript",
+    "getting-started/editor-setup",
     "getting-started/other-bundlers",
-    "getting-started/using-with-monorepos",
 
     "---Guides---",
+    "guides/using-with-monorepos",
     "guides/troubleshooting",
     "guides/custom-components",
     "guides/third-party-components",
     "guides/themes",
-    "guides/editor-setup",
 
-    
-    "---Core concepts---",
+    "---Core Concepts---",
     "core-concepts/tailwindcss",
     "core-concepts/quirks",
-
     "core-concepts/responsive-design",
     "core-concepts/dark-mode",
     "core-concepts/functions-and-directives",
 
-    "---React Native concepts---",
+    "---React Native Concepts---",
     "core-concepts/units",
     "core-concepts/differences",
     "core-concepts/style-specificity",

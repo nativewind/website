@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         // on: 'nav',
         type: 'menu',
         text: 'Docs',
-        url: '/docs',
+        url: '/docs/getting-started/installation',
         // active: 'nested-url',
         // NOTE: homepage hover items
         items: [

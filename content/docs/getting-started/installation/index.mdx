@@ -83,11 +83,25 @@ Switch the bundler to use the [Metro bundler](https://docs.expo.dev/guides/custo
 }
 ```
 
-### 7. TypeScript (optional)
+### 7. TypeScript setup (optional)
 
-Please follow the [TypeScript guide](./typescript).
+If you're using TypeScript in your project, you'll need to set up the type definitions. Nativewind extends the React Native types via declaration merging. The simplest method to include the types is to create a new `nativewind-env.d.ts` file and add a [triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html) referencing the types.
+
+```tsx
+/// <reference types="nativewind/types" />
+```
+
+<Callout type="warn" title="CAUTION">
+Do not call this file:
+
+- `nativewind.d.ts`
+- The same name as a file or folder in the same directory e.g `app.d.ts` when an `/app` folder exists
+- The same name as a folder in `node_modules`, e.g `react.d.ts`
+
+By doing so, your types will not be picked up by the TypeScript compiler.
+</Callout>
 
 ## Additional Setup Guides
 
-- [Using with Monorepos](./using-with-monorepos) - Learn how to set up Nativewind in monorepo environments like NX
+- [Using with Monorepos](../guides/using-with-monorepos) - Learn how to set up Nativewind in monorepo environments like NX
 - [Other Bundlers](./other-bundlers) - Learn how to use Nativewind with other bundlers
