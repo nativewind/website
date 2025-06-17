@@ -9,7 +9,6 @@
     "index",
     "getting-started/installation/index",
     "getting-started/editor-setup",
-    "getting-started/other-bundlers",
 
     "---Guides---",
     "guides/using-with-monorepos",
@@ -17,6 +16,7 @@
     "guides/custom-components",
     "guides/third-party-components",
     "guides/themes",
+    "guides/other-bundlers",
 
     "---Core Concepts---",
     "core-concepts/tailwindcss",
