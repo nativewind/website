@@ -85,7 +85,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             icon: <Book />,
             text: 'Guides',
             description: 'Troubleshooting',
-            url: '/docs/guides/troubleshooting',
+            url: '/docs/getting-started/troubleshooting',
           },
           {
             icon: <LayoutIcon />,

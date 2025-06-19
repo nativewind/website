@@ -9,10 +9,10 @@
     "index",
     "getting-started/installation/index",
     "getting-started/editor-setup",
+    "getting-started/troubleshooting",
 
     "---Guides---",
     "guides/using-with-monorepos",
-    "guides/troubleshooting",
     "guides/custom-components",
     "guides/third-party-components",
     "guides/themes",
