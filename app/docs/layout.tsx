@@ -2,7 +2,7 @@ import { DocsLayout } from '@/components/notebook';
 import { source } from '@/lib/source';
 import { Wordmark } from '../assets';
 import { RootToggle } from '@/components/layout/root-toggle';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Briefcase } from 'lucide-react';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 
@@ -14,7 +14,14 @@ export default function Layout({ children }: { children: ReactNode }) {
         mode: 'light-dark',
       }}
       tree={source.pageTree}
-      // links: [],
+      links={[
+        {
+          icon: <Briefcase />,
+          text: 'Hire Us',
+          url: '/hire-us',
+          active: 'url',
+        },
+      ]}
       githubUrl='https://github.com/nativewind/nativewind'
       // NOTE: for /layouts/notebook option https://fumadocs.vercel.app/docs/ui/layouts/docs#notebook
       nav={{

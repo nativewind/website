@@ -113,18 +113,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         url: '/blog',
         active: 'nested-url',
       },
-      // {
-      //   text: 'Community',
-      //   // TODO: GH Discussions / Discord Link?
-      //   url: '/community',
-      //   icon: <UsersRound />,
-      //   external: true,
-      // },
-      // {
-      //   text: 'Sponsors',
-      //   url: '/sponsors',
-      //   icon: <Heart />,
-      // },
     ]}
   >
     { children }
