@@ -14,14 +14,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         mode: 'light-dark',
       }}
       tree={source.pageTree}
-      links={[
-        {
-          icon: <Briefcase />,
-          text: 'Hire Us',
-          url: '/hire-us',
-          active: 'url',
-        },
-      ]}
       githubUrl='https://github.com/nativewind/nativewind'
       // NOTE: for /layouts/notebook option https://fumadocs.vercel.app/docs/ui/layouts/docs#notebook
       nav={{
