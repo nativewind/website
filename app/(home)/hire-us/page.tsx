@@ -17,7 +17,7 @@ export default function HireUsPage() {
         <SectionTitle id="hire-us" title="Hire Us" className="backdrop-blur-none" />
       </div>
       
-      <div className="relative min-h-[calc(100vh-16rem-6.5625rem)] flex flex-col mx-auto w-full border-t border-dashed">
+      <div className="relative min-h-[calc(100vh-16rem-6.5625rem)] flex flex-col mx-auto w-full border-t border-dashed bg-fd-background">
         <div className="max-w-fd-container mx-auto w-full px-8 lg:px-0 py-8">
           <p className="opacity-70 mb-8">
             Need help with your Nativewind project? We may be able to help.

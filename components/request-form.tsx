@@ -40,11 +40,11 @@ export default function RequestForm() {
 
   if (isSubmitted) {
     return (
-      <div className="rounded-lg border border-green-200 bg-green-50 p-6 dark:border-green-800 dark:bg-green-900/20">
-        <h3 className="text-lg font-semibold text-green-800 dark:text-green-200">
+      <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-6 dark:border-emerald-800 dark:bg-emerald-900/20">
+        <h3 className="text-lg font-semibold text-emerald-800 dark:text-emerald-200">
           Thank you for your request!
         </h3>
-        <p className="mt-2 text-green-700 dark:text-green-300">
+        <p className="mt-2 text-emerald-700 dark:text-emerald-300">
           We've received your message and will get back to you as soon as possible.
         </p>
         <button
@@ -75,12 +75,12 @@ export default function RequestForm() {
             id="name"
             name="name"
             required
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-blue-400 dark:focus:ring-blue-400"
+            className="mt-1 block w-full rounded-md border border-fd-accent-foreground/20 px-3 py-2 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 bg-fd-accent dark:text-white dark:focus:border-cyan-400 dark:focus:ring-cyan-400"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label htmlFor="email" className="block text-sm font-medium text-fd-accent-foreground">
             Email *
           </label>
           <input
@@ -88,7 +88,7 @@ export default function RequestForm() {
             id="email"
             name="email"
             required
-            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-blue-400 dark:focus:ring-blue-400"
+            className="mt-1 block w-full rounded-md border border-fd-accent-foreground/20 px-3 py-2 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 bg-fd-accent dark:text-white dark:focus:border-cyan-400 dark:focus:ring-cyan-400"
           />
         </div>
       </div>
@@ -103,7 +103,7 @@ export default function RequestForm() {
           rows={6}
           required
           placeholder="Please provide details about your request, including any specific requirements, timeline, or budget considerations."
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-blue-400 dark:focus:ring-blue-400"
+          className="mt-1 block w-full rounded-md border border-fd-accent-foreground/20 px-3 py-2 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 bg-fd-accent dark:text-white dark:focus:border-cyan-400 dark:focus:ring-cyan-400"
         />
       </div>
 
@@ -114,13 +114,13 @@ export default function RequestForm() {
             name="privacy"
             type="checkbox"
             required
-            className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:ring-blue-400"
+            className="h-4 w-4 rounded border-fd-accent-foreground/20 text-cyan-600 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:focus:ring-cyan-400"
           />
         </div>
         <div className="ml-3 text-sm">
-          <label htmlFor="privacy" className="text-gray-700 dark:text-gray-300">
+          <label htmlFor="privacy" className="text-fd-accent-foreground">
             I agree to the{' '}
-            <a href="/privacy" className="text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
+            <a href="/privacy" className="text-fd-primary hover:text-cyan-500 dark:hover:text-cyan-300">
               privacy policy
             </a>{' '}
             and consent to being contacted regarding my request. *
@@ -132,7 +132,7 @@ export default function RequestForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group relative box-content pl-4 pr-2 py-2 text-fd-background disabled:opacity-50 disabled:cursor-not-allowed"
+          className="group relative box-content pl-4 pr-2 py-2 text-fd-background disabled:opacity-50 disabled:cursor-not-allowed mr-2 cursor-pointer z-10 lg:-mt-12"
         >
           <div>{isSubmitting ? 'Sending...' : 'Submit Request'}</div>
           <div className="-z-10 absolute top-0 left-0 h-[80%] w-full bg-fd-foreground/80 group-hover:translate-1 duration-300 border-t border-dashed"/>
