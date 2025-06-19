@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function RequestForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +24,9 @@ export default function RequestForm() {
 
       if (response.ok) {
         setIsSubmitted(true);
-        e.currentTarget.reset();
+        if (formRef.current) {
+          formRef.current.reset();
+        }
       } else {
         throw new Error('Form submission failed');
       }
@@ -61,7 +64,7 @@ export default function RequestForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
