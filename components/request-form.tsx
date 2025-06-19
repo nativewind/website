@@ -107,7 +107,7 @@ export default function RequestForm() {
         />
       </div>
 
-      <div className="flex items-start">
+      {/* <div className="flex items-start">
         <div className="flex h-5 items-center">
           <input
             id="privacy"
@@ -126,13 +126,13 @@ export default function RequestForm() {
             and consent to being contacted regarding my request. *
           </label>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex justify-end">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group relative box-content pl-4 pr-2 py-2 text-fd-background disabled:opacity-50 disabled:cursor-not-allowed mr-2 cursor-pointer z-10 lg:-mt-12"
+          className="group relative box-content pl-4 pr-2 py-2 text-fd-background disabled:opacity-50 disabled:cursor-not-allowed mr-2 cursor-pointer z-10"
         >
           <div>{isSubmitting ? 'Sending...' : 'Submit Request'}</div>
           <div className="-z-10 absolute top-0 left-0 h-[80%] w-full bg-fd-foreground/80 group-hover:translate-1 duration-300 border-t border-dashed"/>
