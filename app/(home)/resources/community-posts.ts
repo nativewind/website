@@ -51,6 +51,19 @@ export const posts = [
     }
   },
   {
+    title: "NativeTemplates",
+    url: "https://www.native-templates.com/",
+    image: "https://github.com/thomino/expo-playground/blob/main/assets/img/readme/readme.jpg?raw=true",
+    description: "React Native apps with working flows, theming, and logic — built using Expo, NativeWind, and TypeScript. Ready for iOS and Android",
+    author: {
+      name: 'Thomino',
+      username: 'thomino',
+      avatar: 'https://avatars.githubusercontent.com/u/4378611?v=4',
+      github: "https://github.com/thomino",
+      twitter: "https://x.com/thomino",
+    }
+  },
+  {
     title: "expo-auto-resizing-input",
     url: "https://github.com/rs-4/expo-auto-resizing-input",
     image: ExpoAutoResizingInput,
