@@ -14,10 +14,6 @@
     {
       "source": "/repro",
       "destination": "https://stackblitz.com/edit/nativewind-test?file=README.md&view=editor"
-    },
-    {
-      "source": "/docs/getting-started/installation",
-      "destination": "/docs"
     }
   ]
 } 
