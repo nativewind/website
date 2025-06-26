@@ -7,8 +7,8 @@
     "[Community](https://nativewind.dev/discord)",
 
     "---Getting Started---",
+    "getting-started/overview",
     "index",
-    "getting-started/installation/index",
     "getting-started/editor-setup",
     "getting-started/troubleshooting",
 
