@@ -1,6 +1,7 @@
 import ExpoAutoResizingInput from "@/app/assets/expo-auto-resizing-input.png";
 import ExpoBottomMenu from "@/app/assets/expo-bottom-menu.png";
 import ExpoPlayground from "@/app/assets/expo-playground.png";
+import LambdaUI from "@/app/assets/lambda-ui.png";
 
 function shuffleArray<T>(array: T[]): T[] {
   for (let i = array.length - 1; i > 0; i--) {
@@ -100,6 +101,19 @@ export const posts = [
       avatar: 'https://avatars.githubusercontent.com/u/72416925?v=4',
       github: "https://github.com/rs-4",
       twitter: "https://x.com/rsStats_",
+    }
+  },
+  {
+    title: "Lambda UI",
+    url: "https://www.lambda-ui.dev/",
+    image: LambdaUI,
+    description: "Craft Stunning Mobile Apps Without Limits",
+    author: {
+      name: 'Nick',
+      username: 'codewithnick',
+      avatar: 'https://pbs.twimg.com/profile_images/1890049281555369984/FJQAgYwW_400x400.jpg',
+      twitter: "https://x.com/codeewithnick",
+      github: "",
     }
   }
 ]
