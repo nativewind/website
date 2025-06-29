@@ -12,7 +12,14 @@ import StateOfNW611 from '@/app/assets/state-of-nw-611.png'
 import StateOfNWNew from '@/public/og.png'
 
 export const stateOfNativewind = [
-    {
+  {
+    title: 'State of Nativewind',
+    image: StateOfNWNew,
+    date: '2025-06-26',
+    time: '22:16',
+    url: 'https://www.youtube.com/watch?v=eTWuAmaU1yc',
+  },
+  {
     title: 'State of Nativewind',
     image: StateOfNW611,
     date: '2025-06-11',

@@ -6,7 +6,7 @@ const withMDX = createMDX();
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.makeitanimated.dev', 'rn-primitives.vercel.app', 'github.com'],
+    domains: ['www.makeitanimated.dev', 'rn-primitives.vercel.app', 'github.com', 'pbs.twimg.com'],
   },
   webpack(config) {
     config.module.rules.push({
