@@ -22,7 +22,10 @@ tags: [migration, nativewind, v5, upgrade]
 image: https://www.nativewind.dev/img/og-image.png
 hide_table_of_contents: false
 ---
-> ⚠️ **Important:** Nativewind v5 is not yet available. This guide is to prepare people for the upgrade process.
+
+<Callout type="warn">
+**Important:** Nativewind v5 is not yet available. This guide is to prepare people for the upgrade process.
+</Callout>
 
 Welcome to the official upgrade guide for **Nativewind v5**. This release introduces several foundational changes that align Nativewind with the future of React Native while maintaining backward compatibility with the core API.
 
@@ -36,7 +39,9 @@ Before upgrading to Nativewind v5, your project **must** meet the following vers
 
 Nativewind v5 is built on top of Tailwind CSS v4.1+. You must upgrade your Tailwind configuration and tooling accordingly.
 
-> **Migration Tip:** Refer to the [Tailwind CSS v4 Upgrade Guide](https://tailwindcss.com/docs/upgrade-guide) for detailed steps.
+<Callout type="tip">
+**Migration Tip:** Refer to the [Tailwind CSS v4 Upgrade Guide](https://tailwindcss.com/docs/upgrade-guide) for detailed steps.
+</Callout>
 
 ### React Native 0.79+
 
@@ -67,7 +72,9 @@ Nativewind v5 preserves its existing API. Your usage of:
 
 However, several features are being **deprecated** and will emit runtime warnings during development. These features will be **removed in a future major release**.
 
-> ⚠️ **Warning:** Deprecated features will continue to function in v5 but should be migrated away from as soon as possible.
+<Callout type="warn">
+**Warning:** Deprecated features will continue to function in v5 but should be migrated away from as soon as possible.
+</Callout>
 
 However, there will be a number of breaking changes to how Nativewind functions and its configuration file that may affect you.
 
