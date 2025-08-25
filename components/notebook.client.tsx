@@ -129,10 +129,11 @@ export function SidebarLayoutTab({
 export function DynamicLabel() {
   const currentPath = usePathname();
   const isDocs = currentPath.startsWith('/docs');
+  const isv5 = currentPath.startsWith('/v5');
   return (
-    <Link href={isDocs ? '/docs' : '/blog'} className={`lg:flex absolute ${isDocs ? 'left-4' : 'left-[calc((100vw-var(--fd-layout-width))/2_+_1rem)]'} hidden top-3 text-sm flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 bg-fd-primary/10 text-fd-primary`} style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }} >
-      {isDocs ? <BookOpen /> : <BookText />}
-      {isDocs ? 'Docs' : 'Blog'}
+    <Link href={isDocs ? '/docs' : isv5 ? '/v5' : '/blog'} className={`lg:flex absolute ${isDocs || isv5 ? 'left-4' : 'left-[calc((100vw-var(--fd-layout-width))/2_+_1rem)]'} hidden top-3 text-sm flex-row items-center gap-2 rounded-md p-2 text-start [overflow-wrap:anywhere] md:py-1.5 [&_svg]:size-4 [&_svg]:shrink-0 ${isv5 ? 'bg-amber-500/10 text-amber-500' : 'bg-fd-primary/10 text-fd-primary'}`} style={{ paddingInlineStart: 'calc(var(--spacing) * 2)' }} >
+      {isDocs || isv5 ? <BookOpen /> : <BookText />}
+      {isDocs || isv5 ? 'Docs' : 'Blog'}
     </Link>
   )
 }

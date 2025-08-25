@@ -1,6 +1,10 @@
 import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 import { defineCollections } from 'fumadocs-mdx/config';
 
+export const docs5 = defineDocs({
+  dir: 'content/v5',
+});
+
 export const docs = defineDocs({
   dir: 'content/docs',
 });

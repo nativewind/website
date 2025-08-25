@@ -24,21 +24,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         <Wordmark className="h-6" />
       ),
     }}
-    afterTitle={(
-      <RootToggle
-        key="root-toggle"
-        options={[
-          {
-            title: 'v4',
-            url: '/docs',
-          },
-          {
-            title: 'v2',
-            url: 'https://v2.nativewind.dev/',
-          },
-        ]}
-      />
-    )}
     links={[
       // NOTE: docs link is separate to only show in home layout and not in docs layout, linkItems are passed to docs/layout.tsx
       {
