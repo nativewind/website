@@ -57,6 +57,35 @@
   background-position: 0 0, 10px 10px;
 }
 
+.bg-grid-dots-small-light {
+  background-image: radial-gradient(
+    circle at 0 0,
+    #fff 1.5px,
+    transparent 0
+  ),
+  radial-gradient(
+    circle at 100% 100%,
+    #fff 1.5px,
+    transparent 0
+  );
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+}
+
+.bg-grid-dots-small-dark {
+  background-image: radial-gradient(
+    circle at 0 0,
+    #000 1.5px,
+    transparent 0
+  ),
+  radial-gradient(
+    circle at 100% 100%,
+    #000 1.5px,
+    transparent 0
+  );
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+}
 .bg-grid-dots-current {
   background-image: radial-gradient(
     circle at 0 0,

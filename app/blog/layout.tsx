@@ -2,7 +2,6 @@ import { DocsLayout } from '@/components/notebook';
 import type { ReactNode } from 'react';
 import { blog } from '@/lib/source';
 import { Wordmark } from '../assets';
-import { RootToggle } from '@/components/layout/root-toggle';
 import Link from 'next/link';
 import { BookOpen, BookText, Heart, LayoutTemplate, UserRound } from 'lucide-react';
 
