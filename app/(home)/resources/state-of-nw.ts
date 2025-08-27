@@ -17,6 +17,13 @@ export const stateOfNativewind = [
   {
     title: "State of Nativewind",
     image: StateOfNWNewest,
+    date: "2025-08-20",
+    time: "44:05",
+    url: "https://www.youtube.com/watch?v=cM7ejHG42Nk",
+  },
+  {
+    title: "State of Nativewind",
+    image: StateOfNWNewest,
     date: "2025-08-05",
     time: "32:59",
     url: "https://www.youtube.com/watch?v=chbcOn801kg",
