@@ -1,4 +1,4 @@
-import { createMDX } from 'fumadocs-mdx/next';
+import { createMDX } from "fumadocs-mdx/next";
 
 const withMDX = createMDX();
 
@@ -6,7 +6,13 @@ const withMDX = createMDX();
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['www.makeitanimated.dev', 'rn-primitives.vercel.app', 'github.com', 'pbs.twimg.com'],
+    domains: [
+      "www.makeitanimated.dev",
+      "rn-primitives.vercel.app",
+      "github.com",
+      "pbs.twimg.com",
+      "i.ytimg.com",
+    ],
   },
   webpack(config) {
     config.module.rules.push({
