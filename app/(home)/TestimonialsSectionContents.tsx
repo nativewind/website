@@ -13,7 +13,7 @@ import KnowhereLogo from "../assets/knowhere.png";
 import RovelistLogo from "../assets/rovelist.png";
 import DayStackLogo from "../assets/daystack.png";
 import FluentlyLogo from "../assets/fluently.png";
-import HiveMindLogo from "../assets/hivemind.png";
+import HivemindLogo from "../assets/hivemind.png";
 import MindLumenLogo from "../assets/MindLumen.png";
 import BrainnotesLogo from "../assets/brainnotes.png";
 import FocusminnyLogo from "../assets/focusminny.png";
@@ -218,9 +218,9 @@ const items : ShowcaseItemProps[] = [
     appstore: "https://apps.apple.com/nl/app/ai-therapist-mindlumen/id6738006220",
   },
   {
-    name: "HiveMind",
+    name: "Hivemind",
     description: "Turn any topic into your personal social media feed with AI.",
-    logo: HiveMindLogo,
+    logo: HivemindLogo,
     website: "https://gethivemind.app/",
     appstore: "https://apps.apple.com/de/app/hivemind-study-by-scrolling/id6737344456",
   },
