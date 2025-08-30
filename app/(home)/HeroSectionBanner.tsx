@@ -7,20 +7,8 @@ export default function HeroSectionBanner() {
       {/* [mask-image:linear-gradient(to_right,transparent,red_1rem,red_calc(100%-1rem),transparent)] */}
       <div className="pb-4 pt-6 md:pb-2 md:pt-4 px-4 w-full flex flex-wrap gap-2 lg:justify-center items-center border-b dark:border-fd-primary/30 border-fd-primary border-dashed">
         <BannerLights />
-        
         Pre-release v5 of Nativewind is now available!
-
         <div className="flex flex-wrap gap-2 items-center">
-          Read the
-          <Link
-            href="/blog/v5-migration-guide"
-            className="relative flex bg-white/60 dark:bg-black/40 text-black/90 dark:text-white/90 w-fit flex-row items-center gap-2 rounded-md px-1.5 py-1 text-start [overflow-wrap:anywhere] [&_svg]:size-4 [&_svg]:shrink-0 hover:underline decoration-fd-primary duration-300"
-            style={{ paddingInlineStart: "calc(var(--spacing) * 2)" }}
-          >
-            <BookText />
-            Migration Guide
-          </Link>
-          or <span className="max-md:hidden">check out</span>
           <Link
             href="/v5/"
             className="relative w-fit flex flex-row items-center gap-2 bg-black dark:bg-amber-950 text-white dark:text-amber-500 rounded-md px-1.5 py-1 text-start [overflow-wrap:anywhere] [&_svg]:size-4 [&_svg]:shrink-0 hover:underline duration-300"
@@ -48,5 +36,5 @@ function BannerLights() {
       <div className="absolute top-0 py-1 left-0 w-full -z-10 h-full lg:hidden bg-fd-primary [mask-image:radial-gradient(ellipse_60%_25%_at_top,red,transparent_70%)]" />
       <div className="absolute top-0 py-1 left-0 w-full -z-10 h-full lg:hidden bg-indigo-300/50 [mask-image:radial-gradient(ellipse_60%_25%_at_100%_0%,red,transparent_70%)]" />
     </>
-  )
+  );
 }

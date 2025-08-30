@@ -10,6 +10,14 @@
     "index",
     "getting-started/installation/index",
     "getting-started/editor-setup",
-    "getting-started/troubleshooting"
+    "getting-started/troubleshooting",
+
+    "---Guides---",
+    "guides/migrate-from-v4",
+    "guides/using-with-monorepos",
+    "guides/custom-components",
+    "guides/third-party-components",
+    "guides/themes",
+    "guides/other-bundlers"
   ]
 }

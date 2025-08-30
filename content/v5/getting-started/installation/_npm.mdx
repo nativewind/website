@@ -2,15 +2,44 @@
 title: _npm helper
 ---
 
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
-import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
 
-<Tabs groupId="npm-install" items={["npm", "yarn", "pnpm", "bun", props.framework === 'expo' ? "expo" : undefined]}>
+<Tabs
+  groupId="v5-npm-install"
+  items={
+    props.expo === false
+      ? ["npm", "yarn", "pnpm", "bun"]
+      : ["expo", "npm", "yarn", "pnpm", "bun"]
+  }
+>
+  {props.expo !== false ? (
+    <Tab value="expo" label="Expo">
+      <CodeBlock language="bash">
+        <Pre>
+          {[
+            props.deps?.length
+              ? `npx expo install ${props.deps.join(" ")}`
+              : undefined,
+            props.devDeps?.length
+              ? `npx expo install --dev ${props.devDeps.join(" ")}`
+              : undefined,
+          ]
+            .filter(Boolean)
+            .join("\n")}
+        </Pre>
+      </CodeBlock>
+    </Tab>
+  ) : (
+    <></>
+  )}
   <Tab value="npm">
     <CodeBlock language="bash">
       <Pre>
         {[
-          props.deps?.length ? `npm install ${props.deps.join(" ")}` : undefined,
+          props.deps?.length
+            ? `npm install ${props.deps.join(" ")}`
+            : undefined,
           props.devDeps?.length
             ? `npm install --dev ${props.devDeps.join(" ")}`
             : undefined,
@@ -38,7 +67,9 @@ import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
     <CodeBlock language="bash">
       <Pre>
         {[
-          props.deps?.length ? `pnpm install ${props.deps.join(" ")}` : undefined,
+          props.deps?.length
+            ? `pnpm install ${props.deps.join(" ")}`
+            : undefined,
           props.devDeps?.length
             ? `pnpm install --dev ${props.devDeps.join(" ")}`
             : undefined,
@@ -52,7 +83,9 @@ import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
     <CodeBlock language="bash">
       <Pre>
         {[
-          props.deps?.length ? `bun install ${props.deps.join(" ")}` : undefined,
+          props.deps?.length
+            ? `bun install ${props.deps.join(" ")}`
+            : undefined,
           props.devDeps?.length
             ? `bun install --dev ${props.devDeps.join(" ")}`
             : undefined,
@@ -62,20 +95,4 @@ import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
       </Pre>
     </CodeBlock>
   </Tab>
-  {props.framework === 'expo' && (
-    <Tab value="expo" label="Expo">
-      <CodeBlock language="bash">
-        <Pre>
-          {[
-            props.deps?.length ? `npx expo install ${props.deps.join(" ")}` : undefined,
-            props.devDeps?.length
-              ? `npx expo install --dev ${props.devDeps.join(" ")}`
-              : undefined,
-          ]
-            .filter(Boolean)
-            .join("\n")}
-        </Pre>
-      </CodeBlock>
-    </Tab>
-  )}
 </Tabs>

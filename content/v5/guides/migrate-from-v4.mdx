@@ -1,0 +1,268 @@
+---
+title: Migrate from v4
+---
+
+import { Callout } from "@/components/callout";
+
+## Breaking Changes & Prerequisites
+
+Before upgrading to Nativewind v5, your project **must** meet the following version requirements:
+
+### Tailwind CSS v4.1+
+
+Nativewind v5 is built on top of Tailwind CSS v4.1+. You must upgrade your Tailwind configuration and tooling accordingly.
+
+<Callout type="tip">
+  **Migration Tip:** Refer to the [Tailwind CSS v4 Upgrade
+  Guide](https://tailwindcss.com/docs/upgrade-guide) for detailed steps.
+</Callout>
+
+### React Native 0.81+
+
+React Native 0.81 introduces architectural changes that Nativewind v5 relies on, including improvements to the StyleSheet and layout engines.
+
+> Use `react-native upgrade` or migrate your setup manually to update.
+
+<Callout type="info">
+
+Earlier versions can work with limited functionality. Nativewind only provide support for 0.81+
+
+</Callout>
+
+### React Native New Architecture
+
+A number of styles require the new architecture.
+
+<Callout type="info">
+
+The old architecture can work with limited functionality. Nativewind only provide support for the new architecture.
+
+</Callout>
+
+### React Native Reanimated v4+
+
+Nativewind v5 uses internal features that depend on Reanimated v4+. Ensure your project uses this version to avoid runtime crashes or build issues.
+
+> **Note:** Reanimated v4 introduces its own breaking changes — consult the [Reanimated v4 changelog](https://docs.swmansion.com/react-native-reanimated/) when upgrading.
+
+### React Native CSS
+
+Nativewind previously used a transient dependency on a library called `react-native-css-interop`. This library has been renamed to `react-native-css` and moved to a `peerDependency` and will require installation.
+
+Nativewind will no longer be tied to a specific version of `react-native-css` and the two libraries can be updated individually.
+
+## Breaking changes
+
+### Tailwind CSS changes
+
+Please ensure you are familar with the [Tailwind CSS upgrade guide](https://tailwindcss.com/docs/upgrade-guide). It has a number of breaking changes, renamed styles and deprecations.
+
+### Classname changes
+
+Tailwind v4 changed the standard for its classnames. As such, these Nativewind classes have also been renamed
+
+- `elevation-sm` has been renamed to `elevation-xs`
+- `elevation` has been renamed to `elevation-sm`
+
+### Animation changes
+
+Nativewind has switched from using a custom animation engine to Reanimated CSS animations. You may find there are implementation differences between the two engines.
+
+### JavaScript Theme Functions
+
+The JavaScript theme functions have been removed and replaced with CSS equitant functions. Please see the
+
+### `shadow-*`
+
+The `shadow-*` classes now use `boxShadow` style. Previously they used `shadowColor`, `shadowOffset`, `shadowOpacity` and `shadowRadius`. There may be a visual difference.
+
+### Line Height
+
+Line height numeric values are parsed as if they had the `em` unit. Previously they were parsed as a unit-less value. To migrate, simply divide the old value by the font-size.
+
+### rem
+
+`rem` is no longer exported and cannot be changed at runtime. If you require Tailwind CSS to dynamically change values, you should update your theme to use a CSS variable instead of `rem`
+
+### Dynamic mapping modifier
+
+The dynamic mapping modifier has been renamed to `@prop`.
+
+```diff
+- {}-[inputColor]:color-black
++ @prop-[inputColor]:color-black
+```
+
+## Deprecations
+
+Nativewind v5 preserves its existing API. Your usage of:
+
+- `className`
+- `styled`
+
+...will continue to work without modification.
+
+However, several features are being **deprecated** and will emit runtime warnings during development. These features will be **removed in a future major release**.
+
+<Callout type="warn">
+  **Warning:** Deprecated features will continue to function in v5 but should be
+  migrated away from as soon as possible.
+</Callout>
+
+However, there will be a number of breaking changes to how Nativewind functions and its configuration file that may affect you.
+
+## JSX Transform → Replaced by Import Rewrites
+
+Nativewind v5 **removes the JSX transform** that previously injected Tailwind support into individual JSX elements. This has been replaced by a new **import rewrite system**.
+
+This does not require any configuration change, but may affect your app if you are performing your own import rewrites. Previously Nativewind would change this code:
+
+```jsx
+import { View, Text } from "react-native";
+
+<View className="bg-red-500 p-4">
+  <Text className="text-white">Hello</Text>
+</View>;
+```
+
+Now the `import` will be rewritten to `import { View, Text } from 'react-native-css/react-native'`
+
+The move to import rewrites is driven by a broader shift in the React Native ecosystem of publishing compiled libraries. Nativewind previously took advantage that libraries were always compiled locally which allowed us to override the `jsxImportSource`. When libraries are compiled externally, their JSX is already transformed. The new shift to import rewrites is similar to how existing libraries such as `react-native-web` work.
+
+## `cssInterop` / `remapProps` → Replaced by `styled()`
+
+The `cssInterop` and `remapProps` APIs are deprecated and replaced with a unified `styled` API. It accepts the same options as `cssInterop`/`remapProps` and returns the same component. The `remapProps` mode is available via a new 3rd parameter:
+
+```jsx
+// Same as cssInterop()
+styled(View, { className: "style" });
+
+// Same as remapProps()
+styled(View, { className: "style" }, { passThrough: true });
+```
+
+By default `styled()` enables the transform globally for that component, but this can be disabled by setting `global` to false:
+
+```jsx
+const MyComponent = styled(View, { className: "style" }, { global: false });
+```
+
+## Native functions
+
+The `nativewind/theme` export has been removed. You can now access these functions as CSS functions.
+
+### `platformColor`
+
+`platformColor()` is available as a CSS function:
+
+```css
+@theme {
+  --color-error: platformColor(systemRed, red);
+}
+```
+
+### `hairlineWidth`
+
+`hairlineWidth()` is available as a CSS function:
+
+```css
+@theme {
+  --spacing-hairline: hairlineWidth();
+}
+```
+
+### `pixelRatio`
+
+`pixelRatio()` is available as a CSS function:
+
+```css
+@theme {
+  --spacing-doublePixelRatio: calc(pixelRatio(2) * 2);
+}
+```
+
+### `fontScale`
+
+`fontScale()` is available as a CSS function:
+
+```css
+@theme {
+  --spacing-doubleFontScale: calc(fontScale(2) * 2);
+}
+```
+
+### `getPixelSizeForLayoutSize`
+
+`getPixelSizeForLayoutSize()` is available as a CSS function:
+
+```css
+@theme {
+  --spacing-custom: getPixelSizeForLayoutSize(42);
+}
+```
+
+### `roundToNearestPixel`
+
+`roundToNearestPixel()` is available as a CSS function:
+
+```css
+@theme {
+  --spacing-custom: roundToNearestPixel(calc(10 / 3));
+}
+```
+
+### `platformSelect`
+
+Now use a media query that sets the platform as the media type:
+
+```css
+@theme {
+  --color-error: var(--my-color, green);
+}
+
+@media ios {
+  :root {
+    --my-color: red;
+  }
+}
+
+@media android {
+  :root {
+    --my-color: blue;
+  }
+}
+```
+
+### `pixelRatioSelect` / `fontScaleSelect`
+
+Now use a media query:
+
+```css
+@theme {
+  --spacing-custom-pixel: 11;
+  --spacing-custom-font: 11;
+}
+
+@media (pixelRatio() > 2) {
+  :root {
+    --spacing-custom-pixel: 3;
+  }
+}
+
+@media (fontScale() > 2) {
+  :root {
+    --spacing-custom-font: 3;
+  }
+}
+```
+
+## New CSS Features
+
+Nativewind v5 adds support for the new React Native styling features:
+
+- `position: static` ([Tailwind](https://tailwindcss.com/docs/position)) ([Yoga](https://www.yogalayout.dev/blog/announcing-yoga-3.0#position-static))
+- `align-content: space-evenly` ([Tailwind](https://tailwindcss.com/docs/place-content#space-evenly)) ([Yoga](https://www.yogalayout.dev/blog/announcing-yoga-3.0#better-support-for-multiline-containers))
+- `filter()` ([Tailwind](https://tailwindcss.com/docs/filter)) ([React Native](https://reactnative.dev/blog/2024/10/23/release-0.76-new-architecture#box-shadow-and-filter-style-props))
+- `backgroundImage()` ([Tailwind](https://tailwindcss.com/docs/background-image)) (gradients only)
+- `box-sizing` ([Tailwind](https://tailwindcss.com/docs/box-sizing))
+- `display: contents` ([Tailwind](https://tailwindcss.com/docs/display#contents))
