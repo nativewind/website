@@ -1,4 +1,4 @@
-export const revalidate = 60 * 60 * 24 * 7; // ISR: 7 days
+export const revalidate = 60 * 60 * 24 * 3; // ISR: 3 days
 
 import SectionTitle from "../SectionTitle";
 import StateOfNativewindCard from "./StateOfNativewindCard";
