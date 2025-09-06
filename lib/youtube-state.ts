@@ -113,7 +113,7 @@ export async function fetchStateOfNativewind(): Promise<Item[]> {
 
   do {
     const url = pageToken ? `${base}&pageToken=${pageToken}` : base;
-    const r = await fetch(url, { next: { revalidate: 60 * 60 * 24 * 7 } }); // cache 7 days
+    const r = await fetch(url, { next: { revalidate: 60 * 60 * 24 * 3 } }); // cache 3 days
     const data = await r.json();
     (data.items || []).forEach((it: any) => {
       const vid = it.contentDetails?.videoId;
@@ -134,7 +134,7 @@ export async function fetchStateOfNativewind(): Promise<Item[]> {
     const vidsURL = `${API}/videos?part=contentDetails,snippet&id=${chunk.join(
       ","
     )}&key=${key}`;
-    const r = await fetch(vidsURL, { next: { revalidate: 60 * 60 * 24 * 7 } });
+    const r = await fetch(vidsURL, { next: { revalidate: 60 * 60 * 24 * 3 } });
     const data = await r.json();
     (data.items || []).forEach((v: any) => {
       idToDuration.set(
@@ -152,7 +152,7 @@ export async function fetchStateOfNativewind(): Promise<Item[]> {
   pageToken = undefined;
   do {
     const url: any = pageToken ? `${base}&pageToken=${pageToken}` : base;
-    const r = await fetch(url, { next: { revalidate: 60 * 60 * 24 * 7 } });
+    const r = await fetch(url, { next: { revalidate: 60 * 60 * 24 * 3 } });
     const data = await r.json();
     (data.items || []).forEach((it: any) => {
       const vid = it.contentDetails?.videoId;
