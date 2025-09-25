@@ -20,12 +20,12 @@ import { Callout } from "@/components/callout";
 >
   {"Framework-less"}
 </a>
-{" | "} <a
+{/* {" | "} <a
   href="./installation/nextjs"
   className="decoration-transparent hover:decoration-fd-foreground opacity-70 hover:opacity-100 underline-offset-8 rounded-lg p-4"
 >
   {"Next.js"}
-</a>
+</a> */}
 
 <Callout type="tip">
  If you'd like to skip manual setup and use Nativewind, you can use the following command to initialize a new Expo project with Nativewind v5, Expo SDK 54, and Tailwind CSS.
@@ -61,9 +61,8 @@ export default {
 Create a `global.css` file and add the Tailwind directives.
 
 ```css title="global.css"
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/preflight.css" layer(base);
-@import "tailwindcss/utilities.css";
+@import "tailwindcss";
+@import "nativewind/theme";
 ```
 
 > From here onwards, replace `./global.css` with the relative path to the CSS file you just created.
@@ -75,15 +74,16 @@ Create a `global.css` file and add the Tailwind directives.
 
 ### 3. Create or modify your metro.config.js
 
-Create a `metro.config.js` file in the root of your Expo project if you don't already have one, then add the following configuration:
+Run `npx expo customize metro.config.js` to create a `metro.config.js` file if you don't already have one, then wrap the default config with `withNativewind`.
 
 ```js title="metro.config.js"
 const { getDefaultConfig } = require("expo/metro-config");
-const { withNativeWind } = require("nativewind/metro");
+const { withNativewind } = require("nativewind/metro");
 
+/** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname);
 
-module.exports = withNativeWind(config);
+module.exports = withNativewind(config);
 ```
 
 ### 4. Import your CSS file
