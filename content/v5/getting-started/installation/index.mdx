@@ -28,15 +28,15 @@ import { Callout } from "@/components/callout";
 </a>
 
 <Callout type="tip">
- If you'd like to skip manual setup and use Nativewind, you can use the following command to initialize a new Expo project with Nativewind and Tailwind CSS.
+ If you'd like to skip manual setup and use Nativewind, you can use the following command to initialize a new Expo project with Nativewind v5, Expo SDK 54, and Tailwind CSS.
 
 ```bash
-npx rn-new@latest --nativewind
+npx rn-new@next --nativewind
 ```
 
 </Callout>
 
-## Installation with React Native
+## Installation with Expo
 
 ### 1. Install Nativewind
 
@@ -48,7 +48,7 @@ npx rn-new@latest --nativewind
 
 **Add Tailwind to your PostCSS configuration**
 
-Add @tailwindcss/postcss to your postcss.config.mjs file, or wherever PostCSS is configured in your project.
+Create a `postcss.config.mjs` file in the root of your Expo project if you don't already have one, then add `@tailwindcss/postcss` there, or wherever PostCSS is configured in your project.
 
 ```jsx title="postcss.config.mjs
 export default {
@@ -58,7 +58,7 @@ export default {
 };
 ```
 
-Create a CSS file and add the Tailwind directives.
+Create a `global.css` file and add the Tailwind directives.
 
 ```css title="global.css"
 @import "tailwindcss/theme.css" layer(theme);
@@ -75,7 +75,7 @@ Create a CSS file and add the Tailwind directives.
 
 ### 3. Create or modify your metro.config.js
 
-Create a `metro.config.js` file in the root of your project if you don't already have one, then add the following configuration:
+Create a `metro.config.js` file in the root of your Expo project if you don't already have one, then add the following configuration:
 
 ```js title="metro.config.js"
 const { getDefaultConfig } = require("expo/metro-config");
