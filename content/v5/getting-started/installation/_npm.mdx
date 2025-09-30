@@ -71,7 +71,7 @@ import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
             ? `pnpm install ${props.deps.join(" ")}`
             : undefined,
           props.devDeps?.length
-            ? `pnpm install --dev ${props.devDeps.join(" ")}`
+            ? `pnpm install --save-dev ${props.devDeps.join(" ")}`
             : undefined,
         ]
           .filter(Boolean)
