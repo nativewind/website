@@ -4,6 +4,60 @@ title: Migrate from v4
 
 import { Callout } from "@/components/callout";
 
+## Migration steps
+
+The simplest way To migrate from v4 -> v5 is to follow the [installation steps](/docs/getting-started/installation) again.
+
+Once completed, the only additional step is to remove `nativewind` from your `babel.config.js`
+
+```diff
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+-      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+-      "nativewind/babel",
++      "babel-preset-expo",
+    ],
+  };
+};
+```
+
+You should now be running v5 🎉 If you are running into issues, are some common steps that may have been overlooked
+
+**Incorrect CSS atRules**
+
+Ensure you updated to the new atRules in your CSS file
+
+```diff
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
+
++ @import "tailwindcss/theme.css" layer(theme);
++ @import "tailwindcss/preflight.css" layer(base);
++ @import "tailwindcss/utilities.css";
++
++ @import "nativewind/theme";
+```
+
+**Metro config**
+
+The `withNativewind` no longer requires a second argument. `withNativeWind` was renamed to `withNativewind`, but both will work.
+
+```diff
+- module.exports = withNativeWind(config, { input: './global.css' })
++ module.exports = withNativewind(config);
+```
+
+**PostCSS config**
+
+Ensure that this file was created!
+
+**JSX transform errors**
+
+Ensure you removed `nativewind` from your babel config. You will most likely need to clear the Metro cache.
+
 ## Breaking Changes & Prerequisites
 
 Before upgrading to Nativewind v5, your project **must** meet the following version requirements:
