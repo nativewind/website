@@ -105,7 +105,23 @@ export default App() {
   `AppRegistry.registerComponent` or your app will not Fast Refresh correctly
 </Callout>
 
-### 5. TypeScript setup (optional)
+### 5. Pin lightningcss version
+
+Add a `resolutions` field to your `package.json` to pin the lightningcss version to 1.30.1:
+
+```json title="package.json"
+{
+  "resolutions": {
+    "lightningcss": "1.30.1"
+  }
+}
+```
+
+<Callout type="warn">
+  If you don't pin the lightningcss version, you may encounter deserialization errors with respect to `global.css` when building your app.
+</Callout>
+
+### 6. TypeScript setup (optional)
 
 <include>./_typescript.mdx</include>
 
