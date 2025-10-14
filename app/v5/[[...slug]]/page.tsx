@@ -14,6 +14,7 @@ import { Callout } from '@/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import FooterSection from '@/app/(home)/FooterSection';
+import { EditButton } from '@/components/edit-button';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -23,6 +24,19 @@ export default async function Page(props: {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  
+  // Generate the file path for the edit button
+  // Use the page's file information if available, otherwise construct from slug
+  let filePath: string;
+  if (page.file?.path) {
+    filePath = `content/v5/${page.file.path}`;
+  } else if (params.slug) {
+    const slugPath = params.slug.join('/');
+    // Default to adding /index.mdx for folder-based docs, but this might need adjustment
+    filePath = `content/v5/${slugPath}/index.mdx`;
+  } else {
+    filePath = 'content/v5/index.mdx';
+  }
 
   return (
     <>
@@ -45,8 +59,13 @@ export default async function Page(props: {
             Last updated on {Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(new Date(page.data.lastModified))}
           </p>
         )}
-        <DocsTitle>{page.data.title}</DocsTitle>
-        <DocsDescription>{page.data.description}</DocsDescription>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex-1">
+            <DocsTitle>{page.data.title}</DocsTitle>
+            <DocsDescription>{page.data.description}</DocsDescription>
+          </div>
+          <EditButton filePath={filePath} version="v5" />
+        </div>
         <DocsBody>
           <MDX components={{
             ...defaultMdxComponents as any,
