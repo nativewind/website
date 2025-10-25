@@ -2,6 +2,8 @@
 title: Installation
 ---
 
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+
 import Install from "./_install.mdx";
 import TailwindInstall from "./_tailwind.mdx";
 import { Callout } from "@/components/callout";
@@ -99,26 +101,57 @@ export default App() {
 }
 ```
 
-<Callout type="cation">
-  You should import your CSS file inside the same file as top-most component of
-  your app. Do **not** import it in the same file as calling
-  `AppRegistry.registerComponent` or your app will not Fast Refresh correctly
+<Callout type="warn">
+  You should import your CSS file inside the same file as the top-most component of
+  your app. Do **not** import it in the same file that calls
+  `AppRegistry.registerComponent` or your app will not Fast Refresh properly.
 </Callout>
 
-### 5. Pin lightningcss version
+### 5. Override the lightningcss version
 
-Add a `resolutions` field to your `package.json` to pin the lightningcss version to 1.30.1:
+Force `lightningcss` to a specific version in your `package.json`:
 
-```json title="package.json"
-{
-  "resolutions": {
-    "lightningcss": "1.30.1"
-  }
-}
-```
+<Tabs groupId="v5-npm-install" items={["npm", "yarn", "pnpm", "bun"]}>
+  <Tab value="npm">
+    ```json title="package.json"
+    {
+      "overrides": {
+        "lightningcss": "1.30.1"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```json title="package.json"
+    {
+      "resolutions": {
+        "lightningcss": "1.30.1"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```json title="package.json"
+    {
+      "overrides": {
+        "lightningcss": "1.30.1"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```json title="package.json"
+    {
+      "overrides": {
+        "lightningcss": "1.30.1"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
 
 <Callout type="warn">
-  If you don't pin the lightningcss version, you may encounter deserialization errors with respect to `global.css` when building your app.
+  If you don't pin the `lightningcss` version, you may encounter deserialization errors with respect to `global.css` when building your app.
 </Callout>
 
 ### 6. TypeScript setup (optional)
