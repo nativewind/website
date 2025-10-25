@@ -15,6 +15,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import FooterSection from '@/app/(home)/FooterSection';
 import { EditButton } from '@/components/edit-button';
+import { CopyInstallationButton } from '@/components/copy-installation-button';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -37,6 +38,9 @@ export default async function Page(props: {
   } else {
     filePath = 'content/v5/index.mdx';
   }
+
+  // Check if this is the installation page
+  const isInstallationPage = params.slug?.join('/') === 'getting-started/installation';
 
   return (
     <>
@@ -64,7 +68,10 @@ export default async function Page(props: {
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description}</DocsDescription>
           </div>
-          <EditButton filePath={filePath} version="v5" />
+          <div className="flex items-center gap-2">
+            <EditButton filePath={filePath} version="v5" />
+            {isInstallationPage && <CopyInstallationButton />}
+          </div>
         </div>
         <DocsBody>
           <MDX components={{

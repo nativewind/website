@@ -1,0 +1,315 @@
+'use client';
+import { Copy } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/cn";
+
+// Full markdown content for direct copying
+const INSTALLATION_GUIDE_CONTENT = `# Nativewind v5 Installation Guide
+
+This guide provides complete installation instructions for Nativewind v5 with Expo. Use this document to initialize projects with your preferred package manager.
+
+## Quick Start
+
+For rapid setup, use the \`rn-new\` CLI tool:
+
+\`\`\`bash
+npx rn-new@next --nativewind
+\`\`\`
+
+This automatically sets up a new Expo project with Nativewind v5, Expo SDK 54, and Tailwind CSS.
+
+## Manual Installation
+
+### Step 1: Install Nativewind and Dependencies
+
+Install \`nativewind\` and its peer dependencies: \`tailwindcss\`, \`react-native-css\`, \`react-native-reanimated\`, and \`react-native-safe-area-context\`.
+
+#### Package Manager Commands:
+
+**Expo CLI (Recommended for Expo projects):**
+\`\`\`bash
+npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+\`\`\`
+
+**npm:**
+\`\`\`bash
+npm install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+\`\`\`
+
+**yarn:**
+\`\`\`bash
+yarn add nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+\`\`\`
+
+**pnpm:**
+\`\`\`bash
+pnpm install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+\`\`\`
+
+**bun:**
+\`\`\`bash
+bun install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+\`\`\`
+
+### Step 2: Install Tailwind CSS and PostCSS
+
+Install Tailwind CSS and PostCSS as dev dependencies:
+
+#### Package Manager Commands:
+
+**Expo CLI (Recommended for Expo projects):**
+\`\`\`bash
+npx expo install --dev tailwindcss @tailwindcss/postcss postcss
+\`\`\`
+
+**npm:**
+\`\`\`bash
+npm install --dev tailwindcss @tailwindcss/postcss postcss
+\`\`\`
+
+**yarn:**
+\`\`\`bash
+yarn add --dev tailwindcss @tailwindcss/postcss postcss
+\`\`\`
+
+**pnpm:**
+\`\`\`bash
+pnpm install --save-dev tailwindcss @tailwindcss/postcss postcss
+\`\`\`
+
+**bun:**
+\`\`\`bash
+bun install --dev tailwindcss @tailwindcss/postcss postcss
+\`\`\`
+
+**Optional:** Install \`prettier-plugin-tailwindcss\` to automatically format your Tailwind CSS code.
+
+### Step 3: Configure PostCSS
+
+Create a \`postcss.config.mjs\` file in the root of your project (if it doesn't already exist):
+
+\`\`\`javascript
+// postcss.config.mjs
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+\`\`\`
+
+### Step 4: Create Global CSS File
+
+Create a \`global.css\` file in your project root and add the Tailwind directives:
+
+\`\`\`css
+/* global.css */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+\`\`\`
+
+**Note:** Instead of using the standard \`@tailwind\` directives, Nativewind recommends using the \`@import\` at-rules above for better compatibility with \`react-native-web\`.
+
+### Step 5: Configure Metro
+
+Create or modify your \`metro.config.js\` file:
+
+1. If you don't have a \`metro.config.js\` file, run:
+   \`\`\`bash
+   npx expo customize metro.config.js
+   \`\`\`
+
+2. Wrap the default config with \`withNativewind\`:
+
+\`\`\`javascript
+// metro.config.js
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativewind } = require("nativewind/metro");
+
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname);
+
+module.exports = withNativewind(config);
+\`\`\`
+
+### Step 6: Import CSS in Your App
+
+Import the CSS file at the top of your main app file:
+
+\`\`\`javascript
+// App.js
+import "./global.css"
+
+export default function App() {
+  /* Your App */
+}
+\`\`\`
+
+**Important:** Import your CSS file inside the same file as the top-most component of your app. Do **not** import it in the same file that calls \`AppRegistry.registerComponent\` or your app will not Fast Refresh properly.
+
+### Step 7: Pin lightningcss Version
+
+Force \`lightningcss\` to version 1.30.1 in your \`package.json\` to prevent deserialization errors. The configuration differs by package manager:
+
+#### Package Manager Configurations:
+
+**npm:**
+\`\`\`json
+{
+  "overrides": {
+    "lightningcss": "1.30.1"
+  }
+}
+\`\`\`
+
+**yarn:**
+\`\`\`json
+{
+  "resolutions": {
+    "lightningcss": "1.30.1"
+  }
+}
+\`\`\`
+
+**pnpm:**
+\`\`\`json
+{
+  "overrides": {
+    "lightningcss": "1.30.1"
+  }
+}
+\`\`\`
+
+**bun:**
+\`\`\`json
+{
+  "overrides": {
+    "lightningcss": "1.30.1"
+  }
+}
+\`\`\`
+
+**Critical:** This step is required to avoid build-time errors related to \`global.css\` deserialization.
+
+### Step 8: TypeScript Setup (Optional but Recommended)
+
+If using TypeScript, create a \`nativewind-env.d.ts\` file in your project root:
+
+\`\`\`typescript
+/// <reference types="react-native-css/types" />
+
+// NOTE: This file should not be edited and should be committed with your source code.
+// It is generated by react-native-css. If you need to move or disable this file,
+// please see the documentation.
+\`\`\`
+
+**Quick Alternative:** Run \`npx expo start --clear\` in your Expo project's root directory to generate this file automatically.
+
+**Important Naming Conventions:**
+- Do NOT name this file \`nativewind.d.ts\`
+- Do NOT use the same name as a file or folder in the same directory (e.g., \`app.d.ts\` when an \`/app\` folder exists)
+- Do NOT use the same name as a folder in \`node_modules\` (e.g., \`react.d.ts\`)
+
+These naming conflicts will prevent TypeScript from picking up the types correctly.
+
+## Verify Installation
+
+Create a test component to verify your setup:
+
+\`\`\`tsx
+// App.tsx
+import "./global.css"
+import { Text, View } from "react-native";
+
+export default function App() {
+  return (
+    <View className="flex-1 items-center justify-center bg-white">
+      <Text className="text-xl font-bold text-blue-500">
+        Welcome to Nativewind!
+      </Text>
+    </View>
+  );
+}
+\`\`\`
+
+If you see styled text centered on a white background, Nativewind is working correctly!
+
+## Key Differences Between Package Managers
+
+### Installation Commands
+- **Expo CLI**: Uses \`npx expo install\` which ensures version compatibility with your Expo SDK
+- **npm**: Standard \`npm install\` or \`npm install --dev\` for dev dependencies
+- **yarn**: Uses \`yarn add\` or \`yarn add --dev\` for dev dependencies
+- **pnpm**: Uses \`pnpm install\` or \`pnpm install --save-dev\` for dev dependencies
+- **bun**: Uses \`bun install\` or \`bun install --dev\` for dev dependencies
+
+### Dependency Resolution (lightningcss pinning)
+- **npm, pnpm, bun**: Use \`"overrides"\` field in package.json
+- **yarn**: Uses \`"resolutions"\` field in package.json
+
+### Recommendations
+- For Expo projects, prefer using \`npx expo install\` as it handles peer dependency resolution and version compatibility automatically
+- After adding the lightningcss override/resolution, reinstall dependencies:
+  - npm: \`npm install\`
+  - yarn: \`yarn install\`
+  - pnpm: \`pnpm install\`
+  - bun: \`bun install\`
+
+## Additional Resources
+
+- [Editor Setup](https://nativewind.dev/v5/getting-started/installation/editor-setup) - Configure your IDE for Nativewind
+- [Other Bundlers](https://nativewind.dev/docs/guides/other-bundlers) - Use Nativewind with alternative bundlers
+- [Nativewind Documentation](https://nativewind.dev) - Complete documentation and guides
+
+## Summary Checklist
+
+- [ ] Install Nativewind and peer dependencies
+- [ ] Install Tailwind CSS and PostCSS as dev dependencies
+- [ ] Create \`postcss.config.mjs\` with \`@tailwindcss/postcss\`
+- [ ] Create \`global.css\` with Tailwind imports
+- [ ] Configure \`metro.config.js\` with \`withNativewind\`
+- [ ] Import \`global.css\` in your main app component
+- [ ] Pin \`lightningcss\` to version 1.30.1 using appropriate package manager field
+- [ ] (TypeScript) Create \`nativewind-env.d.ts\` type definitions
+- [ ] Test with a simple styled component
+
+---
+
+**Version:** Nativewind v5 Preview  
+**Compatible with:** Expo SDK 54+  
+**Last Updated:** 2025
+`;
+
+interface CopyInstallationButtonProps {
+  className?: string;
+}
+
+export function CopyInstallationButton({ className = "" }: CopyInstallationButtonProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(INSTALLATION_GUIDE_CONTENT);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className={cn(
+        "inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-fd-muted-foreground hover:text-fd-foreground bg-fd-card border border-fd-border rounded-md hover:bg-fd-accent transition-colors",
+        className
+      )}
+    >
+      <Copy className="h-4 w-4" />
+      {copied ? "Copied!" : "Copy"}
+    </button>
+  );
+}
+
