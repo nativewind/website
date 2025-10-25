@@ -32,9 +32,28 @@ import { Callout } from "@/components/callout";
 <Callout type="tip">
  If you'd like to skip manual setup and use Nativewind, you can use the following command to initialize a new Expo project with Nativewind v5, Expo SDK 54, and Tailwind CSS.
 
+<Tabs groupId="v5-npm-install" items={["npm", "yarn", "pnpm", "bun"]}>
+  <Tab value="npm">
 ```bash
 npx rn-new@next --nativewind
 ```
+  </Tab>
+  <Tab value="yarn">
+```bash
+yarn dlx rn-new@next --nativewind
+```
+  </Tab>
+  <Tab value="pnpm">
+```bash
+pnpx rn-new@next --nativewind
+```
+  </Tab>
+  <Tab value="bun">
+```bash
+bunx rn-new@next --nativewind
+```
+  </Tab>
+</Tabs>
 
 </Callout>
 

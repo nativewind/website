@@ -6,8 +6,24 @@ This guide provides complete installation instructions for Nativewind v5 with Ex
 
 For rapid setup, use the `rn-new` CLI tool:
 
+**npm:**
 ```bash
 npx rn-new@next --nativewind
+```
+
+**yarn:**
+```bash
+yarn dlx rn-new@next --nativewind
+```
+
+**pnpx:**
+```bash
+pnpx rn-new@next --nativewind
+```
+
+**bun:**
+```bash
+bunx rn-new@next --nativewind
 ```
 
 This automatically sets up a new Expo project with Nativewind v5, Expo SDK 54, and Tailwind CSS.
