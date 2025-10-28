@@ -186,8 +186,10 @@ Force `lightningcss` to version 1.30.1 in your `package.json` to prevent deseria
 **pnpm:**
 ```json
 {
-  "overrides": {
-    "lightningcss": "1.30.1"
+  "pnpm": {
+    "overrides": {
+      "lightningcss": "1.30.1"
+    }
   }
 }
 ```
