@@ -6,7 +6,7 @@ import { Callout } from "@/components/callout";
 
 ## Migration steps
 
-The simplest way To migrate from v4 -> v5 is to follow the [installation steps](/docs/getting-started/installation) again.
+The simplest way to migrate from Nativewind v4 -> Nativewindv5 is to follow the [installation steps](/docs/getting-started/installation) again.
 
 Once completed, the only additional step is to remove `nativewind` from your `babel.config.js`
 
@@ -23,7 +23,7 @@ module.exports = function (api) {
 };
 ```
 
-You should now be running v5 🎉 If you are running into issues, are some common steps that may have been overlooked
+You should now be running Nativewind v5 🎉 If you are running into issues, here are some common steps that may have been overlooked:
 
 **Incorrect CSS atRules**
 
@@ -41,9 +41,11 @@ Ensure you updated to the new atRules in your CSS file
 + @import "nativewind/theme";
 ```
 
+{/* TODO: Add monorepo migration steps */}
+
 **Metro config**
 
-The `withNativewind` no longer requires a second argument. `withNativeWind` was renamed to `withNativewind`, but both will work.
+The `withNativewind` function no longer requires a second argument. Please note that, while `withNativeWind` was renamed to `withNativewind`, either will work.
 
 ```diff
 - module.exports = withNativeWind(config, { input: './global.css' })
@@ -52,11 +54,11 @@ The `withNativewind` no longer requires a second argument. `withNativeWind` was 
 
 **PostCSS config**
 
-Ensure that this file was created!
+Ensure that the `postcss.config.mjs` file was created!
 
 **JSX transform errors**
 
-Ensure you removed `nativewind` from your babel config. You will most likely need to clear the Metro cache.
+Ensure that you removed `nativewind` from your babel config. You will most likely need to clear the Metro cache by running `npx expo start --clear`.
 
 ## Breaking Changes & Prerequisites
 
@@ -64,7 +66,7 @@ Before upgrading to Nativewind v5, your project **must** meet the following vers
 
 ### Tailwind CSS v4.1+
 
-Nativewind v5 is built on top of Tailwind CSS v4.1+. You must upgrade your Tailwind configuration and tooling accordingly.
+Nativewind v5 is built on top of Tailwind v4.1+. You must upgrade your Tailwind configuration and tooling, accordingly.
 
 <Callout type="tip">
   **Migration Tip:** Refer to the [Tailwind CSS v4 Upgrade
@@ -79,7 +81,7 @@ React Native 0.81 introduces architectural changes that Nativewind v5 relies on,
 
 <Callout type="info">
 
-Earlier versions can work with limited functionality. Nativewind only provide support for 0.81+
+Earlier versions of React Native can work, albeit with limited functionality. Nativewind only provides support for React Native 0.81+.
 
 </Callout>
 
@@ -89,7 +91,7 @@ A number of styles require the new architecture.
 
 <Callout type="info">
 
-The old architecture can work with limited functionality. Nativewind only provide support for the new architecture.
+The old architecture can work with limited functionality. However, we only provide support for the new React Native architecture.
 
 </Callout>
 
@@ -97,11 +99,11 @@ The old architecture can work with limited functionality. Nativewind only provid
 
 Nativewind v5 uses internal features that depend on Reanimated v4+. Ensure your project uses this version to avoid runtime crashes or build issues.
 
-> **Note:** Reanimated v4 introduces its own breaking changes — consult the [Reanimated v4 changelog](https://docs.swmansion.com/react-native-reanimated/) when upgrading.
+> **Note:** Reanimated v4 introduces its own breaking changes — please consult the [Reanimated v4 changelog](https://docs.swmansion.com/react-native-reanimated/) when upgrading.
 
 ### React Native CSS
 
-Nativewind previously used a transient dependency on a library called `react-native-css-interop`. This library has been renamed to `react-native-css` and moved to a `peerDependency` and will require installation.
+Nativewind previously used a transient dependency on a library called `react-native-css-interop`. This library has been renamed to `react-native-css`, has been moved to be a peer dependency, and will require separate installation.
 
 Nativewind will no longer be tied to a specific version of `react-native-css` and the two libraries can be updated individually.
 
@@ -109,11 +111,11 @@ Nativewind will no longer be tied to a specific version of `react-native-css` an
 
 ### Tailwind CSS changes
 
-Please ensure you are familar with the [Tailwind CSS upgrade guide](https://tailwindcss.com/docs/upgrade-guide). It has a number of breaking changes, renamed styles and deprecations.
+Please ensure you are familiar with the [Tailwind CSS upgrade guide](https://tailwindcss.com/docs/upgrade-guide). It has a number of breaking changes, renamed styles and deprecations.
 
 ### Classname changes
 
-Tailwind v4 changed the standard for its classnames. As such, these Nativewind classes have also been renamed
+Tailwind v4 changed the standard for its classnames. As such, these Nativewind classes have also been renamed:
 
 - `elevation-sm` has been renamed to `elevation-xs`
 - `elevation` has been renamed to `elevation-sm`
@@ -124,7 +126,7 @@ Nativewind has switched from using a custom animation engine to Reanimated CSS a
 
 ### JavaScript Theme Functions
 
-The JavaScript theme functions have been removed and replaced with CSS equitant functions. Please see the
+The JavaScript theme functions have been removed and replaced with CSS equivalent functions. Please see the [Tailwind CSS functions and directives](https://tailwindcss.com/docs/functions-and-directives#functions) documentation for more information.
 
 ### `shadow-*`
 
@@ -181,11 +183,11 @@ import { View, Text } from "react-native";
 
 Now the `import` will be rewritten to `import { View, Text } from 'react-native-css/react-native'`
 
-The move to import rewrites is driven by a broader shift in the React Native ecosystem of publishing compiled libraries. Nativewind previously took advantage that libraries were always compiled locally which allowed us to override the `jsxImportSource`. When libraries are compiled externally, their JSX is already transformed. The new shift to import rewrites is similar to how existing libraries such as `react-native-web` work.
+The move to import rewrites is driven by a broader shift in the React Native ecosystem of publishing compiled libraries. Nativewind previously took advantage of the fact that libraries were always compiled locally, which allowed us to override the `jsxImportSource`. When libraries are compiled externally, their JSX is already transformed. The new shift to import rewrites is similar to how existing libraries such as `react-native-web` work.
 
 ## `cssInterop` / `remapProps` → Replaced by `styled()`
 
-The `cssInterop` and `remapProps` APIs are deprecated and replaced with a unified `styled` API. It accepts the same options as `cssInterop`/`remapProps` and returns the same component. The `remapProps` mode is available via a new 3rd parameter:
+The `cssInterop` and `remapProps` APIs are deprecated and have been replaced with a unified `styled` API. It accepts the same options as `cssInterop`/`remapProps` and returns the same component. The `remapProps` mode is available via a new 3rd parameter:
 
 ```jsx
 // Same as cssInterop()
