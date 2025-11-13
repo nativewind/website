@@ -22,6 +22,7 @@ import ShutterMateLogo from "../assets/shuttermate.png";
 import FoloLogo from "../assets/folo.png";
 import VibeCodeLogo from "../assets/vibecode.png"
 import NeonCityLogo from "../assets/neoncity.png"
+import TurboStarterLogo from "../assets/turbostarter.png";
 import ShowcaseItem, { ShowcaseItemProps } from "./ShowcaseItem";
 
 export default function TestimonialsSectionContents() {
@@ -237,7 +238,15 @@ const items : ShowcaseItemProps[] = [
     logo: VibeCodeLogo,
     website: "https://vibecodeapp.com/",
     appstore: "https://apps.apple.com/us/app/vibecode/id6742912146",
-  }
+  },
+  {
+    name: "TurboStarter",
+    description: "Ship your mobile app in days, not weeks.",
+    logo: TurboStarterLogo,
+    website: "https://turbostarter.dev/",
+    appstore: "https://apps.apple.com/app/id6754278899",
+    playstore: "https://play.google.com/store/apps/details?id=com.turbostarter.core",
+  },
 ];
 
 // NOTE: this needs to be done in a server component to avoid hydration errors
