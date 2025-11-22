@@ -3,12 +3,47 @@ title: Migrate from v4
 ---
 
 import { Callout } from "@/components/callout";
+import { CopyMigrationButton } from "@/components/copy-migration-button";
+
+<div className="mb-4">
+  <CopyMigrationButton />
+</div>
 
 ## Migration steps
 
-The simplest way to migrate from Nativewind v4 -> Nativewindv5 is to follow the [installation steps](/docs/getting-started/installation) again.
+The simplest way to migrate from Nativewind v4 to v5 is to follow these steps:
 
-Once completed, the only additional step is to remove `nativewind` from your `babel.config.js`
+### Step 1: Update Dependencies
+
+Install the new versions of required packages:
+
+```bash
+# Using Expo CLI (recommended)
+npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+
+# Install Tailwind CSS v4 and PostCSS as dev dependencies
+npx expo install --dev tailwindcss @tailwindcss/postcss postcss
+```
+
+### Step 2: Update CSS File
+
+Replace your old CSS directives with the new Tailwind v4 imports in your `global.css` (or equivalent):
+
+```diff
+- @tailwind base;
+- @tailwind components;
+- @tailwind utilities;
+
++ @import "tailwindcss/theme.css" layer(theme);
++ @import "tailwindcss/preflight.css" layer(base);
++ @import "tailwindcss/utilities.css";
++
++ @import "nativewind/theme";
+```
+
+### Step 3: Update Babel Config
+
+Remove Nativewind from your `babel.config.js`:
 
 ```diff
 module.exports = function (api) {
@@ -23,42 +58,49 @@ module.exports = function (api) {
 };
 ```
 
-You should now be running Nativewind v5 🎉 If you are running into issues, here are some common steps that may have been overlooked:
+### Step 4: Create PostCSS Config
 
-**Incorrect CSS atRules**
+Create a `postcss.config.mjs` file in the root of your project:
 
-Ensure you updated to the new atRules in your CSS file
-
-```diff
-- @tailwind base;
-- @tailwind components;
-- @tailwind utilities;
-
-+ @import "tailwindcss/theme.css" layer(theme);
-+ @import "tailwindcss/preflight.css" layer(base);
-+ @import "tailwindcss/utilities.css";
-+
-+ @import "nativewind/theme";
+```javascript
+// postcss.config.mjs
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
 ```
 
-{/* TODO: Add monorepo migration steps */}
+### Step 5: Update Metro Config
 
-**Metro config**
-
-The `withNativewind` function no longer requires a second argument. Please note that, while `withNativeWind` was renamed to `withNativewind`, either will work.
+Update the `withNativewind` function call (no longer requires a second argument):
 
 ```diff
 - module.exports = withNativeWind(config, { input: './global.css' })
 + module.exports = withNativewind(config);
 ```
 
-**PostCSS config**
+Note: While `withNativeWind` was renamed to `withNativewind`, either will work.
 
-Ensure that the `postcss.config.mjs` file was created!
+### Step 6: Clear Cache and Restart
 
-**JSX transform errors**
+```bash
+npx expo start --clear
+```
 
-Ensure that you removed `nativewind` from your babel config. You will most likely need to clear the Metro cache by running `npx expo start --clear`.
+You should now be running Nativewind v5 🎉
+
+### Troubleshooting Common Issues
+
+If you encounter issues, here are some common problems and solutions:
+
+**JSX Transform Errors**: Ensure you removed `nativewind` from your babel config and cleared the Metro cache with `npx expo start --clear`.
+
+**Incorrect CSS atRules**: Verify you updated to the new atRules in your CSS file (see Step 2 above).
+
+**Metro Config Issues**: The `withNativewind` function no longer requires a second argument. Ensure your config matches Step 5.
+
+**Missing PostCSS Config**: Ensure the `postcss.config.mjs` file was created with the correct content.
 
 ## Breaking Changes & Prerequisites
 
