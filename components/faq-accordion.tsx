@@ -52,8 +52,8 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
           value={`item-${index + 1}`}
         >
           <CopyLinkToHighlight title={item.title} />
-          <AccordionTrigger>
-            <div className="flex items-center">
+          <AccordionTrigger className="cursor-pointer">
+            <div className="flex items-center max-sm:w-full max-sm:pr-2 max-sm:justify-between">
               {item.title}
               {item.icon}
             </div>

@@ -6,6 +6,8 @@ import {
 } from "fumadocs-ui/page";
 
 import { FaqAccordion, FaqItem } from "@/components/faq-accordion";
+import Link from "fumadocs-core/link";
+import { FileQuestionMark } from "lucide-react";
 
 const items: FaqItem[] = [
   {
@@ -18,11 +20,15 @@ const items: FaqItem[] = [
     title:
       "Is Nativewind v5 out yet",
     content:
-      "not yet",
+      (
+        <>
+          not yet, check out <Link href="/v5/faq" className="underline text-amber-500 hover:text-amber-600 dark:hover:text-amber-400">the v5 FAQ</Link> for more info.
+        </>
+      ),
   },
 ];
 
-export default async function Page() {
+export default async function FAQPage() {
   return (
     <>
       <div className="absolute inset-0 -z-10 w-full h-full pointer-events-none overflow-x-clip">
@@ -32,17 +38,21 @@ export default async function Page() {
       </div>
 
       <DocsPage>
-        <div className="flex items-center justify-between mb-4 md:max-xl:px-12">
+        <div className="flex justify-between mb-4 md:max-xl:px-12">
           <div className="flex-1">
             <DocsTitle>FAQ</DocsTitle>
-            <DocsDescription className="!mb-0">Frequently answered questions</DocsDescription>
+            <DocsDescription className="!mb-0 text-balance">Frequently answered questions</DocsDescription>
+          </div>
+          <div className="flex items-start md:items-center gap-2">
+            <Link href="/v5/faq" className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-fd-muted-foreground hover:text-amber-500 bg-fd-card border border-fd-border hover:border-amber-500/30 rounded-md hover:bg-amber-500/10 transition-colors">
+              <FileQuestionMark className="size-4" />
+              v5
+            </Link>
           </div>
         </div>
-        {/* TODO: redo FAQAccordion to accept children instead of items and make this a normal mdx page */}
         <div className="md:max-xl:px-12">
           <FaqAccordion items={items} />
         </div>
-        {/* <FooterSection /> */}
       </DocsPage>
     </>
   );
