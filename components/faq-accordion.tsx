@@ -23,7 +23,6 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
 
     const handleHashChange = () => {
       const id = decodeURIComponent(location.href).split("#")[1];
-      console.log("FAQ Accordion hash change detected:", id);
 
       // trigger opening the accordion item
       const accordionItem = document.getElementById(id);
