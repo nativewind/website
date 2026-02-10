@@ -10,11 +10,12 @@ You will need to install `nativewind` and its peer dependencies `tailwindcss`, `
   framework={props.framework}
   deps={[
     "nativewind",
-    props.framework === 'framework-less' ? 'react-native-reanimated' : 'react-native-reanimated@~3.17.4',
-    "react-native-safe-area-context@5.4.0",
+    "react-native-reanimated",
+    "react-native-safe-area-context",
   ]}
   devDeps={[
     "tailwindcss@^3.4.17",
-    "prettier-plugin-tailwindcss@^0.5.11"
+    "prettier-plugin-tailwindcss@^0.5.11",
+    ...(props.framework === 'expo' ? ["babel-preset-expo"] : []),
   ]}
 />
