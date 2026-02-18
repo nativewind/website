@@ -11,9 +11,19 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
-<Callout type="warn" title="CAUTION">
-Animation support is experimental! We are waiting for your feedback to improve implementation.
-</Callout>
+Animations are powered by `react-native-reanimated` and support keyframe-based CSS animations including `from`/`to` blocks, multi-step keyframes, per-frame timing functions (`cubic-bezier`), and transform animations.
+
+## Supported Features
+
+- Keyframe animations with `from`/`to` and percentage-based frames
+- Transform animations (rotate, translateX, translateY, scale, etc.)
+- Starting transform values (animating from a non-default transform)
+- Per-frame `animation-timing-function` (e.g. `cubic-bezier`)
+- Animations triggered by pseudo-classes (e.g. `:active`)
+- Stopping animations by removing the animation class
+- `animation-none` to halt an active animation
+- Changing `animation-duration` mid-animation (resets and restarts)
+- Infinite animations with `animation-iteration-count: infinite`
 
 ## Compatibility
 
@@ -28,10 +38,7 @@ Animation support is experimental! We are waiting for your feedback to improve i
   ]}
 />
 
-## Contributors
+## Known Limitations
 
-Nativewind's animation is still experimental and very basic. We are looking for contributors to help with
-
-- Animated all mapped props (currently only works with `style`)
-- Improve performance
-- Update code to support new Reanimated v3 features (currently written in v2 style)
+- Animations currently only work with the `style` prop (not all mapped props)
+- We are looking for contributors to help improve performance
