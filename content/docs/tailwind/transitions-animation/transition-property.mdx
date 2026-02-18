@@ -11,9 +11,15 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
-<Callout type="warn" title="CAUTION">
-Animation support is experimental! We are waiting for your feedback to improve implementation.
-</Callout>
+Transitions are powered by `react-native-reanimated` and support smooth interpolation between style values when classes change.
+
+## Supported Features
+
+- Numeric property transitions (e.g. `width`, `height`, `opacity`)
+- Color transitions with proper interpolation
+- Transitions triggered by class changes on rerender
+- Transitions triggered by pseudo-class interactions (e.g. `:active`)
+- Transitions combined with group parent states
 
 ## Compatibility
 
