@@ -1,32 +1,45 @@
 ---
-title: NativeWindStyleSheet
+title: StyleSheet
 ---
 
-<!-- # NativeWindStyleSheet -->
+<!-- # StyleSheet -->
 
-A StyleSheet is an abstraction similar to CSS StyleSheets and React Native's StyleSheet.
+In NativeWind v4, the `StyleSheet` is exported from `react-native-css-interop` (and re-exported from `nativewind`). It provides internal methods used by the build system and runtime.
 
-## Methods
+<Callout type="warn" title="NOTE">
+The `NativeWindStyleSheet` API from v2/v3 (with methods like `setOutput`, `setDimensions`, `setAppearance`) no longer exists in v4. Use `useColorScheme()` for color scheme management instead.
+</Callout>
 
-### setOutput(specifics)
+## Color Scheme Management
 
-Set the style output per Platform
+To set or toggle the color scheme, use the [`useColorScheme()`](./use-color-scheme) hook:
 
-```js
-NativeWindStyleSheet.setOutput({
-  web: 'css',
-  default: 'native'
-})
+```tsx
+import { useColorScheme } from "nativewind";
+
+function MyComponent() {
+  const { colorScheme, setColorScheme, toggleColorScheme } = useColorScheme();
+
+  return (
+    <Text onPress={() => toggleColorScheme()}>
+      {`The color scheme is ${colorScheme}`}
+    </Text>
+  );
+}
 ```
 
-### setDimensions(dimensions: Dimensions)
+<Callout type="warn" title="CAUTION">
+`setColorScheme` and `toggleColorScheme` require `darkMode: "class"` in your Tailwind config. They will throw an error if `darkMode` is set to `"media"` (the default).
+</Callout>
 
-Override how window dimensions are calculated. Defaults to Dimensions from React Native.
+## Internal Methods
 
-### setAppearance(appearance: Appearance)
+The `StyleSheet` object exposes the following methods, primarily used internally by the build system:
 
-Override the app's appearance. Defaults to Appearance from React Native.
+| Method | Description |
+| --- | --- |
+| `registerCompiled(options)` | Registers compiled CSS data from the Metro transform |
+| `getFlag(name)` | Retrieves a build flag (e.g. `darkMode` strategy) |
+| `getGlobalStyle(name)` | Retrieves a registered global style rule |
 
-### setColorScheme(colorScheme: 'light' | 'dark' | 'system')
-
-Set the applications color scheme
+These methods are not intended for direct use in application code.
