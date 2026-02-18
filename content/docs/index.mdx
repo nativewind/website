@@ -6,7 +6,7 @@ title: Overview
 
 ## What is Nativewind?
 
-Nativewind allows you to use [Tailwind CSS](https://tailwindcss.com) to style your components in React Native. Styled components can be shared between all React Native platforms, using the best style engine for that platform; CSS StyleSheet on web and StyleSheet.create for native. Its goals are to provide a consistent styling experience across all platforms, improving Developer UX, component performance and code maintainability.
+Nativewind allows you to use [Tailwind CSS](https://v3.tailwindcss.com) to style your components in React Native. Styled components can be shared between all React Native platforms, using the best style engine for that platform; CSS StyleSheet on web and StyleSheet.create for native. Its goals are to provide a consistent styling experience across all platforms, improving Developer UX, component performance and code maintainability.
 
 On native platforms, Nativewind performs two functions. First, at build time, it compiles your Tailwind CSS styles into `StyleSheet.create` objects and determines the conditional logic of styles (e.g. hover, focus, active, etc). Second, it has an efficient runtime system that applies the styles to your components. This means you can use the full power of Tailwind CSS, including media queries, container queries, and custom values, while still having the performance of a native style system.
 
@@ -18,13 +18,13 @@ On web, Nativewind is a small polyfill for adding `className` support to React N
 
 🖥️ **DevUX** Plugins for simple setup and improving intellisense support
 
-✨ **Media & Container queries** Use modern mobile styling features like media and container queries [(docs)](../core-concepts/responsive-design)
+✨ **Media & Container queries** Use modern mobile styling features like media and container queries [(docs)](../docs/core-concepts/responsive-design)
 
 👪 **Custom values (CSS Variables)** Create themes, sub-themes and dynamic styles using custom values
 
 ✨ **Pseudo classes** hover / focus / active on compatible components [(docs)](../core-concepts/states#hover-focus-and-active)
 
-👪 **Parent state styles** automatically style children based upon parent pseudo classes [(docs)](../core-concepts/states#styling-based-on-parent-state)
+👪 **Parent state styles** automatically style children based upon parent pseudo classes [(docs)](../docs/core-concepts/states#styling-based-on-parent-state)
 
 🔥 **Lots of other features**
 
