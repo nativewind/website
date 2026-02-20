@@ -156,7 +156,7 @@ export async function GET(request: NextRequest) {
               left: 0,
               width: W,
               height: H,
-              filter: 'blur(36px)',
+              filter: 'blur(4px)',
               display: 'flex',
             }}
           />
