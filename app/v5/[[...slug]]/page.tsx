@@ -1,4 +1,5 @@
 import { source5 } from '@/lib/source';
+import { getSectionLabel } from '@/lib/og-section';
 import {
   DocsPage,
   DocsBody,
@@ -102,6 +103,8 @@ export async function generateMetadata(props: {
   if (!page) notFound();
 
   const ogParams = new URLSearchParams({ title: page.data.title });
+  const section = getSectionLabel(source5.pageTree, page.url);
+  if (section) ogParams.set('section', section);
   if (page.data.lastModified) {
     ogParams.set(
       'lastModified',

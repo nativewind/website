@@ -65,7 +65,8 @@ function getWindmapSrc(): string {
 }
 
 // ── Font loading ──────────────────────────────────────────────────────────────
-let cachedFonts: { regular: ArrayBuffer; bold: ArrayBuffer } | null = null;
+type FontSet = { regular: ArrayBuffer; medium: ArrayBuffer; mono: ArrayBuffer };
+let cachedFonts: FontSet | null = null;
 
 async function loadGoogleFont(family: string, weight: number): Promise<ArrayBuffer> {
   const url = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@${weight}&display=swap`;
@@ -82,13 +83,14 @@ async function loadGoogleFont(family: string, weight: number): Promise<ArrayBuff
   return fetch(match[1]).then((r) => r.arrayBuffer());
 }
 
-async function getInterFonts() {
+async function getAllFonts(): Promise<FontSet> {
   if (cachedFonts) return cachedFonts;
-  const [regular, bold] = await Promise.all([
+  const [regular, medium, mono] = await Promise.all([
     loadGoogleFont('Inter', 400),
-    loadGoogleFont('Inter', 700),
+    loadGoogleFont('Inter', 500),
+    loadGoogleFont('JetBrains Mono', 400),
   ]);
-  cachedFonts = { regular, bold };
+  cachedFonts = { regular, medium, mono };
   return cachedFonts;
 }
 
@@ -96,8 +98,9 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get('title') ?? 'Nativewind';
   const lastModified = searchParams.get('lastModified') ?? null;
+  const section = searchParams.get('section') ?? null;
 
-  const fonts = await getInterFonts();
+  const fonts = await getAllFonts();
   const bgSrc = getWindmapSrc();
 
   // Wordmark dimensions: viewBox="0 0 590 110" → scale to height LOGO_H
@@ -230,7 +233,7 @@ export async function GET(request: NextRequest) {
           </svg>
         </div>
 
-        {/* ── Bottom left: last updated + title ─────────────────────────── */}
+        {/* ── Bottom left: section label + title ───────────────────────── */}
         {/* Full-canvas flex column with justifyContent:flex-end + padding is
             more reliable in satori than position:absolute;bottom:X, which
             positions the element's *top* edge rather than its bottom edge. */}
@@ -256,22 +259,23 @@ export async function GET(request: NextRequest) {
               maxWidth: '1000px',
             }}
           >
-            {lastModified && (
+            {section && (
               <span
                 style={{
                   color: '#9b9b9b',
                   fontSize: 36,
                   fontWeight: 400,
+                  fontFamily: 'JetBrains Mono, monospace',
                 }}
               >
-                Last updated on {lastModified}
+                {section}
               </span>
             )}
             <span
               style={{
                 color: '#ebebeb',
                 fontSize: TITLE_FONT_SIZE,
-                fontWeight: 700,
+                fontWeight: 500,
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
                 display: '-webkit-box',
@@ -284,13 +288,42 @@ export async function GET(request: NextRequest) {
             </span>
           </div>
         </div>
+
+        {/* ── Bottom padding: last updated (small, dim) ─────────────────── */}
+        {/* Positioned in the 64px zone below CONTENT_BOTTOM, outside the
+            blurred title zone. Title itself does not move. */}
+        {lastModified && (
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: W,
+              height: PAD,
+              display: 'flex',
+              alignItems: 'center',
+              paddingLeft: PAD,
+            }}
+          >
+            <span
+              style={{
+                color: '#5a5a5a',
+                fontSize: 22,
+                fontWeight: 400,
+              }}
+            >
+              Last updated on {lastModified}
+            </span>
+          </div>
+        )}
       </div>
     ),
     {
       ...size,
       fonts: [
         { name: 'Inter', data: fonts.regular, weight: 400, style: 'normal' },
-        { name: 'Inter', data: fonts.bold, weight: 700, style: 'normal' },
+        { name: 'Inter', data: fonts.medium, weight: 500, style: 'normal' },
+        { name: 'JetBrains Mono', data: fonts.mono, weight: 400, style: 'normal' },
       ],
     },
   );
