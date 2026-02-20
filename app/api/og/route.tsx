@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 
@@ -9,90 +11,34 @@ const H = 630;
 const size = { width: W, height: H };
 
 // ── Layout constants (must stay in sync with JSX below) ──────────────────────
-const PAD_TOP = 48;          // top of wordmark = top guide
 const LOGO_H = 72;           // wordmark height
-const LOGO_BOTTOM = PAD_TOP + LOGO_H; // 120 — guide below logo
+const LOGO_BOTTOM = 48 + LOGO_H; // 120 — guide below logo
 const PAD_LEFT = 72;         // left content margin = left guide
 const PAD_RIGHT_EDGE = 64;   // distance from right edge for wordmark
 const RIGHT_GUIDE = W - PAD_RIGHT_EDGE; // 1136 — right guide
 const PAD_BOTTOM = 64;       // bottom content margin
 const CONTENT_BOTTOM = H - PAD_BOTTOM; // 566 — guide below title
+const TITLE_FONT_SIZE = 96;
+const TITLE_LINE_HEIGHT = 1.15;   // approximate single-line height multiplier
+const LAST_MODIFIED_GAP = 16;     // gap between lastModified text and title
 
-// ── Windmap SVG paths (computed once at module load) ─────────────────────────
-//    Smooth cubic-bezier stream lines that evoke the animated VectorField.tsx:
-//    a gentle base drift (~20°) + a counter-clockwise swirl near canvas centre.
-//    Using C-command beziers (3 segments per path) keeps the SVG compact and
-//    renders crisply without needing 70+ polyline points per trail.
-const WINDMAP_PATHS = (() => {
-  // Fixed seed — keeps the pattern identical across every build/request
-  const WINDMAP_SEED = 31337;
-  let seed = WINDMAP_SEED;
-  const rnd = () => {
-    seed = (Math.imul(1664525, seed) + 1013904223) >>> 0;
-    return seed / 0x100000000;
-  };
-
-  const vf = (x: number, y: number) => {
-    const baseAngle = Math.PI / 9; // ~20° drift
-    let vx = Math.cos(baseAngle) * 0.22;
-    let vy = Math.sin(baseAngle) * 0.22;
-    // Counter-clockwise swirl centred slightly right-of-middle
-    const cx = W * 0.52;
-    const cy = H * 0.48;
-    const dx = x - cx;
-    const dy = y - cy;
-    const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
-    if (dist < 680) {
-      const s = (1 - dist / 680) * 1.8;
-      vx += (dy / dist) * s;
-      vy += (-dx / dist) * s;
-    }
-    return { vx, vy };
-  };
-
-  // Normalise a vector to unit length
-  const norm = (vx: number, vy: number) => {
-    const m = Math.sqrt(vx * vx + vy * vy) || 0.001;
-    return { nx: vx / m, ny: vy / m };
-  };
-
-  const paths: string[] = [];
-  const SEG_LENGTH = 90;    // px length of each cubic-bezier segment
-  const SEGMENTS_PER_PATH = 3;
-
-  for (let i = 0; i < 350; i++) {
-    let x = rnd() * W;
-    let y = rnd() * H;
-    let d = `M${x.toFixed(1)},${y.toFixed(1)}`;
-
-    for (let s = 0; s < SEGMENTS_PER_PATH; s++) {
-      const { vx: vx0, vy: vy0 } = vf(x, y);
-      const { nx: n0x, ny: n0y } = norm(vx0, vy0);
-
-      const ex = x + n0x * SEG_LENGTH;
-      const ey = y + n0y * SEG_LENGTH;
-      if (ex < -20 || ex > W + 20 || ey < -20 || ey > H + 20) break;
-
-      // cp1: leave start along start-tangent
-      const cp1x = x + n0x * (SEG_LENGTH / 3);
-      const cp1y = y + n0y * (SEG_LENGTH / 3);
-
-      // cp2: arrive at end along end-tangent (backwards)
-      const { vx: vxE, vy: vyE } = vf(ex, ey);
-      const { nx: nEx, ny: nEy } = norm(vxE, vyE);
-      const cp2x = ex - nEx * (SEG_LENGTH / 3);
-      const cp2y = ey - nEy * (SEG_LENGTH / 3);
-
-      d += ` C${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}`;
-      x = ex;
-      y = ey;
-    }
-
-    if (d.length > 20) paths.push(d);
+// ── Windmap background image ──────────────────────────────────────────────────
+// PNG with white trails on a transparent background, generated from the same
+// vector field as the VectorField.tsx canvas animation on the homepage.
+// Replace app/assets/og-windmap.png to change the background pattern.
+let windmapSrc: string | null = null;
+function getWindmapSrc(): string {
+  if (windmapSrc) return windmapSrc;
+  try {
+    const buf = readFileSync(join(process.cwd(), 'app/assets/og-windmap.png'));
+    windmapSrc = `data:image/png;base64,${buf.toString('base64')}`;
+  } catch {
+    // File missing — fall back to a transparent 1x1 PNG so the route still renders
+    windmapSrc =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
   }
-
-  return paths;
-})();
+  return windmapSrc;
+}
 
 // ── Font loading ──────────────────────────────────────────────────────────────
 let cachedFonts: { regular: ArrayBuffer; bold: ArrayBuffer } | null = null;
@@ -128,20 +74,15 @@ export async function GET(request: NextRequest) {
   const lastModified = searchParams.get('lastModified') ?? null;
 
   const fonts = await getInterFonts();
+  const bgSrc = getWindmapSrc();
 
   // Wordmark dimensions: viewBox="0 0 590 110" → scale to height LOGO_H
   const wordmarkWidth = Math.round(LOGO_H * (590 / 110)); // ≈ 386
 
   // Approximate Y position of the line below "last updated" text.
-  // The content column is bottom-anchored at CONTENT_BOTTOM=566.
-  // Title sits at the bottom; lastModified sits above title with a 16px gap.
-  const TITLE_LENGTH_THRESHOLD = 40;
-  const TITLE_FONT_SIZE_SHORT = 96; // px, for titles ≤ threshold chars
-  const TITLE_FONT_SIZE_LONG = 80;  // px, for longer titles
-  const TITLE_LINE_HEIGHT = 1.15;   // approximate rendered line-height multiplier
-  const LAST_MODIFIED_GAP = 16;     // gap between lastModified and title (matches JSX gap)
-  const titleFontSize = title.length > TITLE_LENGTH_THRESHOLD ? TITLE_FONT_SIZE_LONG : TITLE_FONT_SIZE_SHORT;
-  const approxTitleH = Math.round(titleFontSize * TITLE_LINE_HEIGHT); // single-line estimate
+  // The content column is bottom-anchored at CONTENT_BOTTOM.
+  // Title sits at the bottom; lastModified sits above title with gap = LAST_MODIFIED_GAP.
+  const approxTitleH = Math.round(TITLE_FONT_SIZE * TITLE_LINE_HEIGHT);
   const lineUnderLastModY = CONTENT_BOTTOM - approxTitleH - LAST_MODIFIED_GAP;
 
   return new ImageResponse(
@@ -156,23 +97,15 @@ export async function GET(request: NextRequest) {
           fontFamily: 'Inter, sans-serif',
         }}
       >
-        {/* ── Windmap particle trails ───────────────────────────────────── */}
-        <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
-          <svg width={W} height={H} xmlns="http://www.w3.org/2000/svg">
-            {WINDMAP_PATHS.map((d, i) => (
-              <path
-                key={i}
-                d={d}
-                stroke="#ffffff"
-                strokeOpacity="0.1"
-                strokeWidth="0.9"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            ))}
-          </svg>
-        </div>
+        {/* ── Windmap background ────────────────────────────────────────── */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={bgSrc}
+          width={W}
+          height={H}
+          style={{ position: 'absolute', top: 0, left: 0 }}
+          alt=""
+        />
 
         {/* ── Cyan radial glow (top-right accent) ──────────────────────── */}
         <div
@@ -185,39 +118,35 @@ export async function GET(request: NextRequest) {
         />
 
         {/* ── Structural layout guide lines ─────────────────────────────── */}
+        {/* Grey dashed lines marking layout zones (no line above logo) */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
           <svg width={W} height={H} xmlns="http://www.w3.org/2000/svg">
-            {/* Top of logo / top padding */}
-            <line
-              x1="0" y1={PAD_TOP} x2={W} y2={PAD_TOP}
-              stroke="#3ad1ff" strokeOpacity="0.22" strokeWidth="1" strokeDasharray="6 5"
-            />
             {/* Below logo */}
             <line
               x1="0" y1={LOGO_BOTTOM} x2={W} y2={LOGO_BOTTOM}
-              stroke="#3ad1ff" strokeOpacity="0.22" strokeWidth="1" strokeDasharray="6 5"
+              stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
             />
             {/* Below "last updated" text (only when date is present) */}
             {lastModified && (
               <line
                 x1="0" y1={lineUnderLastModY} x2={W} y2={lineUnderLastModY}
-                stroke="#3ad1ff" strokeOpacity="0.22" strokeWidth="1" strokeDasharray="6 5"
+                stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
               />
             )}
             {/* Below title / bottom padding */}
             <line
               x1="0" y1={CONTENT_BOTTOM} x2={W} y2={CONTENT_BOTTOM}
-              stroke="#3ad1ff" strokeOpacity="0.22" strokeWidth="1" strokeDasharray="6 5"
+              stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
             />
             {/* Left margin */}
             <line
               x1={PAD_LEFT} y1="0" x2={PAD_LEFT} y2={H}
-              stroke="#3ad1ff" strokeOpacity="0.22" strokeWidth="1" strokeDasharray="6 5"
+              stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
             />
             {/* Right margin */}
             <line
               x1={RIGHT_GUIDE} y1="0" x2={RIGHT_GUIDE} y2={H}
-              stroke="#3ad1ff" strokeOpacity="0.22" strokeWidth="1" strokeDasharray="6 5"
+              stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
             />
           </svg>
         </div>
@@ -226,7 +155,7 @@ export async function GET(request: NextRequest) {
         <div
           style={{
             position: 'absolute',
-            top: PAD_TOP,
+            top: 48,
             right: PAD_RIGHT_EDGE,
             display: 'flex',
           }}
@@ -264,7 +193,7 @@ export async function GET(request: NextRequest) {
             left: PAD_LEFT,
             display: 'flex',
             flexDirection: 'column',
-            gap: 16,
+            gap: LAST_MODIFIED_GAP,
             maxWidth: '1000px',
           }}
         >
@@ -282,7 +211,7 @@ export async function GET(request: NextRequest) {
           <span
             style={{
               color: '#ebebeb',
-              fontSize: title.length > TITLE_LENGTH_THRESHOLD ? TITLE_FONT_SIZE_LONG : TITLE_FONT_SIZE_SHORT,
+              fontSize: TITLE_FONT_SIZE,
               fontWeight: 700,
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
