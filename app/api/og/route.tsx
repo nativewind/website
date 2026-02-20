@@ -146,6 +146,7 @@ export async function GET(request: NextRequest) {
             height: CONTENT_BOTTOM - lineAboveTitleY,
             overflow: 'hidden',
             display: 'flex',
+            backgroundColor: '#121212',
           }}
         >
           <img
