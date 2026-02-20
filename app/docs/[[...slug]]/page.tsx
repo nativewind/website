@@ -15,6 +15,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import FooterSection from '@/app/(home)/FooterSection';
 import { EditButton } from '@/components/edit-button';
+import { CopyMarkdownButton } from '@/components/copy-markdown-button';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -64,7 +65,10 @@ export default async function Page(props: {
             <DocsTitle>{page.data.title}</DocsTitle>
             <DocsDescription>{page.data.description}</DocsDescription>
           </div>
-          <EditButton filePath={filePath} version="v4" />
+          <div className="flex items-center gap-2">
+            <CopyMarkdownButton markdownUrl={`${page.url}.mdx`} />
+            <EditButton filePath={filePath} version="v4" />
+          </div>
         </div>
         <DocsBody>
           <MDX components={{

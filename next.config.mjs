@@ -11,6 +11,10 @@ const nextConfig = {
         source: '/docs/:path*.mdx',
         destination: '/llms.mdx/docs/:path*',
       },
+      {
+        source: '/v5/:path*.mdx',
+        destination: '/llms.mdx/v5/:path*',
+      },
     ];
   },
   images: {
