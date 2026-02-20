@@ -19,8 +19,33 @@ const RIGHT_GUIDE = W - PAD_RIGHT_EDGE; // 1136 — right guide
 const PAD_BOTTOM = 64;       // bottom content margin
 const CONTENT_BOTTOM = H - PAD_BOTTOM; // 566 — guide below title
 const TITLE_FONT_SIZE = 96;
-const TITLE_LINE_HEIGHT = 1.15;   // approximate single-line height multiplier
+const TITLE_LINE_HEIGHT = 1.15;   // per-line height multiplier (conservative)
+const TITLE_MAX_WIDTH = 1000;     // maxWidth on the title container (px)
 const LAST_MODIFIED_GAP = 16;     // gap between lastModified text and title
+
+// ── Title line-count estimator ────────────────────────────────────────────────
+// Approximates how many lines the title will wrap to at TITLE_FONT_SIZE px in
+// TITLE_MAX_WIDTH px, using average Inter Bold character widths.
+const AVG_CHAR_WIDTH_RATIO = 0.55; // avg char advance as a fraction of font-size
+const SPACE_WIDTH_RATIO = 0.25;    // space advance as a fraction of font-size
+
+function estimateTitleLines(text: string): number {
+  const charW = AVG_CHAR_WIDTH_RATIO * TITLE_FONT_SIZE;
+  const spaceW = SPACE_WIDTH_RATIO * TITLE_FONT_SIZE;
+  const words = text.split(' ');
+  let lines = 1;
+  let lineW = 0;
+  for (const word of words) {
+    const ww = word.length * charW;
+    if (lineW > 0 && lineW + spaceW + ww > TITLE_MAX_WIDTH) {
+      lines++;
+      lineW = ww;
+    } else {
+      lineW += (lineW > 0 ? spaceW : 0) + ww;
+    }
+  }
+  return lines;
+}
 
 // ── Windmap background image ──────────────────────────────────────────────────
 // PNG with white trails on a transparent background, generated from the same
@@ -79,11 +104,12 @@ export async function GET(request: NextRequest) {
   // Wordmark dimensions: viewBox="0 0 590 110" → scale to height LOGO_H
   const wordmarkWidth = Math.round(LOGO_H * (590 / 110)); // ≈ 386
 
-  // Approximate Y position of the line below "last updated" text.
-  // The content column is bottom-anchored at CONTENT_BOTTOM.
-  // Title sits at the bottom; lastModified sits above title with gap = LAST_MODIFIED_GAP.
-  const approxTitleH = Math.round(TITLE_FONT_SIZE * TITLE_LINE_HEIGHT);
-  const lineUnderLastModY = CONTENT_BOTTOM - approxTitleH - LAST_MODIFIED_GAP;
+  // Y position of the dashed line that separates "last updated" from the title.
+  // Accounts for multi-line wrapping: each extra line moves the separator up by
+  // one TITLE_LINE_HEIGHT unit.
+  const numTitleLines = estimateTitleLines(title);
+  const approxTitleH = Math.round(TITLE_FONT_SIZE * TITLE_LINE_HEIGHT * numTitleLines);
+  const lineAboveTitleY = CONTENT_BOTTOM - approxTitleH - LAST_MODIFIED_GAP;
 
   return new ImageResponse(
     (
@@ -117,19 +143,56 @@ export async function GET(request: NextRequest) {
           }}
         />
 
-        {/* ── Structural layout guide lines ─────────────────────────────── */}
-        {/* Grey dashed lines marking layout zones (no line above logo) */}
+        {/* ── Structural layout guide lines + blur backdrop ─────────────── */}
+        {/* Grey dashed lines marking layout zones (no line above logo).
+            When a date is present we also add an SVG-filter blur behind the
+            title zone (lineAboveTitleY → CONTENT_BOTTOM) to simulate
+            backdrop-filter: blur(4px) — CSS backdrop-filter is not supported
+            in satori so we use a blurred <image> copy + dark overlay instead. */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
           <svg width={W} height={H} xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="blur4" x="-2%" y="-2%" width="104%" height="104%">
+                <feGaussianBlur stdDeviation="4" />
+              </filter>
+              {lastModified && (
+                <clipPath id="titleZoneClip">
+                  <rect
+                    x="0" y={lineAboveTitleY}
+                    width={W} height={CONTENT_BOTTOM - lineAboveTitleY}
+                  />
+                </clipPath>
+              )}
+            </defs>
+
+            {/* Blurred windmap copy clipped to title zone */}
+            {lastModified && (
+              <g>
+                <image
+                  href={bgSrc}
+                  x="0" y="0" width={W} height={H}
+                  filter="url(#blur4)"
+                  clipPath="url(#titleZoneClip)"
+                />
+                {/* Dark overlay so the title text stays legible */}
+                <rect
+                  x="0" y={lineAboveTitleY}
+                  width={W} height={CONTENT_BOTTOM - lineAboveTitleY}
+                  fill="#121212"
+                  fillOpacity="0.45"
+                />
+              </g>
+            )}
+
             {/* Below logo */}
             <line
               x1="0" y1={LOGO_BOTTOM} x2={W} y2={LOGO_BOTTOM}
               stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
             />
-            {/* Below "last updated" text (only when date is present) */}
+            {/* Above title / below "last updated" text (only when date is present) */}
             {lastModified && (
               <line
-                x1="0" y1={lineUnderLastModY} x2={W} y2={lineUnderLastModY}
+                x1="0" y1={lineAboveTitleY} x2={W} y2={lineAboveTitleY}
                 stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
               />
             )}
