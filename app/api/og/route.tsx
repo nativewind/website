@@ -56,17 +56,39 @@ export async function GET(request: NextRequest) {
           fontFamily: 'Inter, sans-serif',
         }}
       >
-        {/* Subtle dot grid background */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage:
-              'radial-gradient(circle, #ffffff18 1.5px, transparent 1.5px)',
-            backgroundSize: '24px 24px',
-            backgroundPosition: '0 0',
-          }}
-        />
+        {/* Dashed grid lines */}
+        <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
+          <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+            {/* Vertical lines every 60px — x = 0, 60, 120 … 1200 (21 lines) */}
+            {Array.from({ length: 21 }, (_, i) => (
+              <line
+                key={`v${i}`}
+                x1={i * 60}
+                y1={0}
+                x2={i * 60}
+                y2={630}
+                stroke="#ffffff"
+                strokeOpacity="0.08"
+                strokeWidth="1"
+                strokeDasharray="4 8"
+              />
+            ))}
+            {/* Horizontal lines every 63px — y = 0, 63, 126 … 630 (11 lines, evenly divides 630) */}
+            {Array.from({ length: 11 }, (_, i) => (
+              <line
+                key={`h${i}`}
+                x1={0}
+                y1={i * 63}
+                x2={1200}
+                y2={i * 63}
+                stroke="#ffffff"
+                strokeOpacity="0.08"
+                strokeWidth="1"
+                strokeDasharray="4 8"
+              />
+            ))}
+          </svg>
+        </div>
 
         {/* Gradient overlay - cyan glow top right */}
         <div
