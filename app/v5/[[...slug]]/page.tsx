@@ -101,8 +101,27 @@ export async function generateMetadata(props: {
   const page = source5.getPage(params.slug);
   if (!page) notFound();
 
+  const ogParams = new URLSearchParams({ title: page.data.title });
+  if (page.data.lastModified) {
+    ogParams.set(
+      'lastModified',
+      Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
+        new Date(page.data.lastModified),
+      ),
+    );
+  }
+
+  const ogImageUrl = `/api/og?${ogParams.toString()}`;
+
   return {
     title: page.data.title,
     description: page.data.description,
+    openGraph: {
+      images: [ogImageUrl],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [ogImageUrl],
+    },
   };
 }
