@@ -13,14 +13,13 @@ const size = { width: W, height: H };
 // ── Layout constants (must stay in sync with JSX below) ──────────────────────
 const LOGO_H = 72;           // wordmark height
 const LOGO_BOTTOM = 48 + LOGO_H; // 120 — guide below logo
-const PAD_LEFT = 72;         // left content margin = left guide
-const PAD_RIGHT_EDGE = 64;   // distance from right edge for wordmark
-const RIGHT_GUIDE = W - PAD_RIGHT_EDGE; // 1136 — right guide
-const PAD_BOTTOM = 64;       // bottom content margin
-const CONTENT_BOTTOM = H - PAD_BOTTOM; // 566 — guide below title
+const PAD = 64;              // uniform padding: left, right edge, and bottom
+const RIGHT_GUIDE = W - PAD; // 1136 — right guide
+const CONTENT_BOTTOM = H - PAD; // 566 — guide below title
 const TITLE_FONT_SIZE = 96;
-const TITLE_LINE_HEIGHT = 1.15;   // per-line height multiplier (conservative)
+const TITLE_LINE_HEIGHT = 1.1;    // must match JSX lineHeight below
 const TITLE_MAX_WIDTH = 1000;     // maxWidth on the title container (px)
+const TITLE_MAX_LINES = 3;        // clamp to prevent overflow / logo collision
 const LAST_MODIFIED_GAP = 16;     // gap between lastModified text and title
 
 // ── Title line-count estimator ────────────────────────────────────────────────
@@ -107,9 +106,11 @@ export async function GET(request: NextRequest) {
   // Y position of the dashed line that separates "last updated" from the title.
   // Accounts for multi-line wrapping: each extra line moves the separator up by
   // one TITLE_LINE_HEIGHT unit.
-  const numTitleLines = estimateTitleLines(title);
+  const numTitleLines = Math.min(estimateTitleLines(title), TITLE_MAX_LINES);
   const approxTitleH = Math.round(TITLE_FONT_SIZE * TITLE_LINE_HEIGHT * numTitleLines);
-  const lineAboveTitleY = CONTENT_BOTTOM - approxTitleH - LAST_MODIFIED_GAP;
+  // Place the separator line at the midpoint of the gap so it sits between the
+  // last-updated text and the title, rather than flush against either one.
+  const lineAboveTitleY = CONTENT_BOTTOM - approxTitleH - Math.round(LAST_MODIFIED_GAP / 2);
 
   return new ImageResponse(
     (
@@ -152,8 +153,8 @@ export async function GET(request: NextRequest) {
         <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
           <svg width={W} height={H} xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <filter id="blur4" x="-2%" y="-2%" width="104%" height="104%">
-                <feGaussianBlur stdDeviation="4" />
+              <filter id="blur12" x="-4%" y="-4%" width="108%" height="108%">
+                <feGaussianBlur stdDeviation="12" />
               </filter>
               {lastModified && (
                 <clipPath id="titleZoneClip">
@@ -165,23 +166,14 @@ export async function GET(request: NextRequest) {
               )}
             </defs>
 
-            {/* Blurred windmap copy clipped to title zone */}
+            {/* Blurred windmap copy clipped to title zone — simulates backdrop-filter: blur */}
             {lastModified && (
-              <g>
-                <image
-                  href={bgSrc}
-                  x="0" y="0" width={W} height={H}
-                  filter="url(#blur4)"
-                  clipPath="url(#titleZoneClip)"
-                />
-                {/* Dark overlay so the title text stays legible */}
-                <rect
-                  x="0" y={lineAboveTitleY}
-                  width={W} height={CONTENT_BOTTOM - lineAboveTitleY}
-                  fill="#121212"
-                  fillOpacity="0.45"
-                />
-              </g>
+              <image
+                href={bgSrc}
+                x="0" y="0" width={W} height={H}
+                filter="url(#blur12)"
+                clipPath="url(#titleZoneClip)"
+              />
             )}
 
             {/* Below logo */}
@@ -203,7 +195,7 @@ export async function GET(request: NextRequest) {
             />
             {/* Left margin */}
             <line
-              x1={PAD_LEFT} y1="0" x2={PAD_LEFT} y2={H}
+              x1={PAD} y1="0" x2={PAD} y2={H}
               stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
             />
             {/* Right margin */}
@@ -219,7 +211,7 @@ export async function GET(request: NextRequest) {
           style={{
             position: 'absolute',
             top: 48,
-            right: PAD_RIGHT_EDGE,
+            right: PAD,
             display: 'flex',
           }}
         >
@@ -262,8 +254,8 @@ export async function GET(request: NextRequest) {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            paddingBottom: PAD_BOTTOM,
-            paddingLeft: PAD_LEFT,
+            paddingBottom: PAD,
+            paddingLeft: PAD,
           }}
         >
           <div
@@ -292,6 +284,10 @@ export async function GET(request: NextRequest) {
                 fontWeight: 700,
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
+                display: '-webkit-box',
+                WebkitLineClamp: TITLE_MAX_LINES,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
               }}
             >
               {title}
