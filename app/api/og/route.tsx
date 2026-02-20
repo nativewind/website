@@ -266,6 +266,7 @@ export async function GET(request: NextRequest) {
                   fontSize: 36,
                   fontWeight: 400,
                   fontFamily: 'JetBrains Mono, monospace',
+                  marginLeft: 8,
                 }}
               >
                 {section}
@@ -282,6 +283,7 @@ export async function GET(request: NextRequest) {
                 WebkitLineClamp: TITLE_MAX_LINES,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
+                marginLeft: 6,
               }}
             >
               {title}
@@ -302,13 +304,13 @@ export async function GET(request: NextRequest) {
               height: PAD,
               display: 'flex',
               alignItems: 'center',
-              paddingLeft: PAD,
+              paddingLeft: PAD + 8,
             }}
           >
             <span
               style={{
-                color: '#5a5a5a',
-                fontSize: 22,
+                color: '#7a7a7a',
+                fontSize: 26,
                 fontWeight: 400,
               }}
             >
