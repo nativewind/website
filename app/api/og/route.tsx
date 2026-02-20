@@ -110,7 +110,8 @@ export async function GET(request: NextRequest) {
   const approxTitleH = Math.round(TITLE_FONT_SIZE * TITLE_LINE_HEIGHT * numTitleLines);
   // Place the separator line at the midpoint of the gap so it sits between the
   // last-updated text and the title, rather than flush against either one.
-  const lineAboveTitleY = CONTENT_BOTTOM - approxTitleH - Math.round(LAST_MODIFIED_GAP / 2);
+  // +4: user-requested nudge downward.
+  const lineAboveTitleY = CONTENT_BOTTOM - approxTitleH - Math.round(LAST_MODIFIED_GAP / 2) + 4;
 
   return new ImageResponse(
     (
@@ -124,57 +125,34 @@ export async function GET(request: NextRequest) {
           fontFamily: 'Inter, sans-serif',
         }}
       >
-        {/* ── Windmap background ────────────────────────────────────────── */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={bgSrc}
-          width={W}
-          height={H}
-          style={{ position: 'absolute', top: 0, left: 0 }}
-          alt=""
-        />
-
-        {/* ── Cyan radial glow (top-right accent) ──────────────────────── */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'radial-gradient(ellipse at 85% 15%, #3ad1ff1c 0%, transparent 58%)',
-          }}
-        />
-
-        {/* ── Structural layout guide lines + blur backdrop ─────────────── */}
-        {/* Grey dashed lines marking layout zones (no line above logo).
-            When a date is present we also add an SVG-filter blur behind the
-            title zone (lineAboveTitleY → CONTENT_BOTTOM) to simulate
-            backdrop-filter: blur(4px) — CSS backdrop-filter is not supported
-            in satori so we use a blurred <image> copy + dark overlay instead. */}
+        {/* ── All background layers + guide lines in a single SVG ─────── */}
+        {/* The <g id="bg"> group is the backdrop source for the blur effect.
+            <filter> and <clipPath> are intentionally placed outside <defs> —
+            they are valid SVG and resvg resolves them by ID regardless of
+            position. The <use> element re-renders the background group
+            through the blur filter, clipped to the title zone, simulating
+            CSS backdrop-filter: blur(12px). */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
           <svg width={W} height={H} xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <filter id="blur12" x="-4%" y="-4%" width="108%" height="108%">
-                <feGaussianBlur stdDeviation="12" />
-              </filter>
-              {lastModified && (
-                <clipPath id="titleZoneClip">
-                  <rect
-                    x="0" y={lineAboveTitleY}
-                    width={W} height={CONTENT_BOTTOM - lineAboveTitleY}
-                  />
-                </clipPath>
-              )}
-            </defs>
+            {/* Background group — dark fill + windmap; used as blur source */}
+            <g id="bg">
+              <rect x="0" y="0" width={W} height={H} fill="#121212" />
+              <image href={bgSrc} x="0" y="0" width={W} height={H} />
+            </g>
 
-            {/* Blurred windmap copy clipped to title zone — simulates backdrop-filter: blur */}
-            {lastModified && (
-              <image
-                href={bgSrc}
-                x="0" y="0" width={W} height={H}
-                filter="url(#blur12)"
-                clipPath="url(#titleZoneClip)"
-              />
-            )}
+            {/* Backdrop-blur simulation for title zone (only when a date is present).
+                filter and clipPath are placed outside <defs> — valid SVG, resolved by ID.
+                <use> re-renders the #bg group through the blur filter, clipped to the
+                title zone, simulating CSS backdrop-filter: blur(12px). */}
+            {lastModified && <>
+              <filter id="blur12" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="12" in="SourceGraphic" />
+              </filter>
+              <clipPath id="titleZoneClip">
+                <rect x="0" y={lineAboveTitleY} width={W} height={CONTENT_BOTTOM - lineAboveTitleY} />
+              </clipPath>
+              <use href="#bg" filter="url(#blur12)" clipPath="url(#titleZoneClip)" />
+            </>}
 
             {/* Below logo */}
             <line
@@ -207,11 +185,13 @@ export async function GET(request: NextRequest) {
         </div>
 
         {/* ── Top right: full Nativewind wordmark ───────────────────────── */}
+        {/* right: PAD + 4 moves the wordmark 4px further left while the right
+            guide line (at W - PAD) stays in its original position. */}
         <div
           style={{
             position: 'absolute',
             top: 48,
-            right: PAD,
+            right: PAD + 4,
             display: 'flex',
           }}
         >
