@@ -186,39 +186,54 @@ export async function GET(request: NextRequest) {
         </div>
 
         {/* ── Bottom left: last updated + title ─────────────────────────── */}
+        {/* Full-canvas flex column with justifyContent:flex-end + padding is
+            more reliable in satori than position:absolute;bottom:X, which
+            positions the element's *top* edge rather than its bottom edge. */}
         <div
           style={{
             position: 'absolute',
-            bottom: PAD_BOTTOM,
-            left: PAD_LEFT,
+            top: 0,
+            left: 0,
+            width: W,
+            height: H,
             display: 'flex',
             flexDirection: 'column',
-            gap: LAST_MODIFIED_GAP,
-            maxWidth: '1000px',
+            justifyContent: 'flex-end',
+            paddingBottom: PAD_BOTTOM,
+            paddingLeft: PAD_LEFT,
           }}
         >
-          {lastModified && (
-            <span
-              style={{
-                color: '#9b9b9b',
-                fontSize: 36,
-                fontWeight: 400,
-              }}
-            >
-              Last updated on {lastModified}
-            </span>
-          )}
-          <span
+          <div
             style={{
-              color: '#ebebeb',
-              fontSize: TITLE_FONT_SIZE,
-              fontWeight: 700,
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: LAST_MODIFIED_GAP,
+              maxWidth: '1000px',
             }}
           >
-            {title}
-          </span>
+            {lastModified && (
+              <span
+                style={{
+                  color: '#9b9b9b',
+                  fontSize: 36,
+                  fontWeight: 400,
+                }}
+              >
+                Last updated on {lastModified}
+              </span>
+            )}
+            <span
+              style={{
+                color: '#ebebeb',
+                fontSize: TITLE_FONT_SIZE,
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: '-0.02em',
+              }}
+            >
+              {title}
+            </span>
+          </div>
         </div>
       </div>
     ),
