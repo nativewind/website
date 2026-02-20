@@ -203,8 +203,8 @@ export async function GET(request: NextRequest) {
         <div
           style={{
             position: 'absolute',
-            top: 48,
-            right: PAD + 8,
+            top: 24,
+            right: PAD + 32,
             display: 'flex',
           }}
         >
@@ -266,7 +266,7 @@ export async function GET(request: NextRequest) {
                   fontSize: 36,
                   fontWeight: 400,
                   fontFamily: 'JetBrains Mono, monospace',
-                  marginLeft: 8,
+                  marginLeft: 16,
                 }}
               >
                 {section}
@@ -283,7 +283,7 @@ export async function GET(request: NextRequest) {
                 WebkitLineClamp: TITLE_MAX_LINES,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
-                marginLeft: 6,
+                marginLeft: 14,
               }}
             >
               {title}
@@ -304,7 +304,7 @@ export async function GET(request: NextRequest) {
               height: PAD,
               display: 'flex',
               alignItems: 'center',
-              paddingLeft: PAD + 8,
+              paddingLeft: PAD + 16,
             }}
           >
             <span
