@@ -110,8 +110,8 @@ export async function GET(request: NextRequest) {
   const approxTitleH = Math.round(TITLE_FONT_SIZE * TITLE_LINE_HEIGHT * numTitleLines);
   // Place the separator line at the midpoint of the gap so it sits between the
   // last-updated text and the title, rather than flush against either one.
-  // +4: user-requested nudge downward.
-  const lineAboveTitleY = CONTENT_BOTTOM - approxTitleH - Math.round(LAST_MODIFIED_GAP / 2) + 4;
+  // +5: user-requested nudge downward.
+  const lineAboveTitleY = CONTENT_BOTTOM - approxTitleH - Math.round(LAST_MODIFIED_GAP / 2) + 5;
 
   return new ImageResponse(
     (
@@ -125,47 +125,56 @@ export async function GET(request: NextRequest) {
           fontFamily: 'Inter, sans-serif',
         }}
       >
-        {/* ── All background layers + guide lines in a single SVG ─────── */}
-        {/* The <g id="bg"> group is the backdrop source for the blur effect.
-            <filter> and <clipPath> are intentionally placed outside <defs> —
-            they are valid SVG and resvg resolves them by ID regardless of
-            position. The <use> element re-renders the background group
-            through the blur filter, clipped to the title zone, simulating
-            CSS backdrop-filter: blur(12px). */}
+        {/* ── Windmap background ────────────────────────────────────────── */}
+        {/* HTML <img> is used because SVG <image> silently fails in resvg when
+            the base64 data URL exceeds ~1 MB (the windmap PNG is 1.4 MB). */}
+        <img
+          src={bgSrc}
+          style={{ position: 'absolute', top: 0, left: 0, width: W, height: H, display: 'flex' }}
+        />
+
+        {/* ── Blurred title zone ────────────────────────────────────────── */}
+        {/* A copy of the windmap offset so the visible slice aligns with
+            the title zone, blurred via CSS filter, clipped by the container.
+            Always rendered (not gated on lastModified). */}
+        <div
+          style={{
+            position: 'absolute',
+            top: lineAboveTitleY,
+            left: 0,
+            width: W,
+            height: CONTENT_BOTTOM - lineAboveTitleY,
+            overflow: 'hidden',
+            display: 'flex',
+          }}
+        >
+          <img
+            src={bgSrc}
+            style={{
+              position: 'absolute',
+              top: -lineAboveTitleY,
+              left: 0,
+              width: W,
+              height: H,
+              filter: 'blur(36px)',
+              display: 'flex',
+            }}
+          />
+        </div>
+
+        {/* ── Guide lines ───────────────────────────────────────────────── */}
         <div style={{ position: 'absolute', inset: 0, display: 'flex' }}>
           <svg width={W} height={H} xmlns="http://www.w3.org/2000/svg">
-            {/* Background group — dark fill + windmap; used as blur source */}
-            <g id="bg">
-              <rect x="0" y="0" width={W} height={H} fill="#121212" />
-              <image href={bgSrc} x="0" y="0" width={W} height={H} />
-            </g>
-
-            {/* Backdrop-blur simulation for title zone (only when a date is present).
-                filter and clipPath are placed outside <defs> — valid SVG, resolved by ID.
-                <use> re-renders the #bg group through the blur filter, clipped to the
-                title zone, simulating CSS backdrop-filter: blur(12px). */}
-            {lastModified && <>
-              <filter id="blur12" x="-5%" y="-5%" width="110%" height="110%">
-                <feGaussianBlur stdDeviation="12" in="SourceGraphic" />
-              </filter>
-              <clipPath id="titleZoneClip">
-                <rect x="0" y={lineAboveTitleY} width={W} height={CONTENT_BOTTOM - lineAboveTitleY} />
-              </clipPath>
-              <use href="#bg" filter="url(#blur12)" clipPath="url(#titleZoneClip)" />
-            </>}
-
             {/* Below logo */}
             <line
               x1="0" y1={LOGO_BOTTOM} x2={W} y2={LOGO_BOTTOM}
               stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
             />
-            {/* Above title / below "last updated" text (only when date is present) */}
-            {lastModified && (
-              <line
-                x1="0" y1={lineAboveTitleY} x2={W} y2={lineAboveTitleY}
-                stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
-              />
-            )}
+            {/* Above title — always rendered */}
+            <line
+              x1="0" y1={lineAboveTitleY} x2={W} y2={lineAboveTitleY}
+              stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" strokeDasharray="6 5"
+            />
             {/* Below title / bottom padding */}
             <line
               x1="0" y1={CONTENT_BOTTOM} x2={W} y2={CONTENT_BOTTOM}
@@ -185,13 +194,13 @@ export async function GET(request: NextRequest) {
         </div>
 
         {/* ── Top right: full Nativewind wordmark ───────────────────────── */}
-        {/* right: PAD + 4 moves the wordmark 4px further left while the right
+        {/* right: PAD + 8 moves the wordmark 8px further left while the right
             guide line (at W - PAD) stays in its original position. */}
         <div
           style={{
             position: 'absolute',
             top: 48,
-            right: PAD + 4,
+            right: PAD + 8,
             display: 'flex',
           }}
         >
