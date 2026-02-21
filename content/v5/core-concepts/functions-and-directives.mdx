@@ -1,0 +1,156 @@
+---
+title: Functions & Directives
+---
+
+{/* # Functions & Directives */}
+
+## Overview
+
+Nativewind v5 uses Tailwind CSS v4, which introduces a CSS-first configuration model. Please refer to the [Tailwind CSS v4 documentation](https://tailwindcss.com/docs/functions-and-directives) for the full directive reference.
+
+## Tailwind CSS v4 Directives
+
+| Directive | Purpose |
+| --- | --- |
+| `@import` | Import Tailwind layers and other CSS files |
+| `@theme` | Define design tokens (colors, spacing, fonts, etc.) |
+| `@utility` | Define custom utilities |
+| `@custom-variant` | Define custom variants |
+| `@source` | Specify content sources for class detection |
+| `@plugin` | Load a Tailwind plugin |
+| `@apply` | Inline utility classes within custom CSS |
+
+### Example CSS setup
+
+```css title="global.css"
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+```
+
+The `nativewind/theme` import adds React Native-specific theme values (elevation, platform fonts, safe area utilities) and custom variants (`ios:`, `android:`, `native:`, `web:`, `tv:`).
+
+## CSS Functions
+
+These CSS functions are polyfilled on native by `react-native-css`:
+
+### var()
+
+`var()` allows you to use CSS custom properties (variables). Variables can be set in CSS or from JavaScript using the `vars()` function.
+
+```css
+:root {
+  --brand-color: #3b82f6;
+}
+
+.branded {
+  color: var(--brand-color);
+}
+```
+
+```tsx
+import { View, Text } from "react-native";
+import { vars } from "nativewind";
+
+function ThemedSection({ brandColor }) {
+  return (
+    <View style={vars({ "--brand-color": brandColor })}>
+      <Text className="text-[--brand-color]">Themed text</Text>
+    </View>
+  );
+}
+```
+
+Variables are inherited through the component tree, just like CSS.
+
+### calc()
+
+`calc()` performs arithmetic in CSS values. Supported unit types:
+
+- **Numerical** (`px`): `calc(10px + 100px)` resolves to `110`
+- **Percentage** (`%`): `calc(var(--width) + 20%)` resolves correctly
+- **`rem` units**: `calc(2rem * 5)` resolves using the platform rem value
+- **`em` units**: `calc(2em * 2)` resolves relative to the element's font size
+- **CSS variables**: `calc(var(--variable) + 20px)` resolves at runtime
+- **Inside color functions**: `hsl(calc(var(--H) + 20), 50%, 50%)` works for dynamic colors
+
+```css
+.element {
+  width: calc(10px + 100px);
+  padding: calc(2rem * 3);
+  margin: calc(var(--spacing) + 8px);
+}
+```
+
+<Callout type="warn" title="Limitation: Mixing unit types">
+React Native's layout engine does not support mixing numerical and percentage units. `calc(100% - 20px)` will not work. Ensure all operands use the same unit type.
+</Callout>
+
+### env()
+
+`env()` accesses device-specific environment values. Supported values:
+
+```css
+env(safe-area-inset-top);
+env(safe-area-inset-bottom);
+env(safe-area-inset-left);
+env(safe-area-inset-right);
+```
+
+See [Safe Area Insets](../tailwind/new-concepts/safe-area-insets) for more information.
+
+### color-mix()
+
+`color-mix()` blends two colors together in a given color space:
+
+```css
+.element {
+  color: color-mix(in oklch, red 50%, blue);
+}
+```
+
+## React Native Functions
+
+Nativewind provides additional functions for React Native-specific values:
+
+### hairlineWidth()
+
+Returns the thinnest visible line width on the device (maps to `StyleSheet.hairlineWidth`):
+
+```css
+.thin-border {
+  border-width: hairlineWidth();
+}
+```
+
+### roundToNearestPixel()
+
+Rounds a value to the nearest pixel boundary:
+
+```css
+.precise {
+  height: roundToNearestPixel(32.4);
+}
+```
+
+### getPixelSizeForLayoutSize()
+
+Converts a layout size to pixel size:
+
+```css
+.pixel-precise {
+  width: getPixelSizeForLayoutSize(100);
+}
+```
+
+### platformColor()
+
+Access platform-specific named colors:
+
+```css
+.system-blue {
+  color: platformColor(systemBlue);
+}
+```

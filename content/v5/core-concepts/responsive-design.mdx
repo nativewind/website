@@ -1,0 +1,53 @@
+---
+title: Responsive Design
+---
+
+{/* # Responsive Design */}
+
+Nativewind supports responsive design using Tailwind CSS breakpoint variants and CSS media queries.
+
+## Breakpoint Variants
+
+Tailwind's responsive variants (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`) work on native by using media queries based on window width. Please refer to the [Tailwind CSS responsive design documentation](https://tailwindcss.com/docs/responsive-design) for the full API.
+
+```tsx
+<Text className="text-sm md:text-base lg:text-lg">
+  Responsive text
+</Text>
+```
+
+## Media Queries
+
+Nativewind supports the following media query types on native:
+
+| Media Feature | Example | Notes |
+| --- | --- | --- |
+| `width` | `@media (width: 500px)` | Exact and range syntax supported |
+| `min-width` | `@media (min-width: 768px)` | |
+| `max-width` | `@media (max-width: 1024px)` | |
+| `prefers-color-scheme` | `@media (prefers-color-scheme: dark)` | Uses React Native Appearance API |
+| `resolution` | `@media (resolution: 2dppx)` | `dppx` and `dpi` units |
+| `min-resolution` | `@media (min-resolution: 2dppx)` | |
+| `max-resolution` | `@media (max-resolution: 160dpi)` | |
+
+### Platform Media Queries
+
+Nativewind extends standard media queries with platform-specific selectors:
+
+```css
+@media ios { /* iOS only */ }
+@media android { /* Android only */ }
+@media native { /* All native platforms */ }
+```
+
+These are available as custom variants in your classes: `ios:`, `android:`, `native:`, `web:`, `tv:`.
+
+```tsx
+<Text className="font-sans ios:font-[System] android:font-[Roboto]">
+  Platform-specific font
+</Text>
+```
+
+## Reactive Updates
+
+Media queries on native are reactive. When the window dimensions change (e.g. device rotation, split screen), styles update automatically without re-rendering.

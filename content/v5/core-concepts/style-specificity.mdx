@@ -1,0 +1,71 @@
+---
+title: Style Specificity
+---
+
+{/* # Style Specificity */}
+
+Nativewind employs a specificity model that aligns with CSS rules, augmented to accommodate the inline-style nature of React Native.
+
+## How Specificity Works
+
+When multiple classes target the same property, the last class in the stylesheet wins (following CSS source order), not the order in `className`:
+
+```tsx
+// Both "blue" and "red" set `color`. The one declared later in CSS wins.
+<Text className="text-blue-500 text-red-500" />
+```
+
+## Specificity Order
+
+Styles are applied in the following order of precedence (lowest to highest):
+
+1. **Base styles** -- Regular utility classes (e.g. `text-red-500`)
+2. **Modifier styles** -- Styles with pseudo-class modifiers (e.g. `hover:text-blue-500`) have higher specificity
+3. **Inline styles** -- The `style` prop takes precedence over `className`
+4. **Important styles** -- `!important` overrides everything, including inline styles
+
+```tsx
+// Inline style (color: "black") wins over className (text-white → color: "#fff")
+<Text className="text-white" style={{ color: "black" }} />
+```
+
+## Important
+
+The `!` prefix (Tailwind's `!important` syntax) overrides both normal class styles and inline styles:
+
+```tsx
+// !text-white overrides the inline style
+<Text className="!text-white" style={{ color: "black" }} />
+// Result: color is "#fff"
+```
+
+## Merging className and style
+
+Nativewind automatically merges `className` styles with the `style` prop. When the same property is set in both, the `style` prop wins (unless `!important` is used in the class):
+
+```tsx
+// className sets padding, style sets color — both are applied
+<View className="p-4" style={{ backgroundColor: "red" }} />
+// Result: { padding: 16, backgroundColor: "red" }
+```
+
+When they target the same property, `style` takes precedence:
+
+```tsx
+// Both set color — inline style wins
+<Text className="text-white" style={{ color: "black" }} />
+// Result: { color: "black" }
+```
+
+## Component Composition
+
+When building custom components that accept `className`, styles compose naturally through string concatenation:
+
+```tsx
+function MyText({ className, ...props }) {
+  return <Text className={`text-base text-black ${className}`} {...props} />;
+}
+
+// User's className takes effect via CSS source order
+<MyText className="text-red-500" />
+```

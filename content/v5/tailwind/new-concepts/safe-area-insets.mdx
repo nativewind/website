@@ -1,0 +1,22 @@
+---
+title: Safe Area Insets
+---
+
+import Compatibility from "../_compatibility.mdx";
+import Usage from "../_usage.tsx";
+
+{/* # Safe Area Insets */}
+
+These utilities come from the `tailwindcss-safe-area` plugin, which is included automatically via `nativewind/theme`. They use `env(safe-area-inset-*)` values to ensure your content respects device safe areas such as notches, home indicators, and rounded corners.
+
+## Compatibility
+
+<Compatibility
+  supported={[
+    "m-safe", "mx-safe", "my-safe", "ms-safe", "me-safe", "mt-safe", "mr-safe", "mb-safe", "ml-safe",
+    "p-safe", "px-safe", "py-safe", "ps-safe", "pe-safe", "pt-safe", "pr-safe", "pb-safe", "pl-safe",
+    "min-h-screen-safe", "max-h-screen-safe", "h-screen-safe",
+    "inset-safe", "top-safe", "right-safe", "bottom-safe", "left-safe",
+    "pb-safe-offset-{n}", "pb-safe-or-{n}"
+  ]}
+/>

@@ -1,0 +1,35 @@
+---
+title: "Built on Tailwind CSS"
+---
+
+{/* # Built on Tailwind CSS */}
+
+Nativewind is built upon the Tailwind CSS style language. Nativewind v5 uses **Tailwind CSS v4**, which introduces a CSS-first configuration approach. We recommend reading the Tailwind CSS guides on:
+
+- [Utility-First Fundamentals](https://tailwindcss.com/docs/utility-first)
+- [Reusing Styles](https://tailwindcss.com/docs/reusing-styles)
+- [Adding Custom Styles](https://tailwindcss.com/docs/adding-custom-styles)
+
+Since Nativewind compiles your Tailwind CSS at build time, the full Tailwind CSS language is available. The entire set of utilities, variants, functions, and directives will work on web. On native, Nativewind applies the subset that React Native's style engine supports.
+
+## Supporting React Native
+
+Nativewind works similarly to CSS on the web: it accepts all classes but only applies styles that are supported on the current platform. For example, `grid` will work on web but not on native (where React Native only supports flexbox layout).
+
+You can always use a platform variant to apply styles selectively:
+
+```tsx
+<View className="flex native:flex-col web:grid web:grid-cols-3">
+  {/* flexbox on native, CSS grid on web */}
+</View>
+```
+
+## Tailwind CSS v4 Changes
+
+Nativewind v5 uses Tailwind CSS v4, which has significant differences from v3:
+
+- **CSS-first configuration**: Theming is done via `@theme` blocks in CSS instead of `tailwind.config.js`
+- **New directives**: `@import`, `@theme`, `@utility`, `@custom-variant`, `@source` replace `@tailwind`, `@apply`, `@layer`
+- **No config file required**: `tailwind.config.js` is optional (use `@config` to reference one if needed)
+
+See the [Configuration](../customization/configuration) page for details on setting up your project.

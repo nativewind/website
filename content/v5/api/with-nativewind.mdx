@@ -1,0 +1,38 @@
+---
+title: withNativewind
+---
+
+{/* # withNativewind */}
+
+`withNativewind` is a function that wraps your Metro configuration to enable Nativewind. It is a thin wrapper around `react-native-css`'s `withReactNativeCSS`, with Nativewind-specific defaults.
+
+```tsx title="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativewind } = require("nativewind/metro");
+
+const config = getDefaultConfig(__dirname);
+
+module.exports = withNativewind(config);
+```
+
+## Options
+
+`withNativewind` accepts an optional second argument with the same options as `withReactNativeCSS` from `react-native-css/metro`. The following defaults are applied:
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `globalClassNamePolyfill` | `true` | Enables the babel transform that rewrites imports to add `className` support to all React Native components |
+| `typescriptEnvPath` | `"nativewind-env.d.ts"` | Path for the generated TypeScript declaration file that adds `className` types |
+
+You can override any option:
+
+```tsx title="metro.config.js"
+module.exports = withNativewind(config, {
+  globalClassNamePolyfill: false,
+  typescriptEnvPath: "custom-env.d.ts",
+});
+```
+
+<Callout type="info">
+In v4 this function was called `withNativeWind` (capital W). Both spellings work in v5, but `withNativewind` is preferred.
+</Callout>

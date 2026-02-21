@@ -1,0 +1,61 @@
+---
+title: styled
+---
+
+{/* # styled */}
+
+`styled` is a function from `react-native-css` (re-exported by Nativewind) that creates a wrapper component with `className` support and optional prop/style mapping. It is primarily used for third-party native components that don't pass through the `className` prop.
+
+## Basic Usage
+
+```tsx
+import { styled } from "nativewind";
+import { SomeNativeComponent } from "third-party-library";
+
+const StyledComponent = styled(SomeNativeComponent);
+
+<StyledComponent className="bg-blue-500 p-4" />
+```
+
+## Mapping Styles to Props
+
+Some React Native components expect style values as direct props rather than inside a `style` object. Use `styled` to extract specific style properties and pass them as props:
+
+```tsx
+import { styled } from "nativewind";
+import { Svg, Circle } from "react-native-svg";
+
+const StyledSvg = styled(Svg, {
+  className: {
+    target: "style",
+    nativeStyleToProp: {
+      height: true,
+      width: true,
+    },
+  },
+});
+
+const StyledCircle = styled(Circle, {
+  className: {
+    target: "style",
+    nativeStyleToProp: {
+      fill: true,
+      stroke: true,
+      strokeWidth: true,
+    },
+  },
+});
+
+<StyledSvg className="w-24 h-24" viewBox="0 0 100 100">
+  <StyledCircle
+    className="fill-green-500 stroke-blue-500 stroke-2"
+    cx="50"
+    cy="50"
+    r="45"
+  />
+</StyledSvg>
+```
+
+<Callout type="info">
+For most custom components you write yourself, you don't need `styled`. Simply accept and pass through the `className` prop. `styled` is for third-party components that don't support `className`. See the [third-party components guide](../guides/third-party-components) for more details.
+</Callout>

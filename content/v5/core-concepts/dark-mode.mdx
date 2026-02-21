@@ -1,0 +1,76 @@
+---
+title: Dark Mode
+---
+
+{/* # Dark Mode */}
+
+Nativewind v5 supports dark mode through the system preference using the `prefers-color-scheme` media query. This works automatically with React Native's `Appearance` API on native and the CSS media query on web.
+
+## System Preference (Automatic)
+
+By default, Tailwind CSS's `dark:` variant uses the system color scheme. No additional configuration is needed:
+
+```tsx
+import { View, Text } from "react-native";
+
+function Card() {
+  return (
+    <View className="bg-white dark:bg-gray-900">
+      <Text className="text-black dark:text-white">
+        Adapts to system theme
+      </Text>
+    </View>
+  );
+}
+```
+
+Under the hood, `dark:` maps to `@media (prefers-color-scheme: dark)`, which is reactive on both native and web. When the user changes their system theme, styles update automatically.
+
+## Manual Selection (User Toggle)
+
+To allow users to manually toggle between light and dark mode, use React Native's `Appearance` API:
+
+```tsx
+import { Appearance } from "react-native";
+
+function ThemeToggle() {
+  const toggleTheme = () => {
+    Appearance.setColorScheme(
+      Appearance.getColorScheme() === "dark" ? "light" : "dark"
+    );
+  };
+
+  return (
+    <Pressable onPress={toggleTheme} className="p-4 bg-gray-200 dark:bg-gray-800">
+      <Text className="text-black dark:text-white">Toggle Theme</Text>
+    </Pressable>
+  );
+}
+```
+
+You can read the current color scheme using React Native's `useColorScheme` hook:
+
+```tsx
+import { useColorScheme } from "react-native";
+
+function MyComponent() {
+  const colorScheme = useColorScheme();
+  // colorScheme is "light" | "dark" | null
+}
+```
+
+<Callout type="info">
+Nativewind v4 provided a custom `useColorScheme` hook from `nativewind`. In v5 this is deprecated -- use `useColorScheme` from `react-native` and `Appearance.setColorScheme()` directly instead.
+</Callout>
+
+## Best Practices
+
+Always provide both light and dark mode styles. React Native can have issues with conditionally applied styles:
+
+```tsx
+{/* Always specify both variants */}
+<Text className="text-black dark:text-white" />
+
+{/* Avoid only specifying one */}
+<Text className="dark:text-white" />
+```

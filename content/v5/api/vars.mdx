@@ -1,0 +1,65 @@
+---
+title: vars() & useUnstableNativeVariable()
+---
+
+{/* # vars() & useUnstableNativeVariable() */}
+
+## vars()
+
+`vars` is a function that takes a dictionary of CSS variables and returns a style object. When applied to a component's `style` prop, the variables flow down the component tree, just like CSS custom properties.
+
+```tsx
+import { View, Text } from "react-native";
+import { vars } from "nativewind";
+
+function ThemedSection({ brandColor }) {
+  return (
+    <View style={vars({ "--brand-color": brandColor })}>
+      <Text className="text-[--brand-color]">Themed text</Text>
+    </View>
+  );
+}
+```
+
+Variables set with `vars()` can be consumed by any descendant component using `var()` in their class names or CSS.
+
+### Combining with styles
+
+`vars()` returns a style object, so you can spread it alongside other styles:
+
+```tsx
+<View style={[{ padding: 16 }, vars({ "--accent": "blue" })]} />
+```
+
+## VariableContextProvider
+
+`VariableContextProvider` sets CSS variables via React context rather than the `style` prop. This is useful when you need variables available to components that aren't direct style descendants:
+
+```tsx
+import { VariableContextProvider } from "nativewind";
+
+function App() {
+  return (
+    <VariableContextProvider variables={{ "--theme-color": "#3b82f6" }}>
+      <Text className="text-[--theme-color]">Blue text</Text>
+    </VariableContextProvider>
+  );
+}
+```
+
+## useUnstableNativeVariable()
+
+<Callout type="warn">
+This API is unstable and may change in future releases.
+</Callout>
+
+`useUnstableNativeVariable` reads the current value of a CSS variable from the nearest variable context. This is useful for cases where you need a variable value in JavaScript rather than in a class name:
+
+```tsx
+import { useUnstableNativeVariable } from "nativewind";
+
+function MyComponent() {
+  const themeColor = useUnstableNativeVariable("--theme-color");
+  // Use themeColor in JavaScript logic
+}
+```

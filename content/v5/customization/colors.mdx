@@ -1,0 +1,100 @@
+---
+title: Colors
+---
+
+{/* # Colors */}
+
+Nativewind v5 supports all Tailwind CSS color utilities and several additional color features on native.
+
+## Theme Colors
+
+In Tailwind CSS v4, colors are defined in `@theme`:
+
+```css
+@theme {
+  --color-brand: #3b82f6;
+  --color-brand-dark: #1e40af;
+  --color-surface: oklch(0.95 0 0);
+}
+```
+
+These are available as `text-brand`, `bg-brand-dark`, `border-surface`, etc.
+
+## CSS Variable Colors
+
+Use CSS variables for dynamic colors that can change at runtime:
+
+```css
+:root {
+  --color-primary: #3b82f6;
+}
+```
+
+```tsx
+import { vars } from "nativewind";
+
+<View style={vars({ "--color-primary": userColor })}>
+  <Text className="text-[--color-primary]">Dynamic color</Text>
+</View>
+```
+
+## Special Values
+
+| Value | Behavior |
+| --- | --- |
+| `transparent` | Fully transparent (`rgba(0,0,0,0)`) |
+| `currentColor` / `current` | Inherits the current text color |
+| `inherit` | Inherits the value from the parent |
+
+```tsx
+<View className="text-red-500">
+  <Text className="border-current">
+    {/* border color is red, inherited from parent text color */}
+  </Text>
+</View>
+```
+
+## Color Functions
+
+### color-mix()
+
+Blend two colors in a given color space:
+
+```css
+.blended {
+  color: color-mix(in oklch, red 50%, blue);
+}
+```
+
+### Opacity Modifier
+
+Tailwind's opacity modifier syntax works on native:
+
+```tsx
+<View className="bg-blue-500/50" />
+{/* 50% opacity blue background */}
+```
+
+## HSL and HSLA
+
+HSL color values are supported in various syntaxes:
+
+```css
+.element {
+  color: hsl(200, 100%, 50%);
+  background-color: hsla(200, 100%, 50%, 0.5);
+  border-color: hsl(200 100% 50% / 0.8);
+}
+```
+
+CSS variables can be used inside color functions:
+
+```css
+:root {
+  --hue: 200;
+}
+
+.element {
+  color: hsl(var(--hue), 100%, 50%);
+}
+```

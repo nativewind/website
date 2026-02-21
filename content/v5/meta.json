@@ -18,6 +18,78 @@
     "guides/custom-components",
     "guides/third-party-components",
     "guides/themes",
-    "guides/other-bundlers"
+    "guides/other-bundlers",
+
+    "---Core Concepts---",
+    "core-concepts/tailwindcss",
+    "core-concepts/responsive-design",
+    "core-concepts/states",
+    "core-concepts/dark-mode",
+    "core-concepts/functions-and-directives",
+
+    "---React Native Concepts---",
+    "core-concepts/units",
+    "core-concepts/style-specificity",
+    "tailwind/new-concepts/safe-area-insets",
+
+    "---Customization---",
+    "customization/configuration",
+    "customization/theme",
+    "customization/colors",
+
+    "---API---",
+    "api/with-nativewind",
+    "api/styled",
+    "api/vars",
+    "api/use-color-scheme",
+    "api/css-interop",
+
+    "---Layout---",
+    "...tailwind/layout",
+
+    "---Flexbox & Grid---",
+    "...tailwind/flexbox",
+
+    "---Spacing---",
+    "...tailwind/spacing",
+
+    "---Sizing---",
+    "...tailwind/sizing",
+
+    "---Typography---",
+    "...tailwind/typography",
+
+    "---Backgrounds---",
+    "...tailwind/backgrounds",
+
+    "---Borders---",
+    "...tailwind/borders",
+
+    "---Effects---",
+    "...tailwind/effects",
+
+    "---Transitions & Animation---",
+    "...tailwind/transitions-animation",
+
+    "---Transforms---",
+    "...tailwind/transforms",
+
+    "---Interactivity---",
+    "...tailwind/interactivity",
+
+    "---SVG---",
+    "...tailwind/svg",
+
+    "---Filters---",
+    "...tailwind/filters",
+
+    "---Tables---",
+    "...tailwind/tables",
+
+    "---Accessibility---",
+    "...tailwind/accessibility",
+
+    "---Plugins---",
+    "...tailwind/plugins"
   ]
 }

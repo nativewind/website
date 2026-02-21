@@ -1,0 +1,66 @@
+---
+title: Configuration
+---
+
+{/* # Configuration */}
+
+Nativewind v5 uses Tailwind CSS v4, which introduces a **CSS-first configuration** model. Instead of a `tailwind.config.js` file, you configure your project directly in CSS.
+
+## CSS Setup
+
+Your main CSS file should import Tailwind's layers and the Nativewind theme:
+
+```css title="global.css"
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+```
+
+The `nativewind/theme` import provides:
+
+- Elevation scale (`--elevation-xs` through `--elevation-2xl`)
+- Platform-specific font families (System/Georgia/Menlo on iOS, system defaults on Android)
+- Custom utilities (`elevation-*`, `tint-*`, `ripple-*`, `corner-*`, `color-*`)
+- Custom variants (`ios:`, `android:`, `native:`, `web:`, `tv:`)
+- A `leading-*` override for unit-less line-height values
+- Safe area utilities via `tailwindcss-safe-area`
+
+## Metro Configuration
+
+Configure Metro using `withNativewind` in your Metro config:
+
+```js title="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativewind } = require("nativewind/metro");
+
+const config = getDefaultConfig(__dirname);
+
+module.exports = withNativewind(config);
+```
+
+See the [withNativewind API reference](../api/with-nativewind) for available options.
+
+## Babel Configuration
+
+Nativewind v5 does not require any Babel configuration. The babel plugin is applied automatically by the Metro config. If you had `nativewind/babel` in your `babel.config.js` from v4, remove it.
+
+## Optional: tailwind.config.js
+
+Tailwind CSS v4 still supports a JavaScript config file for advanced use cases. Reference it with `@config`:
+
+```css title="global.css"
+@config "./tailwind.config.js";
+```
+
+However, most configuration can be done directly in CSS using `@theme`, `@utility`, and `@custom-variant`. See the [Theme](./theme) page for details.
+
+## Content Sources
+
+Tailwind CSS v4 automatically detects your source files. You can explicitly configure content sources using `@source`:
+
+```css title="global.css"
+@source "../components/**/*.tsx";
+@source "../screens/**/*.tsx";
+```

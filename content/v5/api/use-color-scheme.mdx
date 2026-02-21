@@ -1,0 +1,46 @@
+---
+title: useColorScheme
+---
+
+{/* # useColorScheme */}
+
+<Callout type="warn" title="Deprecated">
+The `useColorScheme` hook from `nativewind` is deprecated in v5. Use `useColorScheme` from `react-native` and `Appearance.setColorScheme()` directly instead.
+</Callout>
+
+## Migration
+
+Replace the Nativewind import with the React Native equivalent:
+
+```diff
+- import { useColorScheme } from "nativewind";
++ import { useColorScheme, Appearance } from "react-native";
+```
+
+The v4 API returned `{ colorScheme, setColorScheme, toggleColorScheme }`. In v5, use the React Native APIs directly:
+
+```tsx
+import { useColorScheme, Appearance } from "react-native";
+
+function ThemeToggle() {
+  const colorScheme = useColorScheme();
+
+  const setColorScheme = (scheme) => {
+    Appearance.setColorScheme(scheme);
+  };
+
+  const toggleColorScheme = () => {
+    Appearance.setColorScheme(
+      Appearance.getColorScheme() === "dark" ? "light" : "dark"
+    );
+  };
+
+  return (
+    <Pressable onPress={toggleColorScheme}>
+      <Text>Current: {colorScheme}</Text>
+    </Pressable>
+  );
+}
+```
+
+See the [Dark Mode](../core-concepts/dark-mode) guide for more details.

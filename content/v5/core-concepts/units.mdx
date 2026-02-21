@@ -1,0 +1,71 @@
+---
+title: Units
+---
+
+{/* # Units */}
+
+## Supported Units
+
+Nativewind v5 supports the following CSS units on native:
+
+<table>
+  <tbody>
+    <tr>
+      <th>Unit</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>`px`</td>
+      <td>Pixels</td>
+      <td>Treated as density-independent pixels (dp) on native. `10px` becomes `10` in React Native.</td>
+    </tr>
+    <tr>
+      <td>`%`</td>
+      <td>Percentage</td>
+      <td>Relative to the parent container, same as CSS.</td>
+    </tr>
+    <tr>
+      <td>`vw`</td>
+      <td>Viewport Width</td>
+      <td>Polyfilled using `Dimensions.get('window').width`. Reactive to window size changes.</td>
+    </tr>
+    <tr>
+      <td>`vh`</td>
+      <td>Viewport Height</td>
+      <td>Polyfilled using `Dimensions.get('window').height`. Reactive to window size changes.</td>
+    </tr>
+    <tr>
+      <td>`rem`</td>
+      <td>Root EM</td>
+      <td>Relative to the root font size. Default is `14` on native, `16` on web.</td>
+    </tr>
+    <tr>
+      <td>`em`</td>
+      <td>EM</td>
+      <td>Relative to the current element's font size.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Ratios
+
+Ratio values like `aspect-ratio: 16 / 9` are supported natively.
+
+## dp vs px
+
+React Native's default unit is density-independent pixels (dp) while the web uses pixels (px). Nativewind treats them as equivalent: `10px` in CSS becomes `10` in React Native's style system. When defining values in your theme, use `px` units and Nativewind will handle the conversion.
+
+## rem Sizing
+
+React Native's `<Text />` renders with a default `fontSize: 14`, while the web default is `16px`. Nativewind uses an `rem` value of `14` on native and `16` on web to maintain visual consistency with Tailwind's spacing scale.
+
+You can override the `rem` value using CSS:
+
+```css
+:root {
+  font-size: 16px;
+}
+```
+
+Or inline using a CSS variable on a parent component.

@@ -1,0 +1,84 @@
+---
+title: cssInterop & remapProps
+---
+
+{/* # cssInterop & remapProps */}
+
+These functions enable `className` support on components that don't natively handle it. They are primarily used for third-party components.
+
+<Callout type="info">
+For your own components, you don't need these functions. Simply accept and pass through `className`. See [Writing Custom Components](../guides/custom-components).
+</Callout>
+
+## cssInterop
+
+`cssInterop` tags a component so the Nativewind runtime resolves `className` strings into styles. Use it when a third-party component accepts a `style` prop but doesn't pass through `className`.
+
+```tsx
+import { cssInterop } from "nativewind";
+import { MapView } from "react-native-maps";
+
+cssInterop(MapView, { className: "style" });
+
+// Now you can use className
+<MapView className="w-full h-64" />
+```
+
+### Mapping to specific props
+
+Some components use props other than `style` for styling:
+
+```tsx
+cssInterop(component, {
+  className: {
+    target: "style",
+    nativeStyleToProp: {
+      height: true,
+      width: true,
+    },
+  },
+});
+```
+
+With `nativeStyleToProp`, style properties are extracted from the resolved styles and passed as individual props. This is useful for components like SVGs that expect `height`/`width` as props on native.
+
+### Multiple className props
+
+Components with multiple style props can accept multiple className props:
+
+```tsx
+cssInterop(FlatList, {
+  className: "style",
+  contentContainerClassName: "contentContainerStyle",
+});
+
+<FlatList
+  className="bg-white"
+  contentContainerClassName="p-4"
+/>
+```
+
+## remapProps
+
+`remapProps` is a simpler alternative to `cssInterop` for components that just need prop renaming:
+
+```tsx
+import { remapProps } from "nativewind";
+
+const CustomButton = remapProps(ThirdPartyButton, {
+  buttonClass: "buttonStyle",
+  labelClass: "labelStyle",
+});
+
+<CustomButton buttonClass="bg-blue-500" labelClass="text-white" />
+```
+
+Options:
+
+```tsx
+// Map a new prop to an existing style prop
+remapProps(component, { newProp: "existingStyleProp" });
+
+// Override an existing prop to accept className
+remapProps(component, { existingProp: true });
+```

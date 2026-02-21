@@ -1,0 +1,104 @@
+---
+title: Theme
+---
+
+{/* # Theme */}
+
+In Tailwind CSS v4, the theme is defined in CSS using the `@theme` directive instead of `tailwind.config.js`. Nativewind builds on this with additional React Native-specific theme values.
+
+## Defining Theme Values
+
+Use `@theme` to add design tokens:
+
+```css title="global.css"
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+@import "nativewind/theme";
+
+@theme {
+  --color-brand: #3b82f6;
+  --color-brand-light: #93c5fd;
+  --font-display: "CustomFont";
+  --spacing-18: 4.5rem;
+}
+```
+
+These become available as utilities: `text-brand`, `bg-brand-light`, `font-display`, `p-18`, etc.
+
+## Nativewind Default Theme
+
+The `nativewind/theme` import adds the following:
+
+### Elevation Scale
+
+```css
+@theme {
+  --elevation-xs: 1;
+  --elevation-sm: 3;
+  --elevation-md: 6;
+  --elevation-lg: 8;
+  --elevation-xl: 13;
+  --elevation-2xl: 24;
+  --elevation-none: 0;
+}
+```
+
+Used via the `elevation-*` utilities (Android shadow elevation).
+
+### Platform Fonts
+
+Platform-specific default fonts are set on `:root`:
+
+- **iOS**: `--font-sans: System`, `--font-serif: Georgia`, `--font-mono: Menlo`
+- **Android**: `--font-sans: SystemAndroid`, `--font-serif: sans-serif`, `--font-mono: monospace`
+
+## Custom Utilities
+
+Define custom utilities with `@utility`:
+
+```css
+@utility my-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+```
+
+Then use it as `className="my-shadow"`.
+
+Nativewind's theme defines several custom utilities:
+
+- `elevation-*` -- Android shadow elevation
+- `tint-*` -- Image tint color
+- `ripple-*` -- Android ripple effect (color, borderless, radius)
+- `corner-*` -- Corner shape (`rounded`, `squircle`)
+- `color-*` -- Shorthand for text color
+
+## Custom Variants
+
+Define custom variants with `@custom-variant`:
+
+```css
+@custom-variant dark (@media (prefers-color-scheme: dark));
+@custom-variant landscape (@media (orientation: landscape));
+```
+
+Nativewind provides these platform variants:
+
+```css
+@custom-variant ios (@media ios);
+@custom-variant android (@media android);
+@custom-variant native (@media native);
+@custom-variant tv (@media (display-mode: tv));
+@custom-variant web (@supports selector(div > div));
+```
+
+Use them as modifiers: `ios:text-red-500`, `android:p-4`, `native:flex-col`, `web:grid`.
+
+## Plugins
+
+Load Tailwind plugins using `@plugin`:
+
+```css
+@plugin "./my-plugin.js";
+@plugin "tailwindcss-safe-area";
+```
