@@ -67,8 +67,8 @@ export default async function Page(props: {
             <DocsDescription>{page.data.description}</DocsDescription>
           </div>
           <div className="flex items-center gap-2">
-            <CopyMarkdownButton markdownUrl={`${page.url}.mdx`} />
             <EditButton filePath={filePath} version="v4" />
+            <CopyMarkdownButton markdownUrl={`${page.url}.mdx`} />
           </div>
         </div>
         <DocsBody>

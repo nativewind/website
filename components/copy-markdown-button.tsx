@@ -52,7 +52,7 @@ export function CopyMarkdownButton({ markdownUrl, className = '' }: CopyMarkdown
       ) : (
         <>
           <Copy className="h-4 w-4" />
-          Copy MD
+          Copy
         </>
       )}
     </button>
