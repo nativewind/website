@@ -3,8 +3,9 @@
     "[BookText][Blog](/blog/)",
     "[LayoutTemplate][Showcase](/#showcase)",
     "[Box][Resources](/resources/)",
+    "[Bot][llms.txt](/v5/llms.txt)",
+    "[Bot][llms-full.txt](/v5/llms-full.txt)",
     "[Briefcase][Hire Us](/hire-us/)",
-    "[Community](https://nativewind.dev/discord)",
 
     "---Getting Started---",
     "index",
