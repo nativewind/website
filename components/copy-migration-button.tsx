@@ -123,7 +123,42 @@ const { withNativewind } = require("nativewind/metro");
 module.exports = withNativewind(config);
 \`\`\`
 
-### Step 6: Clear Cache and Restart
+### Step 6: Override the lightningcss version
+
+Force \`lightningcss\` to a specific version in your \`package.json\` to avoid deserialization errors with \`global.css\` when building:
+
+**npm / bun:** Add to \`package.json\`:
+\`\`\`json
+{
+  "overrides": {
+    "lightningcss": "1.30.1"
+  }
+}
+\`\`\`
+
+**yarn:** Add to \`package.json\`:
+\`\`\`json
+{
+  "resolutions": {
+    "lightningcss": "1.30.1"
+  }
+}
+\`\`\`
+
+**pnpm:** Add to \`package.json\`:
+\`\`\`json
+{
+  "pnpm": {
+    "overrides": {
+      "lightningcss": "1.30.1"
+    }
+  }
+}
+\`\`\`
+
+If you don't pin the \`lightningcss\` version, you may encounter deserialization errors with respect to \`global.css\` when building your app.
+
+### Step 7: Clear Cache and Restart
 
 \`\`\`bash
 npx expo start --clear
@@ -471,6 +506,7 @@ Use this checklist to ensure a complete migration:
 - [ ] Update \`global.css\` with new Tailwind v4 imports
 - [ ] Remove Nativewind from \`babel.config.js\`
 - [ ] Update \`metro.config.js\` to remove second argument from \`withNativewind\`
+- [ ] Pin \`lightningcss\` to 1.30.1 in \`package.json\` (overrides/resolutions)
 - [ ] Clear Metro cache (\`npx expo start --clear\`)
 - [ ] Search and replace renamed classes (\`elevation-sm\` → \`elevation-xs\`, etc.)
 - [ ] Replace \`{}-[\` with \`@prop-[\` for dynamic modifiers

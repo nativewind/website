@@ -110,7 +110,56 @@ Update the `withNativewind` function call (no longer requires a second argument)
 + module.exports = withNativewind(config);
 ```
 
-### Step 6: Clear Cache and Restart
+### Step 6: Override the lightningcss version
+
+Force `lightningcss` to a specific version in your `package.json`:
+
+<Tabs groupId="v5-npm-install" items={["npm", "yarn", "pnpm", "bun"]}>
+  <Tab value="npm">
+    ```json title="package.json"
+    {
+      "overrides": {
+        "lightningcss": "1.30.1"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```json title="package.json"
+    {
+      "resolutions": {
+        "lightningcss": "1.30.1"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```json title="package.json"
+    {
+      "pnpm": {
+        "overrides": {
+          "lightningcss": "1.30.1"
+        }
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```json title="package.json"
+    {
+      "overrides": {
+        "lightningcss": "1.30.1"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Callout type="warn">
+  If you don't pin the `lightningcss` version, you may encounter deserialization errors with respect to `global.css` when building your app.
+</Callout>
+
+### Step 7: Clear Cache and Restart
 
 ```bash
 npx expo start --clear
