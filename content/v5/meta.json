@@ -19,6 +19,7 @@
     "guides/custom-components",
     "guides/third-party-components",
     "guides/themes",
+    "guides/custom-fonts",
     "guides/other-bundlers",
 
     "---Core Concepts---",
