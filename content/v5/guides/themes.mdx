@@ -1,340 +1,197 @@
 ---
-title: Themes
+title: Dynamic Themes
 ---
 
-{/* # Themes */}
+import { Callout } from "@/components/callout";
 
-As Nativewind uses Tailwind CLI, it supports all the theming options Tailwind CSS does. Read the Tailwind CSS docs on each className to learn more about the possible theming values.
+{/* # Dynamic Themes */}
 
-## Dynamic themes
+Nativewind v5 supports dynamic theming through CSS variables and the `VariableContextProvider` component. This lets you change colors, spacing, and other design tokens at runtime without rebuilding your stylesheet.
 
-To transition from a static theme to a dynamic one in Nativewind, utilize [CSS Variables as colors](https://tailwindcss.com/docs/customizing-colors#using-css-variables). This approach ensures flexibility and adaptability in theme application, catering to user preferences.
+For static theme customization (adding custom colors, fonts, spacing), see the [Theme](/v5/customization/theme) documentation. For dark mode specifically, see [Dark Mode](/v5/core-concepts/dark-mode).
 
-```js title="tailwind.config.js"
-module.exports = {
-  theme: {
-    colors: {
-      // Create a custom color that uses a CSS custom value
-      primary: "rgb(var(--color-values) / <alpha-value>)",
-    },
-  },
-  plugins: [
-    // Set a default value on the `:root` element
-    ({ addBase }) =>
-      addBase({
-        ":root": {
-          "--color-values": "255 0 0",
-          "--color-rgb": "rgb(255 0 0)",
-        },
-      }),
-  ],
-};
-```
+## How It Works
 
-```tsx title="App.tsx"
-import { vars } from 'nativewind'
+1. Define CSS variables in your `global.css` using `@theme` and `:root`
+2. Reference those variables in your utility classes (e.g. `bg-primary`, `text-secondary`)
+3. Override the variables at runtime using `VariableContextProvider`
 
-const userTheme = vars({
-  '--color-values': '0 255 0',
-  '--color-rgb': 'rbg(0 0 255)'
-});
+The provider uses React context, so any component wrapped by it (and its children) will pick up the overridden values.
 
-export default App() {
-  return (
-    <View>
-      <Text className="text-primary">Access as a theme value</Text>
-      <Text className="text-[--color-rgb]">Or the variable directly</Text>
+## Basic Example
 
-      {/* Variables can be changed inline */}
-      <View style={userTheme}>
-        <Text className="text-primary">I am now green!</Text>
-        <Text className="text-[--color-rgb]">I am now blue!</Text>
-      </View>
-    </View>
-  )
+First, define your theme variables in CSS:
+
+```css title="global.css"
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+@import "nativewind/theme";
+
+@theme {
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+}
+
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
 }
 ```
 
-## Switching themes
+<Callout type="info">
+  You need to define the variables in both `@theme` (so Tailwind generates the utility classes) and `:root` (so the CSS variables have default values at runtime).
+</Callout>
 
-Nativewind is unopinionated on how you implement your theming. This is an example implementation that supports two themes with both a light/dark mode.
+Then override them at runtime:
 
-```tsx title="App.jsx"
-import { vars, useColorScheme } from 'nativewind'
+```tsx title="App.tsx"
+import { View, Text } from "react-native";
+import { VariableContextProvider } from "nativewind";
+
+const christmasTheme = {
+  "--color-primary": "red",
+  "--color-secondary": "green",
+};
+
+export default function App() {
+  return (
+    <View>
+      <Text className="text-primary">Blue (default)</Text>
+
+      <VariableContextProvider value={christmasTheme}>
+        <Text className="text-primary">Red (christmas)</Text>
+        <Text className="text-secondary">Green (christmas)</Text>
+      </VariableContextProvider>
+    </View>
+  );
+}
+```
+
+## Multiple Themes with Light/Dark Mode
+
+Combine `VariableContextProvider` with `useColorScheme` from `react-native` to support multiple themes that each have light and dark variants:
+
+```tsx title="components/ThemeProvider.tsx"
+import { useColorScheme } from "react-native";
+import { VariableContextProvider } from "nativewind";
 
 const themes = {
   brand: {
-    'light': vars({
-      '--color-primary': 'black',
-      '--color-secondary': 'white'
-    }),
-    'dark': vars({
-      '--color-primary': 'white',
-      '--color-secondary': 'dark'
-    })
+    light: {
+      "--color-foreground": "#000000",
+      "--color-muted-foreground": "#64748b",
+      "--color-primary": "#3b82f6",
+      "--color-secondary": "#8b5cf6",
+    },
+    dark: {
+      "--color-foreground": "#ffffff",
+      "--color-muted-foreground": "#a1a1a1",
+      "--color-primary": "#60a5fa",
+      "--color-secondary": "#a78bfa",
+    },
   },
   christmas: {
-    'light': vars({
-      '--color-primary': 'red',
-      '--color-secondary': 'green'
-    }),
-    'dark': vars({
-      '--color-primary': 'green',
-      '--color-secondary': 'red'
-    })
+    light: {
+      "--color-foreground": "#000000",
+      "--color-muted-foreground": "#64748b",
+      "--color-primary": "#dc2626",
+      "--color-secondary": "#16a34a",
+    },
+    dark: {
+      "--color-foreground": "#ffffff",
+      "--color-muted-foreground": "#a1a1a1",
+      "--color-primary": "#f87171",
+      "--color-secondary": "#4ade80",
+    },
+  },
+};
+
+export function ThemeProvider({
+  name,
+  children,
+}: {
+  name: keyof typeof themes;
+  children: React.ReactNode;
+}) {
+  const colorScheme = useColorScheme() ?? "light";
+
+  return (
+    <VariableContextProvider value={themes[name][colorScheme]}>
+      {children}
+    </VariableContextProvider>
+  );
+}
+```
+
+```tsx title="app/_layout.tsx"
+import "../global.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider name="brand">
+      <Stack />
+    </ThemeProvider>
+  );
+}
+```
+
+## Nesting Themes
+
+`VariableContextProvider` inherits from its parent context. You can nest providers to override specific variables while keeping the rest:
+
+```tsx
+<VariableContextProvider value={{ "--color-primary": "blue" }}>
+  <Text className="text-primary">Blue</Text>
+
+  <VariableContextProvider value={{ "--color-primary": "red" }}>
+    <Text className="text-primary">Red (overridden)</Text>
+  </VariableContextProvider>
+</VariableContextProvider>
+```
+
+## Migrating from v4
+
+If you used `vars()` in v4, replace it with `VariableContextProvider`:
+
+```diff
+- import { vars } from "nativewind";
++ import { VariableContextProvider } from "nativewind";
+
+- const theme = vars({ "--color-primary": "red" });
+
+- <View style={theme}>
+-   {children}
+- </View>
+
++ <VariableContextProvider value={{ "--color-primary": "red" }}>
++   {children}
++ </VariableContextProvider>
+```
+
+`vars()` is deprecated and will be removed in a future release.
+
+## Platform-Specific Theme Values
+
+Use CSS media queries to set platform-specific defaults:
+
+```css title="global.css"
+@theme {
+  --color-error: var(--error-color, green);
+}
+
+@media ios {
+  :root {
+    --error-color: red;
   }
 }
 
-function Theme(props) {
-  const { colorScheme } = useColorScheme()
-  return (
-    <View style={themes[props.name][colorScheme]}>
-      {props.children}
-    </View>
-  )
-}
-
-export default App() {
-  return (
-    <Theme name="brand">
-      <View className="text-primary">{/* rgba(0, 0, 0, 1) */}>
-      <Theme name="christmas">
-        <View className="text-primary">{/* rgba(255, 0, 0, 1) */}>
-      </Theme>
-    </Theme>
-  )
+@media android {
+  :root {
+    --error-color: blue;
+  }
 }
 ```
 
-## Retrieving theme values
-
-### Accessing default colors
-
-If you need the default color values at runtime, you can import them directly from `tailwindcss`
-
-retrieve them directly from `tailwindcss/colors`
-
-```tsx
-import colors from "tailwindcss/colors";
-
-export function MyActivityIndicator(props) {
-  return <ActivityIndicator size="small" color={colors.blue.500} {...props} />;
-}
-```
-
-### Access theme values
-
-If you use custom theme values, extract them to a file that is shared with your code and your `tailwind.config.js`. [Please read the Tailwind CSS documentation for more information](https://tailwindcss.com/docs/configuration#referencing-in-java-script).
-
-```tsx title="colors.ts"
-module.exports = {
-  tahiti: {
-    100: "#cffafe",
-    200: "#a5f3fc",
-    300: "#67e8f9",
-    400: "#22d3ee",
-    500: "#06b6d4",
-    600: "#0891b2",
-    700: "#0e7490",
-    800: "#155e75",
-    900: "#164e63",
-  },
-};
-```
-
-```ts title="tailwind.config.js"
-const colors = require("./colors");
-
-module.exports = {
-  theme: {
-    extend: {
-      colors,
-    },
-  },
-};
-```
-
-```tsx title="MyActivityIndicator.js"
-import colors from "./colors";
-
-export function MyActivityIndicator(props) {
-  return <ActivityIndicator color={colors.tahiti.500} {...props} />;
-}
-```
-
-## Platform specific theming
-
-### platformSelect
-
-platformSelect is the equivalent to [`Platform.select()`](https://reactnative.dev/docs/platform#select)
-
-```js title="tailwind.config.js"
-const { platformSelect } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        error: platformSelect({
-          ios: "red",
-          android: "blue",
-          default: "green",
-        }),
-      },
-    },
-  },
-};
-```
-
-### platformColor()
-
-Equivalent of [`PlatformColor`](https://reactnative.dev/docs/platformcolor). Typically used with `platformSelect`.
-
-```ts title="tailwind.config.js"
-const { platformColor } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        platformRed: platformSelect({
-          android: platformColor("systemRed"),
-          web: "red",
-        }),
-      },
-    },
-  },
-};
-```
-
-## Device specific theming
-
-### hairlineWidth()
-
-Equivalent of [`StyleSheet.hairlineWidth`](https://reactnative.dev/docs/stylesheet#hairlinewidth)
-
-```ts title="tailwind.config.js"
-const { hairlineWidth } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      borderWidth: {
-        hairline: hairlineWidth(),
-      },
-    },
-  },
-};
-```
-
-### pixelRatio()
-
-Equivalent of [`PixelRatio.get()`](https://reactnative.dev/docs/pixelratio#get). If a number is provided it returns `PixelRatio.get() * <value>`, otherwise it returns the PixelRatio value.
-
-```ts title="tailwind.config.js"
-const { pixelRatio } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      borderWidth: {
-        number: pixelRatio(2),
-      },
-    },
-  },
-};
-```
-
-### pixelRatioSelect()
-
-A helper function to use [`PixelRatio.get()`](https://reactnative.dev/docs/pixelratio#get) in a conditional statement, similar to `Platform.select`.
-
-```ts title="tailwind.config.js"
-const { pixelRatio, hairlineWidth } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      borderWidth: pixelRatioSelect({
-        2: 1,
-        default: hairlineWidth(),
-      }),
-    },
-  },
-};
-```
-
-### fontScale()
-
-Equivalent of [`PixelRatio.getFontScale()`](https://reactnative.dev/docs/pixelratio#getFontScale). If a number is provided it returns `PixelRatio.getFontScale() * <value>`, otherwise it returns the `PixelRatio.getFontScale()` value.
-
-```ts title="tailwind.config.js"
-const { fontScale } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      fontSize: {
-        custom: fontScale(2),
-      },
-    },
-  },
-};
-```
-
-### fontScaleSelect()
-
-A helper function to use [`PixelRatio.getFontScale()`](https://reactnative.dev/docs/pixelratio#getFontScale) in a conditional statement, similar to `Platform.select`.
-
-```ts title="tailwind.config.js"
-const { fontScaleSelect, hairlineWidth } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      fontSize: {
-        custom: fontScaleSelect({
-          2: 14,
-          default: 16,
-        }),
-      },
-    },
-  },
-};
-```
-
-### getPixelSizeForLayoutSize()
-
-Equivalent of `PixelRatio.getPixelSizeForLayoutSize()`
-
-```js title=tailwind.config.js
-const { getPixelSizeForLayoutSize } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      size: {
-        custom: getPixelSizeForLayoutSize(2),
-      },
-    },
-  },
-};
-```
-
-### roundToNearestPixel()
-
-Equivalent of `PixelRatio.roundToNearestPixel()`
-
-```ts title=tailwind.config.js
-const { roundToNearestPixel } = require("nativewind/theme");
-
-module.exports = {
-  theme: {
-    extend: {
-      size: {
-        custom: roundToNearestPixel(8.4)
-      },
-    },
-  },
-});
-```
+These can still be overridden at runtime via `VariableContextProvider`.

@@ -240,6 +240,27 @@ The dynamic mapping modifier has been renamed to `@prop`.
 + @prop-[inputColor]:color-black
 ```
 
+### `vars()` → Replaced by `VariableContextProvider`
+
+The `vars()` function for dynamic theming is deprecated. Use the `VariableContextProvider` component instead:
+
+```diff
+- import { vars } from "nativewind";
++ import { VariableContextProvider } from "nativewind";
+
+- const theme = vars({ "--color-primary": "red" });
+
+- <View style={theme}>
+-   {children}
+- </View>
+
++ <VariableContextProvider value={{ "--color-primary": "red" }}>
++   {children}
++ </VariableContextProvider>
+```
+
+See the [Dynamic Themes](/v5/guides/themes) guide for full examples.
+
 ## Deprecations
 
 Nativewind v5 preserves its existing API. Your usage of:
