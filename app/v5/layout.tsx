@@ -64,7 +64,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   style={{ paddingInlineStart: "calc(var(--spacing) * 2)" }}
                 >
                   <BookOpen />
-                  v4
+                  View v4 docs
                 </Link>
               </div>
             </div>
