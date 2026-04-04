@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default async function FAQPage() {
   return (
-    <DocsPage>
+    <DocsPage footer={{ enabled: false }}>
       <div className="flex justify-between mb-4 md:max-xl:px-12">
         <div className="flex-1">
           <DocsTitle>FAQ</DocsTitle>
