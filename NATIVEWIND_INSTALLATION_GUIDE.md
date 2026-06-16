@@ -38,27 +38,27 @@ Install `nativewind` and its peer dependencies: `tailwindcss`, `react-native-css
 
 **Expo CLI (Recommended for Expo projects):**
 ```bash
-npx expo install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+npx expo install nativewind@preview react-native-css@latest react-native-reanimated react-native-safe-area-context
 ```
 
 **npm:**
 ```bash
-npm install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+npm install nativewind@preview react-native-css@latest react-native-reanimated react-native-safe-area-context
 ```
 
 **yarn:**
 ```bash
-yarn add nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+yarn add nativewind@preview react-native-css@latest react-native-reanimated react-native-safe-area-context
 ```
 
 **pnpm:**
 ```bash
-pnpm install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+pnpm install nativewind@preview react-native-css@latest react-native-reanimated react-native-safe-area-context
 ```
 
 **bun:**
 ```bash
-bun install nativewind@preview react-native-css react-native-reanimated react-native-safe-area-context
+bun install nativewind@preview react-native-css@latest react-native-reanimated react-native-safe-area-context
 ```
 
 ### Step 2: Install Tailwind CSS and PostCSS
