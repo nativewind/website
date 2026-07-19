@@ -15,6 +15,12 @@ export default function ComponentKitsSection() {
             description="30+ beautiful components and flows that strive for a native look & feel. The perfect starting point for those who need to ship fast and look good doing it."
           />
           <UIKitCard
+            url="https://shadcn-native.moveinready.casa/"
+            title="shadcn-native"
+            preview="https://raw.githubusercontent.com/moveinready-casa/shadcn-native/refs/heads/main/assets/cover-image.png"
+            description="An unoffical shadcn/ui port for react-native built with nativewind, these components are accesible and performant with the same design as shadcn/ui."
+          />
+          <UIKitCard
             invertOg
             url="https://rnr-docs.vercel.app/"
             title="React Native Reusables"
