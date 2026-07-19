@@ -71,35 +71,35 @@ module.exports = {
 };
 ```
 
-### pixelRatio()
+### pixelScale()
 
 Equivalent of [`PixelRatio.get()`](https://reactnative.dev/docs/pixelratio#get). If a number is provided it returns `PixelRatio.get() * <value>`, otherwise it returns the PixelRatio value.
 
 ```ts title=tailwind.config.js
-const { pixelRatio } = require("nativewind/theme");
+const { pixelScale } = require("nativewind/theme");
 
 module.exports = {
   theme: {
     extend: {
       borderWidth: {
-        number: pixelRatio(2),
+        number: pixelScale(2),
       },
     },
   },
 };
 ```
 
-### pixelRatioSelect()
+### pixelScaleSelect()
 
 A helper function to use [`PixelRatio.get()`](https://reactnative.dev/docs/pixelratio#get) in a conditional statement, similar to `Platform.select`.
 
 ```ts title=tailwind.config.js
-const { pixelRatio, hairlineWidth } = require("nativewind/theme");
+const { pixelScale, hairlineWidth } = require("nativewind/theme");
 
 module.exports = {
   theme: {
     extend: {
-      borderWidth: pixelRatioSelect({
+      borderWidth: pixelScaleSelect({
         2: 1,
         default: hairlineWidth(),
       }),
