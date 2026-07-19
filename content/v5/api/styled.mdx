@@ -28,9 +28,9 @@ import { Svg, Circle } from "react-native-svg";
 const StyledSvg = styled(Svg, {
   className: {
     target: "style",
-    nativeStyleToProp: {
-      height: true,
-      width: true,
+    nativeStyleMapping: {
+      height: "height",
+      width: "width",
     },
   },
 });
@@ -38,10 +38,10 @@ const StyledSvg = styled(Svg, {
 const StyledCircle = styled(Circle, {
   className: {
     target: "style",
-    nativeStyleToProp: {
-      fill: true,
-      stroke: true,
-      strokeWidth: true,
+    nativeStyleMapping: {
+      fill: "fill",
+      stroke: "stroke",
+      strokeWidth: "strokeWidth",
     },
   },
 });
