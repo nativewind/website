@@ -10,9 +10,9 @@ While troubleshooting, always start your application without the cache!
 - Framework-less React Native: `npx react-native start --reset-cache`
 </Callout>
 
-Before troubleshooting Nativewind, it's crucial to ensure that Tailwind CSS itself is functioning correctly. Nativewind uses the Tailwind CLI to compile your styles, so any issues with the Tailwind CLI should be resolved first. 
+Before troubleshooting Nativewind, it's crucial to ensure that Tailwind CSS itself is functioning correctly. Nativewind uses the Tailwind CLI to compile your styles, so any issues with the Tailwind CLI should be resolved first.
 
-Using the command `npx tailwindcss --input <input.css> --output output.css`, the Tailwind CLI will generate an `output.css` file. **The `<input.css>` should be your project's main CSS file (typically `global.css` or `styles.css`) that contains the `@import 'tailwindcss';` directive.**
+Using the command `npx tailwindcss --input <input.css> --output output.css`, the Tailwind CLI will generate an `output.css` file. **The `<input.css>` should be your project's main CSS file (typically `global.css` or `styles.css`) that contains the Tailwind 3 directives `@tailwind base;`, `@tailwind components;` and `@tailwind utilities;`.**
 
 For example:
 ```bash
@@ -83,12 +83,12 @@ By itself, this information may or may not be useful to you, but it is extremely
     ```cmd
     set "DEBUG=nativewind" && script output.log <start-command>
     ```
-    
+
     **Note:** For older Windows versions, use:
     ```cmd
     set "DEBUG=nativewind" && <start-command> > output.log 2>output.log
     ```
-    
+
     **For PowerShell:**
     ```powershell
     $env:DEBUG="nativewind"; <start-command> *> output.log
@@ -138,4 +138,4 @@ React Native uses a different base flex definition than the web. This can be fix
 
 ### Flex Direction
 
-React Native uses a different default `flex-direction` than the web. This can be fixed by explicitly setting a `flex-direction`. 
+React Native uses a different default `flex-direction` than the web. This can be fixed by explicitly setting a `flex-direction`.

@@ -4,6 +4,8 @@ title: vars() & useUnstableNativeVariable()
 
 {/* # vars() & useUnstableNativeVariable() */}
 
+`vars()` is deprecated but remains available in RC0. Prefer `VariableContextProvider` for new code. Preserve runtime variables with `inlineVariables.exclude` when the compiler would otherwise inline them; see [Dynamic Themes](/v5/guides/themes).
+
 ## vars()
 
 `vars` is a function that takes a dictionary of CSS variables and returns a style object. When applied to a component's `style` prop, the variables flow down the component tree, just like CSS custom properties.
@@ -15,7 +17,7 @@ import { vars } from "nativewind";
 function ThemedSection({ brandColor }) {
   return (
     <View style={vars({ "--brand-color": brandColor })}>
-      <Text className="text-[--brand-color]">Themed text</Text>
+      <Text className="text-[var(--brand-color)]">Themed text</Text>
     </View>
   );
 }
@@ -36,12 +38,13 @@ Variables set with `vars()` can be consumed by any descendant component using `v
 `VariableContextProvider` sets CSS variables via React context rather than the `style` prop. This is useful when you need variables available to components that aren't direct style descendants:
 
 ```tsx
+import { Text } from "react-native";
 import { VariableContextProvider } from "nativewind";
 
 function App() {
   return (
-    <VariableContextProvider variables={{ "--theme-color": "#3b82f6" }}>
-      <Text className="text-[--theme-color]">Blue text</Text>
+    <VariableContextProvider value={{ "--theme-color": "#3b82f6" }}>
+      <Text className="text-[var(--theme-color)]">Blue text</Text>
     </VariableContextProvider>
   );
 }

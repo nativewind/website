@@ -11,9 +11,14 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+Use native layout, overlay or sticky header APIs for fixed or sticky behavior; CSS viewport positioning is not interchangeable.
+
 ## Compatibility
 
 <Compatibility
+  rejected={["fixed", "sticky"]}
   supported={["absolute", "relative", "static"]}
-  partial={["fixed", "sticky"]}
+
 />

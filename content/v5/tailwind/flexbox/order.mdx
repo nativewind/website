@@ -11,8 +11,12 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+Arrange native children in their intended order. CSS flex order does not reorder native views.
+
 ## Compatibility
 
 <Compatibility
-  supported={["order-{n}", "order-first", "order-last", "order-none"]}
+  rejected={["order-{n}", "order-first", "order-last", "order-none"]}
 />

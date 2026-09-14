@@ -11,9 +11,14 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+Use `border-0` to remove a native border by setting its width. The CSS `border-none` style is rejected.
+
 ## Compatibility
 
 <Compatibility
-  supported={["border-solid", "border-dashed", "border-dotted", "border-none"]}
+  rejected={["border-none"]}
+  supported={["border-solid", "border-dashed", "border-dotted"]}
   none={["border-double", "border-hidden"]}
 />

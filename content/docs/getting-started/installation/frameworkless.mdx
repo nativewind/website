@@ -7,12 +7,12 @@ import Install from './_install.mdx';
 {/* # Installation */}
 
 > Nativewind works with both Expo and framework-less React Native projects but Expo provides a more streamlined experience.
-> 
+>
 > **Web**: If you'd like to use Metro to bundle for a website or App Clip and you are **not** using Expo, you will need either Expo's Metro config `@expo/metro-config` or to manually use Tailwind CLI to generate a CSS file.
 
 
-<a href="./" className="decoration-transparent hover:decoration-fd-foreground opacity-70 hover:opacity-100 underline-offset-8 rounded-lg p-4">Expo</a> 
-| <a href="./frameworkless" className="underline underline-offset-8 text-fd-primary hover:opacity-100 p-4">Framework-less</a> 
+<a href="./" className="decoration-transparent hover:decoration-fd-foreground opacity-70 hover:opacity-100 underline-offset-8 rounded-lg p-4">Expo</a>
+| <a href="./frameworkless" className="underline underline-offset-8 text-fd-primary hover:opacity-100 p-4">Framework-less</a>
 | <a href="./nextjs" className="decoration-transparent hover:decoration-fd-foreground opacity-70 hover:opacity-100 underline-offset-8 rounded-lg p-4">Next.js</a>
 
 Before installing Nativewind, you will need to [initialize your project with the React Native Community CLI](https://reactnative.dev/docs/getting-started-without-a-framework).
@@ -22,6 +22,8 @@ Before installing Nativewind, you will need to [initialize your project with the
 ### 1. Install Nativewind
 
 <Install framework="framework-less" />
+
+Nativewind v4.2.7 supports Reanimated 3 and 4. Choose a version compatible with your React Native release. Reanimated 4 also requires a compatible `react-native-worklets`; do not add Worklets to a Reanimated 3 setup. Keep the Nativewind Babel preset below.
 
 Run `pod-install` to finish installation of `react-native-reanimated`
 

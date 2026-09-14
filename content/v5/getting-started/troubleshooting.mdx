@@ -1,141 +1,53 @@
 ---
 title: Troubleshooting
 ---
-{/* # Troubleshooting */}
 
-<Callout type="tip">
-While troubleshooting, always start your application without the cache!
+## Check versions and restart
 
-- Expo: `npx expo start --clear`
-- Framework-less React Native: `npx react-native start --reset-cache`
-</Callout>
+RC0 requires `nativewind@5.0.0-rc.0` and `react-native-css@3.1.0-rc.0` together. Check the resolved versions in your lockfile or with `npm ls nativewind react-native-css`. Use the equivalent command for your package manager.
 
-Before troubleshooting Nativewind, it's crucial to ensure that Tailwind CSS itself is functioning correctly. Nativewind uses the Tailwind CLI to compile your styles, so any issues with the Tailwind CLI should be resolved first. 
+After changing dependencies or configuration, restart Metro:
 
-Using the command `npx tailwindcss --input <input.css> --output output.css`, the Tailwind CLI will generate an `output.css` file. **The `<input.css>` should be your project's main CSS file (typically `global.css` or `styles.css`) that contains the `@import 'tailwindcss';` directive.**
-
-For example:
 ```bash
-npx @tailwindcss/cli --input ./global.css --output output.css
+npx expo start --clear
 ```
 
-If you are troubleshooting a class that is not working, ensure that the CSS rule is present in the `output.css` file. This will help you determine if the issue is with Tailwind compilation or with Nativewind's runtime.
+Rebuild native apps when native dependencies change. The tested target is Expo 57.0.22 with React Native 0.86.3, Reanimated 4.5.1 and Worklets 0.10.1. Align native packages with Expo rather than bypassing peer errors.
 
-## Verifying Nativewind Installation
+## Build succeeds but styles are missing
 
-Nativewind provides a utility function `verifyInstallation()` designed to help confirm that the package has been correctly installed.
+V5 compiles Tailwind 4 through `@tailwindcss/postcss`. Expo 57 discovers `postcss.config.js` or `postcss.config.mjs`, but not `postcss.config.cjs`. Check the [installation guide](/v5/getting-started/installation), root CSS import and Tailwind source discovery.
 
-Import the `verifyInstallation` function from the Nativewind package and run it within the scope of a React component. **Do not invoke this function on the global scope**; it should be run within a component.
+For an isolated Tailwind check using the same tested version:
 
-```tsx
-import React from 'react';
-import { verifyInstallation } from 'nativewind';
-
-function App() {
-    // Ensure to call inside a component, not globally
-    verifyInstallation();
-
-    return (
-      // Your component JSX here...
-    );
-}
-
-export default App;
+```bash
+npx @tailwindcss/cli@4.1.12 --input ./global.css --output output.css
 ```
 
-## Enabling debug mode
+Check that the expected utility exists in the output. This verifies Tailwind generation only; it does not verify Metro integration or native rendering.
 
-Nativewind supports the `DEBUG` environment variable and will output various debug information while your server is running. **Run this command in your project's root directory where your `package.json` file is located.**
+On web, use the split theme, preflight and unlayered utility imports from the installation guide. A single `@import "tailwindcss"` can let React Native Web default styles win over your utilities.
 
-The `<start-command>` should be replaced with your project's actual start command:
+## Legacy configuration errors
 
-- **Expo**: `npx expo start --clear`
-- **Framework-less React Native**: `npx react-native start --reset-cache`
-- **Next.js**: `npm run dev` or `yarn dev`
-- **Other frameworks**: Use your project's standard development start command
+The RC rejects `@cssInterop`, `@react-native` configuration and qualified native root selectors such as `:root.dark`. Follow [Upgrade a v5 preview](/v5/guides/migrate-from-preview) to translate their intent. Do not suppress these errors.
 
-<Tabs groupId="Troubleshooting" items={['Mac / Linux', 'Windows']}>
-  <Tab value="Mac / Linux" label="Mac / Linux">
-    ```bash
-    DEBUG=nativewind <start-command>
-    ```
-  </Tab>
-  <Tab value="Windows" label="Windows">
-    ```cmd
-    set "DEBUG=nativewind" && <start-command>
-    ```
-  </Tab>
-</Tabs>
+`verifyInstallation`, `cssInterop` and `remapProps` are not Nativewind RC0 exports. Use [styled](/v5/api/styled) for component mapping and verify a visible styled element instead of calling the v4 installation helper.
 
-<Callout type="warn">
-@react-native-community/cli may create multiple terminal sessions. You will need to ensure all sessions have `DEBUG=nativewind` set.
-</Callout>
+## Runtime variables do not update
 
-By itself, this information may or may not be useful to you, but it is extremely useful when reporting issues to the developers on GitHub. You can record the terminal output by redirecting the output to a file.
+Use `VariableContextProvider` with its `value` prop. Preserve dynamic variables with `inlineVariables.exclude` in Metro options. See [Dynamic Themes](/v5/guides/themes).
 
-<Tabs groupId="Troubleshooting" items={['Mac / Linux', 'Windows']}>
-  <Tab value="Mac / Linux" label="Mac / Linux">
-    ```bash
-    DEBUG=nativewind script output.log <start-command>
-    ```
-  </Tab>
-  <Tab value="Windows" label="Windows">
-    ```cmd
-    set "DEBUG=nativewind" && script output.log <start-command>
-    ```
-    
-    **Note:** For older Windows versions, use:
-    ```cmd
-    set "DEBUG=nativewind" && <start-command> > output.log 2>output.log
-    ```
-    
-    **For PowerShell:**
-    ```powershell
-    $env:DEBUG="nativewind"; <start-command> *> output.log
-    ```
-  </Tab>
-</Tabs>
+## Theme changes do not apply
 
-## Common Issues
+Install `expo-system-ui`, set `expo.userInterfaceStyle` to `"automatic"`, and rebuild for native configuration changes. On the tested Expo 57 target, `Appearance.setColorScheme("unspecified")` restores system appearance. Browser manual theme controls need separate configuration. See [Dark Mode](/v5/core-concepts/dark-mode).
 
-### Your cache is loading old data
+## Unsupported component props
 
-Always reset your cache before troubleshooting an issue.
+Adding a TypeScript declaration does not create a runtime mapping. Use supported native props or a `styled` wrapper for third party components. For TextInput placeholder color, use `className="placeholder:text-gray-500"`.
 
-### Colors are not working
+## Platform differences and bug reports
 
-React Native styling is much more restrictive than the web. This code will work on the web, but not on React Native:
+Apply text colors to Text components rather than expecting them to cascade through View. Native `px` values become density independent points, and the default native `rem` is 14. Compare intended layouts on each supported platform.
 
-```tsx title=App.tsx
-export function App() {
-  return (
-    <View className="text-red-500">
-      <Text>Hello, World!</Text>
-    </View>
-  );
-}
-```
-
-The reason is that `<View />` does not accept a `color` style and will not cascade the style! Instead, you must move the color classes to the `<Text />` element.
-
-### Modifiers are not working
-
-Ensure the component you are applying the style to supports both the style and the required props (e.g., `hover:text-white` - does the component support `color` styles and have an `onHover` prop?).
-
-### Explicit styles
-
-React Native has various issues when conditionally applying styles. To prevent these issues, it's best to declare all styles explicitly.
-
-For example, instead of only applying a text color for dark mode, provide both a light and dark mode text color.
-
-### dp vs px
-
-React Native's default unit is density-independent pixels (dp) while the web's default is pixels (px). These two units are different; however, Nativewind treats them as if they are equivalent. Additionally, Nativewind's compiler requires a unit for most numeric values, forcing some styles to use a `px` unit.
-
-### Flex
-
-React Native uses a different base flex definition than the web. This can be fixed by adding `flex-1` to your classes, which forces the platforms to align.
-
-### Flex Direction
-
-React Native uses a different default `flex-direction` than the web. This can be fixed by explicitly setting a `flex-direction`. 
+Check the [RC compatibility guide](https://github.com/nativewind/nativewind/blob/main/docs/rc-compatibility.md), including the Android animation cancellation limitation. When reporting an issue, include exact package versions, Expo SDK, platform and OS, development or release mode, configuration, expected and actual behavior, and a minimal reproduction. Note whether direct React Native or Reanimated reproduces it.

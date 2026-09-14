@@ -4,6 +4,8 @@ title: _compatibility.mdx
 
 import Legend from "./_legend.mdx";
 
+<p>Support applies to the documented values and platforms. See the <a href="https://github.com/nativewind/nativewind/blob/main/docs/rc-compatibility.md">RC compatibility notes</a> for value limits and native migration alternatives. Browser behavior is evaluated separately.</p>
+
 <table>
   <tbody>
     <tr>
@@ -17,7 +19,7 @@ import Legend from "./_legend.mdx";
             <code>{value}</code>
           </pre>
         </td>
-        <td>✅ Full Support</td>
+        <td>✅ Supported</td>
       </tr>
     ))}
     {(props.experimental || []).map((value, index) => (
@@ -48,6 +50,12 @@ import Legend from "./_legend.mdx";
           </pre>
         </td>
         <td>✔️ Partial Support</td>
+      </tr>
+    ))}
+    {(props.rejected || []).map((value, index) => (
+      <tr key={`rejected-${index}`}>
+        <td><pre><code>{value}</code></pre></td>
+        <td>Not supported on native</td>
       </tr>
     ))}
     {(props.none || []).map((value, index) => (

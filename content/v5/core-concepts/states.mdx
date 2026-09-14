@@ -134,3 +134,13 @@ Use `ltr:` and `rtl:` to apply styles based on the text direction:
   Direction-aware text
 </Text>
 ```
+
+## ARIA state modifiers in RC0
+
+Use the public React Native prop, for example:
+
+```tsx
+<View aria-selected={selected} className="aria-selected:bg-blue-500" />
+```
+
+`accessibilityState={{ selected }}` does not activate `aria-selected:` in this RC, and `ariaSelected` is not the public React Native prop. The engine matches the incoming `aria-selected` prop before React Native translates it for the native host.

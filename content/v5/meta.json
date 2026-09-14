@@ -15,6 +15,7 @@
 
     "---Guides---",
     "guides/migrate-from-v4",
+    "guides/migrate-from-preview",
     "guides/using-with-monorepos",
     "guides/custom-components",
     "guides/third-party-components",

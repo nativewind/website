@@ -1,0 +1,42 @@
+---
+title: Upgrade a v5 preview
+---
+
+This guide covers Nativewind 5.0.0-preview.4 with react-native-css 3.0.7 to the v5 release candidate. Apps on Tailwind 3 need the [v4 migration](/v5/guides/migrate-from-v4).
+
+## Update the pair
+
+Preserve your source, manifests, lockfile and configuration, and capture working screens before updating. Use your existing package manager. For npm:
+
+```bash
+npm install --save-exact nativewind@5.0.0-rc.0 react-native-css@3.1.0-rc.0
+```
+
+RC0 requires the exact engine candidate. Keep working Tailwind 4, PostCSS and `withNativewind` configuration. Use the [split Tailwind imports](/v5/getting-started/installation) with unlayered utilities for React Native Web. Expo 57 requires a discovered PostCSS filename such as `postcss.config.mjs`, not `postcss.config.cjs`.
+
+Expo 57.0.22 with React Native 0.86.3, React 19.2.3, Reanimated 4.5.1 and Worklets 0.10.1 is the tested target. An older SDK upgrade needs separate verification.
+
+## Check changed contracts
+
+1. Legacy `@cssInterop` and `@react-native` configuration now reports explicit errors. Use Appearance for native theme selection and `inlineVariables.exclude` for runtime variables.
+2. Qualified root selectors such as `:root.dark` are rejected on native. Use `prefers-color-scheme` media queries. Preserve custom browser selectors separately.
+3. Unsupported prop declarations were removed: `placeholderClassName`, `indicatorClassName`, `presentationClassName`, `cssInterop` and StatusBar `className`. Use supported native props or [styled mappings](/v5/api/styled). TextInput placeholder color uses `placeholder:` utilities.
+4. Recheck workarounds for line height, ripple, corner styling and prop mappings against the RC before removing them.
+
+`vars()`, the deprecated Nativewind color scheme hook, `useUnstableNativeVariable` and the `nativeStyleToProp` alias are still available. They do not need to be replaced just to update the RC.
+
+## Migration skill
+
+```bash
+npx skills add nativewind/nativewind --skill nativewind-preview-to-rc
+```
+
+The [skill](https://github.com/nativewind/nativewind/tree/main/skills/nativewind-preview-to-rc) checks the starting state, including interrupted upgrades, and records remaining verification. Its fixture tests do not replace checks in your application.
+
+## Verify the result
+
+Restart Metro after replacing the engine. Rebuild if native dependencies or configuration change. Check dependency alignment, types, production bundles and actual screens on each supported platform, including input, navigation, themes and animations. On the tested native target, `Appearance.setColorScheme("unspecified")` restores system appearance after an override.
+
+See the [RC compatibility guide](https://github.com/nativewind/nativewind/blob/main/docs/rc-compatibility.md) for platform limits. Android animation cancellation has a known upstream issue. Keep unavailable checks marked as pending.
+
+To revert, restore only this migration's source, manifest, lockfile and configuration changes from the snapshot, reinstall, and rebuild if needed.

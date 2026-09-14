@@ -38,10 +38,10 @@ import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
       <Pre>
         {[
           props.deps?.length
-            ? `npm install ${props.deps.join(" ")}`
+            ? `npm install ${props.exact ? "--save-exact " : ""}${props.deps.join(" ")}`
             : undefined,
           props.devDeps?.length
-            ? `npm install --dev ${props.devDeps.join(" ")}`
+            ? `npm install --save-dev ${props.exact ? "--save-exact " : ""}${props.devDeps.join(" ")}`
             : undefined,
         ]
           .filter(Boolean)
@@ -53,9 +53,9 @@ import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
     <CodeBlock language="bash">
       <Pre>
         {[
-          props.deps?.length ? `yarn add ${props.deps.join(" ")}` : undefined,
+          props.deps?.length ? `yarn add ${props.exact ? "--exact " : ""}${props.deps.join(" ")}` : undefined,
           props.devDeps?.length
-            ? `yarn add --dev ${props.devDeps.join(" ")}`
+            ? `yarn add --dev ${props.exact ? "--exact " : ""}${props.devDeps.join(" ")}`
             : undefined,
         ]
           .filter(Boolean)
@@ -68,10 +68,10 @@ import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
       <Pre>
         {[
           props.deps?.length
-            ? `pnpm install ${props.deps.join(" ")}`
+            ? `pnpm add ${props.exact ? "--save-exact " : ""}${props.deps.join(" ")}`
             : undefined,
           props.devDeps?.length
-            ? `pnpm install --save-dev ${props.devDeps.join(" ")}`
+            ? `pnpm add --save-dev ${props.exact ? "--save-exact " : ""}${props.devDeps.join(" ")}`
             : undefined,
         ]
           .filter(Boolean)
@@ -84,10 +84,10 @@ import { CodeBlock, Pre } from "fumadocs-ui/components/codeblock";
       <Pre>
         {[
           props.deps?.length
-            ? `bun install ${props.deps.join(" ")}`
+            ? `bun add ${props.exact ? "--exact " : ""}${props.deps.join(" ")}`
             : undefined,
           props.devDeps?.length
-            ? `bun install --dev ${props.devDeps.join(" ")}`
+            ? `bun add --dev ${props.exact ? "--exact " : ""}${props.devDeps.join(" ")}`
             : undefined,
         ]
           .filter(Boolean)

@@ -11,6 +11,10 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC limitation on Android
+
+On the tested Reanimated 4.5.1 target, cancelling a running rotation with `animate-none` or removing its animation styles can leave the final transform in place on Android. This is tracked in [Reanimated issue 10507](https://github.com/software-mansion/react-native-reanimated/issues/10507) and reproduces with direct Reanimated controls. Do not assume cancellation resets the transform; verify the affected interaction in your app. See the [RC compatibility guide](https://github.com/nativewind/nativewind/blob/main/docs/rc-compatibility.md).
+
 ## Compatibility
 
 <Compatibility

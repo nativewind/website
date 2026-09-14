@@ -11,6 +11,10 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+For React Native Web Image and Expo Image, use explicit `resizeMode` or `contentFit` props. A utility on the outer View does not establish the nested image fit. Native image adapters and HTML img elements have separate contracts.
+
 ## Compatibility
 
 <Compatibility

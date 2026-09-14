@@ -11,8 +11,13 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+The RC caret mapping uses Android TextInput `cursorColor`. This does not establish iOS support for that prop.
+
 ## Compatibility
 
 <Compatibility
-  supported={["caret-{color}", "caret-[color]", "caret-current", "caret-inherit"]}
+  rejected={["caret-inherit"]}
+  partial={["caret-{color}", "caret-[color]", "caret-current"]}
 />

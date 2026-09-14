@@ -7,7 +7,7 @@ title: Typescript
 Nativewind extends the React Native types via declaration merging. The simplest method to include the types is to create a new `nativewind-env.d.ts` file and add a [triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html) referencing the types.
 
 ```tsx
-/// <reference types="nativewind/types" />
+/// <reference types="react-native-css/types" />
 ```
 
 <Callout type="warn" title="CAUTION">
@@ -19,3 +19,4 @@ Do not call this file:
 
 By doing so, your types will not be picked up by the TypeScript compiler.
 </Callout>
+Ensure this declaration file is included by your tsconfig. If TypeScript reports an unresolved side effect CSS import, add `declare module "*.css";` to an application declaration file included by that project. Do not retain obsolete v4 declarations to silence missing RC props.

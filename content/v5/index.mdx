@@ -4,6 +4,8 @@ title: Overview
 
 {/* # Overview */}
 
+Nativewind v5 is a release candidate. Start with the [RC installation](/v5/getting-started/installation), [v4 migration](/v5/guides/migrate-from-v4), or [preview upgrade](/v5/guides/migrate-from-preview). For the stable Tailwind 3 release, see [v4.2.7 docs](/docs).
+
 ## What is Nativewind?
 
 Nativewind allows you to use [Tailwind CSS](https://tailwindcss.com) to style your components in React Native. Styled components can be shared between all React Native platforms, using the best style engine for that platform; CSS StyleSheet on web and StyleSheet.create for native. Its goals are to provide a consistent styling experience across all platforms, improving Developer UX, component performance and code maintainability.
@@ -18,13 +20,13 @@ On web, Nativewind is a small polyfill for adding `className` support to React N
 
 🖥️ **DevUX** Plugins for simple setup and improving intellisense support
 
-✨ **Media & Container queries** Use modern mobile styling features like media and container queries [(docs)](../core-concepts/states#hover-focus-and-active)
+✨ **Media & Container queries** Use modern mobile styling features like media and container queries [(docs)](/v5/core-concepts/states#hover-focus-and-active)
 
 👪 **Custom values (CSS Variables)** Create themes, sub-themes and dynamic styles using custom values
 
-✨ **Pseudo classes** hover / focus / active on compatible components [(docs)](../core-concepts/states#hover-focus-and-active)
+✨ **Pseudo classes** hover / focus / active on compatible components [(docs)](/v5/core-concepts/states#hover-focus-and-active)
 
-👪 **Parent state styles** automatically style children based upon parent pseudo classes [(docs)](../core-concepts/states#hover-focus-and-active#styling-based-on-parent-state)
+👪 **Parent state styles** automatically style children based upon parent pseudo classes [(docs)](/v5/core-concepts/states#styling-based-on-parent-state)
 
 🔥 **Lots of other features**
 
@@ -50,16 +52,16 @@ On the web, it avoids injecting a StyleSheet at runtime by reusing the existing 
 
 ## In action
 
-Nativewind handles both the Tailwind CSS compilation and the runtime styles. It works via a JSX transform, meaning there is no need for custom wrappers/boilerplate.
+Nativewind handles both the Tailwind CSS compilation and the runtime styles. Metro applies import rewrites for supported React Native components.
 
-As all React components are transformed with JSX, it works with 3rd party modules.
+Third party components may need an explicit `styled` wrapper if they do not forward className.
 
 ```tsx
 import { CustomText } from "third-party-text-component";
 
 export function BoldText(props) {
   // You just need to write `className="<your styles>"`
-  return <CustomText className="text-bold" {...props} />;
+  return <CustomText className="font-bold" {...props} />;
 }
 ```
 
@@ -79,71 +81,4 @@ export function MyText({ bold, italic, lineThrough, ...props }) {
 }
 ```
 
-By default Nativewind maps `className`->`style`, but it can handle the mapping of complex components.
-
-```tsx
-remapProps(FlatList, {
-  className: "style",
-  ListFooterComponentClassName: "ListFooterComponentStyle",
-  ListHeaderComponentClassName: "ListHeaderComponentStyle",
-  columnWrapperClassName: "columnWrapperStyle",
-  contentContainerClassName: "contentContainerStyle",
-});
-
-<FlatList
-  {...}
-  className="bg-black"
-  ListHeaderComponentClassName="bg-black text-white"
-  ListFooterComponentClassName="bg-black text-white"
-  columnWrapperClassName="bg-black"
-  contentContainerClassName="bg-black"
-  indicatorClassName="bg-black"
-/>
-```
-
-And can even work with components that expect style attributes as props
-
-```tsx
-import { Text } from "react-native";
-import { cssInterop } from "nativewind";
-import { Svg, Circle } from "react-native-svg";
-
-/**
- * Svg uses `height`/`width` props on native and className on web
- */
-const StyledSVG = cssInterop(Svg, {
-  className: {
-    target: "style",
-    nativeStyleToProp: {
-      height: true,
-      width: true,
-    },
-  },
-});
-/**
- * Circle uses `fill`/`stroke`/`strokeWidth` props on native and className on web
- */
-const StyledCircle = cssInterop(Circle, {
-  className: {
-    target: "style",
-    nativeStyleToProp: {
-      fill: true,
-      stroke: true,
-      strokeWidth: true,
-    },
-  },
-});
-
-export function BoldText(props) {
-  return (
-    <Svg className="w-1/2 h-1/2" viewBox="0 0 100 100">
-      <StyledCircle
-        className="fill-green-500 stroke-blue-500 stroke-2"
-        cx="50"
-        cy="50"
-        r="45"
-      />
-    </Svg>
-  );
-}
-```
+For components that need explicit mapping, use the returned [styled wrapper](/v5/api/styled). Nativewind RC0 does not export the v4 `cssInterop` or `remapProps` functions. See [third party components](/v5/guides/third-party-components) for style and prop mapping examples.

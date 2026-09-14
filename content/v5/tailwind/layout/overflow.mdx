@@ -11,8 +11,13 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+Use ScrollView or other React Native scrolling components for scrolling. Whole view `overflow-hidden` and `overflow-visible` are distinct from CSS scroll containers.
+
 ## Compatibility
 
 <Compatibility
-  supported={["overflow-auto", "overflow-clip", "overflow-scroll", "overflow-hidden", "overflow-visible", "overflow-x-auto", "overflow-x-clip", "overflow-x-scroll", "overflow-x-hidden", "overflow-x-visible", "overflow-y-auto", "overflow-y-clip", "overflow-y-scroll", "overflow-y-hidden", "overflow-y-visible"]}
+  rejected={["overflow-auto", "overflow-clip", "overflow-scroll", "overflow-x-auto", "overflow-x-clip", "overflow-x-scroll", "overflow-x-hidden", "overflow-x-visible", "overflow-y-auto", "overflow-y-clip", "overflow-y-scroll", "overflow-y-hidden", "overflow-y-visible"]}
+  supported={["overflow-hidden", "overflow-visible"]}
 />
