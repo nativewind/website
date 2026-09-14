@@ -44,7 +44,7 @@ See the [withNativewind API reference](../api/with-nativewind) for available opt
 
 ## Babel Configuration
 
-Nativewind v5 does not require any Babel configuration. The babel plugin is applied automatically by the Metro config. If you had `nativewind/babel` in your `babel.config.js` from v4, remove it.
+The Nativewind import rewrite plugin is applied by the Metro integration. Keep `babel-preset-expo` and unrelated Babel plugins. Remove the v4 `nativewind/babel` preset and Nativewind `jsxImportSource` setting.
 
 ## Optional: tailwind.config.js
 

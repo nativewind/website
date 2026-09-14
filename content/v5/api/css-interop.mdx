@@ -1,84 +1,22 @@
 ---
-title: cssInterop & remapProps
+title: Migrating cssInterop and remapProps
 ---
 
-{/* # cssInterop & remapProps */}
+Nativewind v5 RC0 does not export `cssInterop` or `remapProps`. Those APIs belong to the [v4 documentation](/docs/api/css-interop).
 
-These functions enable `className` support on components that don't natively handle it. They are primarily used for third-party components.
-
-<Callout type="info">
-For your own components, you don't need these functions. Simply accept and pass through `className`. See [Writing Custom Components](../guides/custom-components).
-</Callout>
-
-## cssInterop
-
-`cssInterop` tags a component so the Nativewind runtime resolves `className` strings into styles. Use it when a third-party component accepts a `style` prop but doesn't pass through `className`.
+Use [styled](/v5/api/styled) to create a wrapper for a component that needs className mapping, and render the returned wrapper:
 
 ```tsx
-import { cssInterop } from "nativewind";
-import { MapView } from "react-native-maps";
+import { styled } from "nativewind";
+import { ThirdPartyView } from "third-party-library";
 
-cssInterop(MapView, { className: "style" });
+const StyledView = styled(ThirdPartyView, { className: "style" });
 
-// Now you can use className
-<MapView className="w-full h-64" />
+<StyledView className="bg-blue-500 p-4" />;
 ```
 
-### Mapping to specific props
+`styled` does not globally register or mutate the original component. There is no `global` option. Do not mechanically rename a v4 call and keep rendering the original component.
 
-Some components use props other than `style` for styling:
+For wrappers that forward styles to another styled component, `styled` accepts `{ passThrough: true }` as its third argument. This requires a compatible downstream consumer; it does not produce ordinary resolved styles for arbitrary third party code.
 
-```tsx
-cssInterop(component, {
-  className: {
-    target: "style",
-    nativeStyleToProp: {
-      height: true,
-      width: true,
-    },
-  },
-});
-```
-
-With `nativeStyleToProp`, style properties are extracted from the resolved styles and passed as individual props. This is useful for components like SVGs that expect `height`/`width` as props on native.
-
-### Multiple className props
-
-Components with multiple style props can accept multiple className props:
-
-```tsx
-cssInterop(FlatList, {
-  className: "style",
-  contentContainerClassName: "contentContainerStyle",
-});
-
-<FlatList
-  className="bg-white"
-  contentContainerClassName="p-4"
-/>
-```
-
-## remapProps
-
-`remapProps` is a simpler alternative to `cssInterop` for components that just need prop renaming:
-
-```tsx
-import { remapProps } from "nativewind";
-
-const CustomButton = remapProps(ThirdPartyButton, {
-  buttonClass: "buttonStyle",
-  labelClass: "labelStyle",
-});
-
-<CustomButton buttonClass="bg-blue-500" labelClass="text-white" />
-```
-
-Options:
-
-```tsx
-// Map a new prop to an existing style prop
-remapProps(component, { newProp: "existingStyleProp" });
-
-// Override an existing prop to accept className
-remapProps(component, { existingProp: true });
-```
+Review each prop destination, nested mapping and explicit prop precedence. Use `nativeStyleMapping` to extract styles into props; `nativeStyleToProp` is still a deprecated alias. See [third party components](/v5/guides/third-party-components) and the [v4 migration guide](/v5/guides/migrate-from-v4).

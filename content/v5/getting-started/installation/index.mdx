@@ -7,6 +7,9 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import Install from "./_install.mdx";
 import TailwindInstall from "./_tailwind.mdx";
 import { Callout } from "@/components/callout";
+import { CopyInstallationButton } from "@/components/copy-installation-button";
+
+<CopyInstallationButton />
 
 {/* # Installation */}
 
@@ -30,7 +33,7 @@ import { Callout } from "@/components/callout";
 </a> */}
 
 <Callout type="tip">
- If you'd like to skip manual setup and use Nativewind, you can use the following command to initialize a new Expo project with Nativewind v5, Expo SDK 54, and Tailwind CSS.
+ If you'd like to skip manual setup and use Nativewind, you can use the following command to initialize a new Expo project with Nativewind v5 and Tailwind CSS. Check the generated package versions against the RC target below.
 
 <Tabs groupId="v5-npm-install" items={["npm", "yarn", "pnpm", "bun"]}>
   <Tab value="npm">
@@ -57,6 +60,10 @@ bunx rn-new@next --nativewind
 
 </Callout>
 
+## Nativewind v5 RC0
+
+These instructions target `nativewind@5.0.0-rc.0` with `react-native-css@3.1.0-rc.0`. V4 remains the stable release. Existing apps should follow [Migrate from v4](/v5/guides/migrate-from-v4) or [Upgrade a v5 preview](/v5/guides/migrate-from-preview).
+
 ## Installation with Expo
 
 ### 1. Install Nativewind
@@ -71,13 +78,15 @@ bunx rn-new@next --nativewind
 
 Create a `postcss.config.mjs` file in the root of your Expo project if you don't already have one, then add `@tailwindcss/postcss` there, or wherever PostCSS is configured in your project.
 
-```jsx title="postcss.config.mjs
+```js title="postcss.config.mjs"
 export default {
   plugins: {
     "@tailwindcss/postcss": {},
   },
 };
 ```
+
+Expo 57 discovers `postcss.config.js` and `postcss.config.mjs`; do not name this file `postcss.config.cjs`.
 
 Create a `global.css` file and add the Tailwind directives.
 
@@ -92,8 +101,7 @@ Create a `global.css` file and add the Tailwind directives.
 > From here onwards, replace `./global.css` with the relative path to the CSS file you just created.
 
 <Callout type="tip">
-  Instead of using the standard `@tailwind`, Nativewind recommends using the
-  at-rules above which provide better compatibility with `react-native-web`
+  Keep utilities unlayered as shown above. A single `@import "tailwindcss"` can put utilities below React Native Web defaults in the CSS cascade, even when the build succeeds.
 </Callout>
 
 ### 3. Create or modify your metro.config.js
@@ -113,10 +121,10 @@ module.exports = withNativewind(config);
 ### 4. Import your CSS file
 
 ```js title="App.js"
-import "./global.css"
+import "./global.css";
 
-export default App() {
-  /* Your App */
+export default function App() {
+  return null; // Replace with your app.
 }
 ```
 
@@ -125,6 +133,10 @@ export default App() {
   your app. Do **not** import it in the same file that calls
   `AppRegistry.registerComponent` or your app will not Fast Refresh properly.
 </Callout>
+
+For Expo Router, import the CSS once in `app/_layout.tsx`. Keep `babel-preset-expo` and any unrelated Babel plugins; remove only the v4 Nativewind preset and JSX import source settings.
+
+For system appearance, install `expo-system-ui` as above and set `"userInterfaceStyle": "automatic"` inside the `expo` object in `app.json`. Rebuild after changing native dependencies or native configuration.
 
 ### 5. Override the lightningcss version
 

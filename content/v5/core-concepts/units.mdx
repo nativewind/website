@@ -68,4 +68,4 @@ You can override the `rem` value using CSS:
 }
 ```
 
-Or inline using a CSS variable on a parent component.
+The `rem` value is not a runtime JavaScript setting in v5. For dimensions that change at runtime, use a CSS variable through `VariableContextProvider` and preserve it with `inlineVariables.exclude`; see [Dynamic Themes](/v5/guides/themes).

@@ -15,6 +15,18 @@ const config = getDefaultConfig(__dirname);
 module.exports = withNativewind(config);
 ```
 
+## Runtime variables
+
+To keep a CSS variable dynamic instead of compiling its default value into native styles:
+
+```js
+module.exports = withNativewind(config, {
+  inlineVariables: { exclude: ["--color-primary"] },
+});
+```
+
+See [Dynamic Themes](/v5/guides/themes) for provider examples.
+
 ## Options
 
 `withNativewind` accepts an optional second argument with the same options as `withReactNativeCSS` from `react-native-css/metro`. The following defaults are applied:

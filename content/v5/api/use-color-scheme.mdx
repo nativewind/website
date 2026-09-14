@@ -20,14 +20,12 @@ Replace the Nativewind import with the React Native equivalent:
 The v4 API returned `{ colorScheme, setColorScheme, toggleColorScheme }`. In v5, use the React Native APIs directly:
 
 ```tsx
-import { useColorScheme, Appearance } from "react-native";
+import { useColorScheme, Appearance, Pressable, Text } from "react-native";
 
 function ThemeToggle() {
   const colorScheme = useColorScheme();
 
-  const setColorScheme = (scheme) => {
-    Appearance.setColorScheme(scheme);
-  };
+  const restoreSystemTheme = () => Appearance.setColorScheme("unspecified");
 
   const toggleColorScheme = () => {
     Appearance.setColorScheme(
@@ -36,11 +34,18 @@ function ThemeToggle() {
   };
 
   return (
-    <Pressable onPress={toggleColorScheme}>
-      <Text>Current: {colorScheme}</Text>
-    </Pressable>
+    <>
+      <Pressable onPress={toggleColorScheme}>
+        <Text>Current: {colorScheme}</Text>
+      </Pressable>
+      <Pressable onPress={restoreSystemTheme}>
+        <Text>Use system theme</Text>
+      </Pressable>
+    </>
   );
 }
 ```
+
+The `"unspecified"` value restores system appearance on the Expo 57 native target. Browser manual theme controls need separate handling.
 
 See the [Dark Mode](../core-concepts/dark-mode) guide for more details.

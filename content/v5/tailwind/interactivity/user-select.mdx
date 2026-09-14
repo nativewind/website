@@ -11,8 +11,12 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+The RC maps native `select-all` and `select-auto` to enabled Text selection, without promising CSS selection expansion semantics. In the pinned WebKit engine, `select-none` needs an explicit `WebkitUserSelect: "none"` style. The original Firefox select-all interaction remains unverified.
+
 ## Compatibility
 
 <Compatibility
-  none={["select-none", "select-text", "select-all", "select-auto"]}
+  partial={["select-none", "select-text", "select-all", "select-auto"]}
 />

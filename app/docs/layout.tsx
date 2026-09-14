@@ -51,11 +51,11 @@ export default function Layout({ children }: { children: ReactNode }) {
 
               <h1 className="font-bold text-lg flex gap-2 items-center">
                 Nativewind v5
-                <div className="opacity-50 font-mono text-sm">pre-release</div>
+                <div className="opacity-50 font-mono text-sm">RC</div>
               </h1>
               <p className="text-sm text-fd-foreground/60">
-                Check out the new features and improvements in the preview
-                version of Nativewind.
+                Check out the new features and improvements in the release
+                candidate of Nativewind.
               </p>
               <div className="flex justify-between flex-wrap gap-2">
                 <Link

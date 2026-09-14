@@ -22,14 +22,24 @@ Simply configure your Expo project in Nx as per [the Expo setup guide](../gettin
 Add the Nativewind plugin to your `metro.config.js` using a promise chain as shown below:
 
 ```js title="metro.config.js"
-const { withNativeWind } = require("nativewind/metro");
+const { withNativewind } = require("nativewind/metro");
 
 // ... existing Nx configuration
 
 module.exports = withNxMetro(mergeConfig(defaultConfig, customConfig), {
   // ... existing Nx config
-}).then((config) => withNativeWind(config));
+}).then((config) => withNativewind(config));
 ```
+
+## Shared source files
+
+Tailwind must see classes from shared packages. Add paths relative to the CSS file, for example:
+
+```css
+@source "../../packages/ui/src";
+```
+
+Keep existing Nx/Metro resolver settings and inspect sibling consumers before removing v4 dependencies from a workspace. Verify shared component styles in native and web output.
 
 ## Additional Resources
 

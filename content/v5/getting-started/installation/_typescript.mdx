@@ -24,3 +24,5 @@ Do not call this file:
 By doing so, your types will not be picked up by the TypeScript compiler.
 
 </Callout>
+
+Ensure this declaration file is included by your tsconfig. If TypeScript reports an unresolved side effect CSS import, add `declare module "*.css";` to an application declaration file included by that project. Do not retain obsolete v4 declarations to silence missing RC props.

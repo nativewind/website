@@ -31,11 +31,11 @@ Styles are applied in the following order of precedence (lowest to highest):
 
 ## Important
 
-The `!` prefix (Tailwind's `!important` syntax) overrides both normal class styles and inline styles:
+The `!` suffix (Tailwind's `!important` syntax) overrides both normal class styles and inline styles:
 
 ```tsx
-// !text-white overrides the inline style
-<Text className="!text-white" style={{ color: "black" }} />
+// text-white! overrides the inline style
+<Text className="text-white!" style={{ color: "black" }} />
 // Result: color is "#fff"
 ```
 
@@ -46,7 +46,7 @@ Nativewind automatically merges `className` styles with the `style` prop. When t
 ```tsx
 // className sets padding, style sets color — both are applied
 <View className="p-4" style={{ backgroundColor: "red" }} />
-// Result: { padding: 16, backgroundColor: "red" }
+// Result: { padding: 14, backgroundColor: "red" }
 ```
 
 When they target the same property, `style` takes precedence:

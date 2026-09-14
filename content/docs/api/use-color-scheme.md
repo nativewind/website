@@ -30,3 +30,5 @@ function MyComponent() {
   );
 }
 ```
+
+Nativewind v4.2.7 handles the React Native Appearance `unspecified` value internally. Continue using `setColorScheme("system")` with the v4 Nativewind hook to restore system preference; the v5 direct Appearance recipe is a separate API.

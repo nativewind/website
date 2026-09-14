@@ -8,7 +8,7 @@ Nativewind v5 supports dark mode through the system preference using the `prefer
 
 ## System Preference (Automatic)
 
-By default, Tailwind CSS's `dark:` variant uses the system color scheme. No additional configuration is needed:
+By default, Tailwind CSS's `dark:` variant uses the system color scheme. In Expo, install `expo-system-ui` and set `"userInterfaceStyle": "automatic"` in the `expo` object of `app.json`. Rebuild when native configuration changes:
 
 ```tsx
 import { View, Text } from "react-native";
@@ -31,7 +31,7 @@ Under the hood, `dark:` maps to `@media (prefers-color-scheme: dark)`, which is 
 To allow users to manually toggle between light and dark mode, use React Native's `Appearance` API:
 
 ```tsx
-import { Appearance } from "react-native";
+import { Appearance, Pressable, Text } from "react-native";
 
 function ThemeToggle() {
   const toggleTheme = () => {
@@ -47,6 +47,14 @@ function ThemeToggle() {
   );
 }
 ```
+
+On the Expo 57 target, restore the system preference with:
+
+```tsx
+Appearance.setColorScheme("unspecified");
+```
+
+This manual override is for native. React Native Web does not turn it into a browser theme selector. Keep browser theme selection separate if your app supports a manual browser toggle. Qualified selectors such as `:root.dark` are rejected by the native compiler; use media queries on native.
 
 You can read the current color scheme using React Native's `useColorScheme` hook:
 

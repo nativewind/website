@@ -17,6 +17,8 @@ const StyledComponent = styled(SomeNativeComponent);
 <StyledComponent className="bg-blue-500 p-4" />
 ```
 
+Define the wrapper outside render and use the returned component. The original component is unchanged; `styled` does not register it globally and has no `global` option.
+
 ## Mapping Styles to Props
 
 Some React Native components expect style values as direct props rather than inside a `style` object. Use `styled` to extract specific style properties and pass them as props:
@@ -28,7 +30,7 @@ import { Svg, Circle } from "react-native-svg";
 const StyledSvg = styled(Svg, {
   className: {
     target: "style",
-    nativeStyleToProp: {
+    nativeStyleMapping: {
       height: true,
       width: true,
     },
@@ -37,8 +39,8 @@ const StyledSvg = styled(Svg, {
 
 const StyledCircle = styled(Circle, {
   className: {
-    target: "style",
-    nativeStyleToProp: {
+    target: false,
+    nativeStyleMapping: {
       fill: true,
       stroke: true,
       strokeWidth: true,

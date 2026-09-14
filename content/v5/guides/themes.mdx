@@ -43,6 +43,21 @@ First, define your theme variables in CSS:
   You need to define the variables in both `@theme` (so Tailwind generates the utility classes) and `:root` (so the CSS variables have default values at runtime).
 </Callout>
 
+Preserve each variable you override at runtime from native compiler inlining:
+
+```js title="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativewind } = require("nativewind/metro");
+
+module.exports = withNativewind(getDefaultConfig(__dirname), {
+  inlineVariables: {
+    exclude: ["--color-primary", "--color-secondary"],
+  },
+});
+```
+
+Add other dynamic tokens to this list, including `--color-foreground` and `--color-muted-foreground` in the multiple themes example below. Use units for cross platform length variables, such as `"80px"`.
+
 Then override them at runtime:
 
 ```tsx title="App.tsx"
@@ -114,7 +129,8 @@ export function ThemeProvider({
   name: keyof typeof themes;
   children: React.ReactNode;
 }) {
-  const colorScheme = useColorScheme() ?? "light";
+  const appearance = useColorScheme();
+  const colorScheme = appearance === "dark" ? "dark" : "light";
 
   return (
     <VariableContextProvider value={themes[name][colorScheme]}>
@@ -126,6 +142,7 @@ export function ThemeProvider({
 
 ```tsx title="app/_layout.tsx"
 import "../global.css";
+import { Stack } from "expo-router";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default function RootLayout() {
@@ -153,7 +170,7 @@ export default function RootLayout() {
 
 ## Migrating from v4
 
-If you used `vars()` in v4, replace it with `VariableContextProvider`:
+`vars()` remains available but deprecated in RC0. For new code or a planned refactor, use `VariableContextProvider`:
 
 ```diff
 - import { vars } from "nativewind";

@@ -48,7 +48,9 @@ export async function GET() {
   }
 
   const lines: string[] = [
-    '# Nativewind v5',
+    '# Nativewind v5 RC',
+    '',
+    'Target: nativewind@5.0.0-rc.0 and react-native-css@3.1.0-rc.0 on the tested Expo 57 toolchain. V4.2.7 remains the stable release.',
     '',
     '> Nativewind v5 uses Tailwind CSS v4 as a scripting language to create a universal style system for React Native. Built on top of react-native-css, it compiles Tailwind CSS styles into native StyleSheet objects at build time while providing an efficient runtime for conditional styles like hover, focus, media queries, and container queries.',
     '',

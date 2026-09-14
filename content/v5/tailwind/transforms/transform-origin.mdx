@@ -11,8 +11,13 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+Use React Native’s `transformOrigin` style directly when needed; this RC compiler rejects the named CSS transform origin utilities.
+
 ## Compatibility
 
 <Compatibility
-  supported={["origin-center", "origin-top", "origin-top-right", "origin-right", "origin-bottom-right", "origin-bottom", "origin-bottom-left", "origin-left", "origin-top-left"]}
+  rejected={["origin-center", "origin-top", "origin-top-right", "origin-right", "origin-bottom-right", "origin-bottom", "origin-bottom-left", "origin-left", "origin-top-left"]}
+
 />

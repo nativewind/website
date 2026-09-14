@@ -12,7 +12,7 @@ import { CodeBlock, Pre } from 'fumadocs-ui/components/codeblock';
         {[
           props.deps?.length ? `npm install ${props.deps.join(" ")}` : undefined,
           props.devDeps?.length
-            ? `npm install --dev ${props.devDeps.join(" ")}`
+            ? `npm install --save-dev ${props.devDeps.join(" ")}`
             : undefined,
         ]
           .filter(Boolean)
