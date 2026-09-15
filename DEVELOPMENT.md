@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The Nativewind documentation site serves both v4 (stable) and v5 (preview) docs side-by-side. Built with Next.js 15 and Fumadocs.
+The Nativewind documentation site serves both v4.2.7 (stable) and v5 (release candidate) documentation. Built with Next.js 15 and Fumadocs.
 
 - **V4 docs** at `/docs/` — sourced from `content/docs/`
 - **V5 docs** at `/v5/` — sourced from `content/v5/`
@@ -21,7 +21,8 @@ The Nativewind documentation site serves both v4 (stable) and v5 (preview) docs 
 ```bash
 pnpm install             # Install dependencies
 pnpm dev                 # Start dev server
-pnpm build               # Production build
+pnpm test:llm            # Verify all public Markdown exports and shared helpers
+pnpm build               # Production build, including text endpoints
 pnpm start               # Start production server
 ```
 
@@ -72,8 +73,8 @@ app/
 ├── docs/[[...slug]]/    # V4 doc pages
 ├── v5/[[...slug]]/      # V5 doc pages
 ├── llms.mdx/            # LLM-friendly markdown endpoints
-├── llms.txt/            # Concatenated LLM text (v4)
-├── v5/llms.txt/         # Concatenated LLM text (v5)
+├── llms.txt/            # Documentation index (v4)
+├── v5/llms.txt/         # Documentation index (v5)
 └── api/                 # Search, OG image generation
 
 components/
@@ -89,7 +90,7 @@ content/
 
 lib/
 ├── source.ts            # Fumadocs loaders (source for v4, source5 for v5)
-└── get-llm-text.ts      # Strips frontmatter, formats docs for LLM endpoints
+└── get-llm-text.ts      # Formats source Markdown for LLM endpoints
 ```
 
 ## Key Config Files
@@ -104,12 +105,20 @@ The site has built-in endpoints for serving docs as plain text for LLM consumpti
 
 | Endpoint | Description |
 |----------|-------------|
-| `/llms.txt` | Concatenated v4 docs as plain text |
-| `/v5/llms.txt` | Concatenated v5 docs as plain text |
+| `/llms.txt` | V4 documentation index with Markdown page links |
+| `/v5/llms.txt` | V5 documentation index with Markdown page links |
 | `/llms-full.txt` | Full v4 doc dump |
 | `/v5/llms-full.txt` | Full v5 doc dump |
-| `/llms.mdx/docs/[path]` | Individual v4 doc as markdown |
-| `/llms.mdx/v5/[path]` | Individual v5 doc as markdown |
+| `/llms.mdx/docs/[path]` | Individual v4 page as Markdown; also `/docs/[path].mdx` |
+| `/llms.mdx/v5/[path]` | Individual v5 page as Markdown; also `/v5/[path].mdx` |
+
+The indices, full exports and copy buttons all use the same documentation source. `lib/llm-markdown.ts` expands imported MDX partials and includes, renders tabs, callouts and tables as Markdown, preserves code fences and resolves page links. Files beginning with `_` are helpers and are not exported as standalone pages.
+
+`lib/doc-tables.ts` supplies install commands and compatibility rows to both the React components and the text exporter. Update those shared helpers when changing command generation or support labels. Installation and migration copy buttons fetch the page Markdown endpoint; do not reintroduce separate guide strings.
+
+The exporter supports the data expressions and components used by this repository. It deliberately fails on unknown components or JavaScript expressions instead of silently dropping guidance. When introducing a component, add its Markdown representation and a regression case to `tests/llm-markdown.test.ts`. Run `pnpm test:llm` and `pnpm build`; check rendered pages and copy buttons if UI components changed. Legacy `.md` files are included in those checks.
+
+Keep v4 and v5 installation advice separate. Use the pinned pair from the RC installation page for v5; do not copy current Tailwind CSS v4 links into the stable Tailwind CSS v3 docs. The application migration skills are maintained in [nativewind/nativewind](https://github.com/nativewind/nativewind/tree/main/skills), alongside release setup and measured compatibility records.
 
 ## Common Pitfalls
 

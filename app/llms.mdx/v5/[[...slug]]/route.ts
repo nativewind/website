@@ -1,14 +1,8 @@
+import { getLLMText, isPublicDoc } from '@/lib/get-llm-text';
 import { source5 } from '@/lib/source';
 import { notFound } from 'next/navigation';
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 
 export const revalidate = false;
-
-function stripFrontmatter(content: string): string {
-  const match = content.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/);
-  return match ? content.slice(match[0].length).trim() : content.trim();
-}
 
 export async function GET(
   _req: Request,
@@ -16,21 +10,15 @@ export async function GET(
 ) {
   const { slug } = await params;
   const page = source5.getPage(slug);
-  if (!page) notFound();
-
-  const filePath = join(process.cwd(), 'content/v5', page.file.path);
-  const raw = await readFile(filePath, 'utf-8');
-  const body = stripFrontmatter(raw);
-
-  const text = `# ${page.data.title} (${page.url})\n\n${page.data.description ? `${page.data.description}\n\n` : ''}${body}`;
-
-  return new Response(text, {
-    headers: {
-      'Content-Type': 'text/markdown',
-    },
+  if (!page || !isPublicDoc(page.file.path)) notFound();
+  return new Response(await getLLMText(page, 'v5'), {
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   });
 }
 
 export function generateStaticParams() {
-  return source5.generateParams();
+  return source5
+    .getPages()
+    .filter((page) => isPublicDoc(page.file.path))
+    .map((page) => ({ slug: page.slugs }));
 }

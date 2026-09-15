@@ -7,7 +7,8 @@
     "dev": "next dev",
     "start": "next start",
     "postinstall": "fumadocs-mdx",
-    "validate": "tsx scripts/validate-urls.ts ."
+    "validate": "tsx scripts/validate-urls.ts .",
+    "test:llm": "node --import tsx --test tests/llm-markdown.test.ts"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "^1.1.4",
@@ -26,8 +27,13 @@
     "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "remark-gfm": "4.0.1",
+    "remark-mdx": "3.1.0",
+    "remark-parse": "11.0.0",
+    "remark-stringify": "11.0.0",
     "tailwind-merge": "^3.2.0",
-    "tsx": "^4.7.0"
+    "tsx": "^4.7.0",
+    "unified": "11.0.5"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

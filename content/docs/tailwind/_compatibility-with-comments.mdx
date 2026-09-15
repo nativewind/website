@@ -2,71 +2,10 @@
 title: Compatibility with Comments
 ---
 
+import { CompatibilityTable } from "@/components/compatibility-table";
+
 import Legend from "./_legend.mdx";
 
-<table>
-  <tbody>
-    <tr>
-      <th className="whitespace-nowrap">Class</th>
-      <th>Support</th>
-      <th>Comments</th>
-    </tr>
-    {(props.supported || []).map((value, index) => (
-      <tr key={`supported-${index}`}>
-        <td className="whitespace-nowrap">
-          <pre>
-            <code>{value[0]}</code>
-          </pre>
-        </td>
-        <td className="whitespace-nowrap">✅ Full Support</td>
-        <td>{value[1]}</td>
-      </tr>
-    ))}
-    {(props.experimental || []).map((value, index) => (
-      <tr key={`supported-${index}`}>
-        <td className="whitespace-nowrap">
-          <pre>
-            <code>{value[0]}</code>
-          </pre>
-        </td>
-        <td>🧪 Experimental Support</td>
-        <td>{value[1]}</td>
-      </tr>
-    ))}
-    {(props.native || []).map((value, index) => (
-      <tr key={`supported-${index}`}>
-        <td className="whitespace-nowrap">
-          <pre>
-            <code>{value[0]}</code>
-          </pre>
-        </td>
-        <td>📱 Native only</td>
-        <td>{value[1]}</td>
-      </tr>
-    ))}
-    {(props.partial || []).map((value, index) => (
-      <tr key={`partial-${index}`}>
-        <td className="whitespace-nowrap">
-          <pre>
-            <code>{value[0]}</code>
-          </pre>
-        </td>
-        <td>✔️ Partial Support</td>
-        <td>{value[1]}</td>
-      </tr>
-    ))}
-    {(props.none || []).map((value, index) => (
-      <tr key={`partial-${index}`}>
-        <td className="whitespace-nowrap">
-          <pre>
-            <code>{value[0]}</code>
-          </pre>
-        </td>
-        <td>🌐 Web only</td>
-        <td>{value[1]}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+<CompatibilityTable {...props} />
 
 <>{props.legend || props.legend === undefined ? <Legend /> : <></>}</>

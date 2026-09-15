@@ -2,73 +2,12 @@
 title: _compatibility.mdx
 ---
 
+import { CompatibilityTable } from "@/components/compatibility-table";
+
 import Legend from "./_legend.mdx";
 
 <p>Support applies to the documented values and platforms. See the <a href="https://github.com/nativewind/nativewind/blob/main/docs/rc-compatibility.md">RC compatibility notes</a> for value limits and native migration alternatives. Browser behavior is evaluated separately.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <th className="w-[40%] whitespace-nowrap">Class</th>
-      <th>Support</th>
-    </tr>
-    {(props.supported || []).map((value, index) => (
-      <tr key={`supported-${index}`}>
-        <td>
-          <pre>
-            <code>{value}</code>
-          </pre>
-        </td>
-        <td>✅ Supported</td>
-      </tr>
-    ))}
-    {(props.experimental || []).map((value, index) => (
-      <tr key={`experimental-${index}`}>
-        <td>
-          <pre>
-            <code>{value}</code>
-          </pre>
-        </td>
-        <td>🧪 Experimental Support</td>
-      </tr>
-    ))}
-    {(props.native || []).map((value, index) => (
-      <tr key={`native-${index}`}>
-        <td>
-          <pre>
-            <code>{value}</code>
-          </pre>
-        </td>
-        <td>📱 Native only</td>
-      </tr>
-    ))}
-    {(props.partial || []).map((value, index) => (
-      <tr key={`partial-${index}`}>
-        <td>
-          <pre>
-            <code>{value}</code>
-          </pre>
-        </td>
-        <td>✔️ Partial Support</td>
-      </tr>
-    ))}
-    {(props.rejected || []).map((value, index) => (
-      <tr key={`rejected-${index}`}>
-        <td><pre><code>{value}</code></pre></td>
-        <td>Not supported on native</td>
-      </tr>
-    ))}
-    {(props.none || []).map((value, index) => (
-      <tr key={`none-${index}`}>
-        <td>
-          <pre>
-            <code>{value}</code>
-          </pre>
-        </td>
-        <td>🌐 Web only</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+<CompatibilityTable {...props} />
 
 <>{props.legend || props.legend === undefined ? <Legend /> : <></>}</>
