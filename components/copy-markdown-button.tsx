@@ -6,9 +6,14 @@ import { useState, useCallback } from 'react';
 interface CopyMarkdownButtonProps {
   markdownUrl: string;
   className?: string;
+  label?: string;
 }
 
-export function CopyMarkdownButton({ markdownUrl, className = '' }: CopyMarkdownButtonProps) {
+export function CopyMarkdownButton({
+  markdownUrl,
+  className = '',
+  label = 'Copy',
+}: CopyMarkdownButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {
@@ -18,7 +23,8 @@ export function CopyMarkdownButton({ markdownUrl, className = '' }: CopyMarkdown
         // the user gesture handler. Using ClipboardItem with a Promise allows us
         // to call clipboard.write() immediately while fetching the data async.
         const textPromise = fetch(markdownUrl).then(async (res) => {
-          if (!res.ok) throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
+          if (!res.ok)
+            throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
           const text = await res.text();
           return new Blob([text], { type: 'text/plain' });
         });
@@ -28,7 +34,8 @@ export function CopyMarkdownButton({ markdownUrl, className = '' }: CopyMarkdown
       } else {
         // Fallback for browsers that don't support ClipboardItem
         const res = await fetch(markdownUrl);
-        if (!res.ok) throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
+        if (!res.ok)
+          throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
         const text = await res.text();
         await navigator.clipboard.writeText(text);
       }
@@ -52,7 +59,7 @@ export function CopyMarkdownButton({ markdownUrl, className = '' }: CopyMarkdown
       ) : (
         <>
           <Copy className="h-4 w-4" />
-          Copy
+          {label}
         </>
       )}
     </button>

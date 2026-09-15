@@ -4,12 +4,12 @@ title: withNativeWind
 
 {/* # withNativeWind */}
 
-`withNativeWind` is a higher order component that updates your Metro configuration to support NativeWind.
+`withNativeWind` is a Metro configuration wrapper that updates your Metro configuration to support Nativewind.
 
 The only required option is `input`, which is the relative path to your `.css` file.
 
 ```tsx title=metro.config.js
-import { withNativeWind } from "native-wind/metro";
+import { withNativeWind } from "nativewind/metro";
 
 module.exports = withNativeWind(config, {
   input: "<relative path to your .css file>",
