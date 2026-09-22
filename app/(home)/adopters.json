@@ -1,0 +1,132 @@
+[
+  {
+    "id": "posthog",
+    "name": "PostHog",
+    "url": "https://github.com/PostHog/posthog",
+    "usage": "Mobile app",
+    "evidence": {
+      "manifest_url": "https://github.com/PostHog/posthog/blob/854a4262ec8b23513b91a3c4d3659ec9b1e9cd90/products/desktop/apps/mobile/package.json",
+      "manifest_sha256": "ba8c64cff5d02ab7059d795fbacd4c9f680d042e67a2502385048884e1ce73e7",
+      "nativewind_version": "^4.2.1",
+      "verified_at": "2026-09-22T00:39:15.968858+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "folo",
+    "name": "Folo",
+    "url": "https://github.com/RSSNext/Folo",
+    "usage": "Mobile app",
+    "evidence": {
+      "manifest_url": "https://github.com/RSSNext/Folo/blob/379a6e6daf3f7b986c6221a4aba30f022ecc04f9/apps/mobile/package.json",
+      "manifest_sha256": "f054ec3bbf0c3cfac6357234597a2b9a6ca32756f228bf76e9cec0ddc7309ca1",
+      "nativewind_version": "4.2.6",
+      "verified_at": "2026-09-22T00:39:14.981412+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "onyx",
+    "name": "Onyx",
+    "url": "https://github.com/onyx-dot-app/onyx",
+    "usage": "Mobile app",
+    "evidence": {
+      "manifest_url": "https://github.com/onyx-dot-app/onyx/blob/e8709da3874761c227eb4c12f4071107506677a2/mobile/package.json",
+      "manifest_sha256": "db9a40de2fc5df3ba4d1fee7a6eb376b9c81b9e2755b6839982bde04c51ffcbd",
+      "nativewind_version": "^4.2.6",
+      "verified_at": "2026-09-22T00:39:14.960219+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "karakeep",
+    "name": "Karakeep",
+    "url": "https://github.com/karakeep-app/karakeep",
+    "usage": "Mobile app",
+    "evidence": {
+      "manifest_url": "https://github.com/karakeep-app/karakeep/blob/2d58d906c89e5f6b08a28f9d45a3c617d506a4b4/apps/mobile/package.json",
+      "manifest_sha256": "ccaf0d730681ad4bbb496072ce227cc526ee6b10d976e630f211096f4d361707",
+      "nativewind_version": "^4.2.6",
+      "verified_at": "2026-09-22T00:39:15.121579+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "suna",
+    "name": "Suna",
+    "url": "https://github.com/kortix-ai/suna",
+    "usage": "Mobile app",
+    "evidence": {
+      "manifest_url": "https://github.com/kortix-ai/suna/blob/0479379dbefc7996be4a933c596599b1e8cbaec3/apps/mobile/package.json",
+      "manifest_sha256": "4b39f184612bf5bb88eb6ce2cb0123d501ead55e99d8ee4b2a4403d655377d36",
+      "nativewind_version": "^4.2.1",
+      "verified_at": "2026-09-22T00:39:15.000939+00:00"
+    },
+    "presentation_note": "Name retained from the selected research list. The repository now presents Kortix branding; plain text is used to avoid mislabeling a Kortix logo."
+  },
+  {
+    "id": "linkwarden",
+    "name": "Linkwarden",
+    "url": "https://github.com/linkwarden/linkwarden",
+    "usage": "Mobile app",
+    "evidence": {
+      "manifest_url": "https://github.com/linkwarden/linkwarden/blob/952ac4540657cae3a67c3ca59433899d2fda8374/apps/mobile/package.json",
+      "manifest_sha256": "2831fd754673c3c474572b2cd1c28c1baf277b86361adae97bf6c2088e6ee769",
+      "nativewind_version": "^4.2.1",
+      "verified_at": "2026-09-22T00:39:15.031266+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "polar",
+    "name": "Polar",
+    "url": "https://github.com/polarsource/polar",
+    "usage": "App",
+    "evidence": {
+      "manifest_url": "https://github.com/polarsource/polar/blob/e011302f038694212340da13dfd8df4da97dd6a1/clients/apps/app/package.json",
+      "manifest_sha256": "b1e4d8d7dfc4e5f0e9a86407cc3b8ae4287f120a52818da7b74c0099e670a420",
+      "nativewind_version": "^4.2.1",
+      "verified_at": "2026-09-22T00:39:14.971371+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "react-native-reusables",
+    "name": "React Native Reusables",
+    "url": "https://github.com/founded-labs/react-native-reusables",
+    "usage": "Component registry",
+    "evidence": {
+      "manifest_url": "https://github.com/founded-labs/react-native-reusables/blob/a477f2c9e78956675f228d403b99d7da56b79e68/packages/registry/package.json",
+      "manifest_sha256": "73b1d1034ccef749a44f3fdd3f968a97a8f5592451d7625c86460ccbd8e9ea77",
+      "nativewind_version": "^4.2.2",
+      "verified_at": "2026-09-22T00:39:15.002865+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "gluestack",
+    "name": "gluestack UI",
+    "url": "https://github.com/gluestack/gluestack-ui",
+    "usage": "Component library",
+    "evidence": {
+      "manifest_url": "https://github.com/gluestack/gluestack-ui/blob/b712c8541c85d57becbd1a1b2ba150a369223eb6/packages/gluestack-ui/package.json",
+      "manifest_sha256": "eb1374f316233310debf45ae9d3a3067addd022699f45aaf5208b2f212750d9e",
+      "nativewind_version": "^4.1.23",
+      "verified_at": "2026-09-22T00:39:14.978193+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  },
+  {
+    "id": "streamyfin",
+    "name": "Streamyfin",
+    "url": "https://github.com/streamyfin/streamyfin",
+    "usage": "App",
+    "evidence": {
+      "manifest_url": "https://github.com/streamyfin/streamyfin/blob/7fb905d1e887377ba80ca49b62582690729f77bf/package.json",
+      "manifest_sha256": "ad714dc7a0f47259bf63c3d4540cb85df48f25f02d488f98796699405b94a364",
+      "nativewind_version": "^2.0.11",
+      "verified_at": "2026-09-22T00:39:14.967095+00:00"
+    },
+    "presentation_note": "Official project asset; source and transformations are recorded in app/assets/adopters/provenance.json."
+  }
+]
