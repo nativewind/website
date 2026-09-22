@@ -29,7 +29,7 @@ const marks: Record<string, ReactNode> = {
   folo: <Folo className="size-8" />,
   onyx: (
     <>
-      <Image src={OnyxLight} alt="" className="size-12 dark:hidden" sizes="48px" />
+      <Image src={OnyxLight} alt="" className="size-8 dark:hidden" sizes="32px" />
       <Image src={OnyxDark} alt="" className="hidden size-12 dark:block" sizes="48px" />
     </>
   ),
@@ -42,8 +42,8 @@ const marks: Record<string, ReactNode> = {
   linkwarden: <Image src={Linkwarden} alt="" className="size-8" sizes="32px" />,
   polar: (
     <>
-      <PolarLight className="size-8 dark:hidden" />
-      <PolarDark className="hidden size-8 dark:block" />
+      <PolarLight viewBox="0 0 300 300" className="size-8 dark:hidden" />
+      <PolarDark viewBox="0 0 300 300" className="hidden size-8 dark:block" />
     </>
   ),
   "react-native-reusables": (
