@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { ExternalLink } from "lucide-react";
 
 export interface ShowcaseItemProps {
@@ -6,7 +6,7 @@ export interface ShowcaseItemProps {
   website?: string;
   appstore?: string;
   playstore?: string;
-  logo: StaticImageData;
+  logo: StaticImageData | string;
   description: string;
 }
 
@@ -15,25 +15,32 @@ export default function ShowcaseItem({ name, website, appstore, playstore, logo,
     <div className={`group pt-12 ${website && 'pb-14'}`}>
       <div className="rounded-2xl border border-dashed p-4 flex-1 bg-fd-card relative">
 
-        <Image src={logo} className="rounded-2xl h-16 w-16 -mt-12 mb-4 backdrop-blur left-4 border border-dashed bg-fd-muted object-cover" alt={`${name} logo`} />
+        <Image
+          src={logo}
+          width={64}
+          height={64}
+          unoptimized={typeof logo === "string"}
+          className="rounded-2xl h-16 w-16 -mt-12 mb-4 backdrop-blur left-4 border border-dashed bg-fd-muted object-cover"
+          alt=""
+        />
         <b className="font-bold text-xl">{name}</b>
         <p className="opacity-50 mt-2 text-pretty line-clamp-3">{description}</p>
           
         {website && (
-          <a href={website} target="_blank" rel="noopener noreferrer" className="absolute left-0 bottom-0 translate-y-12 group/link border px-3 py-1.5 shadow-xl dark:shadow-2xl group-hover:translate-y-1/2 group-hover:translate-x-4 duration-300 bg-fd-accent hover:bg-fd-background hover:border-black dark:hover:border-fd-primary dark:hover:shadow-fd-primary rounded-xl font-mono text-sm w-fit ease-[cubic-bezier(0.175,0.885,0.32,1.275)] flex gap-2">
-            {website}
-            <ExternalLink className="w-4 h-4 opacity-0 inline-block group-hover/link:opacity-100 group-hover/link:translate-0 -translate-x-1/2 translate-y-1/2 scale-50 group-hover/link:scale-100 duration-300" />
+          <a href={website} target="_blank" rel="noopener noreferrer" aria-label={`Visit the ${name} website`} className="absolute left-0 bottom-0 translate-y-12 group/link border px-3 py-1.5 shadow-xl dark:shadow-2xl group-hover:translate-y-1/2 group-hover:translate-x-4 duration-300 bg-fd-accent hover:bg-fd-background hover:border-black dark:hover:border-fd-primary dark:hover:shadow-fd-primary rounded-xl font-mono text-sm w-fit max-w-[calc(100%-1rem)] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] flex gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fd-primary">
+            <span className="truncate">{website}</span>
+            <ExternalLink className="w-4 h-4 shrink-0 opacity-0 inline-block group-hover/link:opacity-100 group-hover/link:translate-0 -translate-x-1/2 translate-y-1/2 scale-50 group-hover/link:scale-100 duration-300" />
           </a>
         )}
 
         <div className="absolute top-3 right-3 flex gap-3">
           {playstore && (
-            <a href={playstore} target="_blank" rel="noopener noreferrer" className="border p-1.5 shadow-xl dark:shadow-2xl duration-300 bg-fd-accent hover:bg-fd-background hover:border-black dark:hover:border-fd-primary dark:hover:shadow-fd-primary rounded-xl font-mono text-sm w-fit group-hover:-translate-y-8 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] delay-75 hover:delay-0 hover:scale-105 hover:rounded-xl active:duration-75 active:scale-95 active:-translate-y-7 group-hover:rotate-6 hover:text-fd-foreground dark:hover:text-fd-primary">
+            <a href={playstore} target="_blank" rel="noopener noreferrer" aria-label={`View ${name} on Google Play`} className="border p-1.5 shadow-xl dark:shadow-2xl duration-300 bg-fd-accent hover:bg-fd-background hover:border-black dark:hover:border-fd-primary dark:hover:shadow-fd-primary rounded-xl font-mono text-sm w-fit group-hover:-translate-y-8 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] delay-75 hover:delay-0 hover:scale-105 hover:rounded-xl active:duration-75 active:scale-95 active:-translate-y-7 group-hover:rotate-6 hover:text-fd-foreground dark:hover:text-fd-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fd-primary">
               <PlayStoreIcon className="w-8 h-8 fill-current" />
             </a>
           )}
           {appstore && (
-            <a href={appstore} target="_blank" rel="noopener noreferrer" className="border p-1.5 shadow-xl dark:shadow-2xl duration-300 bg-fd-accent hover:bg-fd-background hover:border-black dark:hover:border-fd-primary dark:hover:shadow-fd-primary rounded-xl font-mono text-sm w-fit group-hover:-translate-y-6 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] delay-0 hover:delay-0 hover:scale-105 hover:rounded-xl active:duration-75 active:scale-95 active:-translate-y-5 group-hover:rotate-3 hover:text-fd-foreground dark:hover:text-fd-primary">
+            <a href={appstore} target="_blank" rel="noopener noreferrer" aria-label={`View ${name} on the App Store`} className="border p-1.5 shadow-xl dark:shadow-2xl duration-300 bg-fd-accent hover:bg-fd-background hover:border-black dark:hover:border-fd-primary dark:hover:shadow-fd-primary rounded-xl font-mono text-sm w-fit group-hover:-translate-y-6 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] delay-0 hover:delay-0 hover:scale-105 hover:rounded-xl active:duration-75 active:scale-95 active:-translate-y-5 group-hover:rotate-3 hover:text-fd-foreground dark:hover:text-fd-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fd-primary">
               <AppStoreIcon className="w-8 h-8 fill-current" />
             </a>
           )}
