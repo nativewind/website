@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+@import "tw-animate-css";
 
 @source '../node_modules/fumadocs-ui/dist/**/*.js';
 
@@ -125,7 +126,6 @@
     linear-gradient(to bottom, #8884 1px, transparent 1px);
 }
 
-
 .bg-grid-lines-y-lg {
   background-position: -20px -20px;
   background-size: 40px 40px;
@@ -148,16 +148,16 @@
 .cut-corners {
   background:var(transparent, rgb(214, 233, 255));
   mask:linear-gradient(
-                -45deg, 
-                transparent 10.313708498984761px, 
-                white 11.313708498984761px, 
-                white calc(100% - 10.313708498984761px), 
+                -45deg,
+                transparent 10.313708498984761px,
+                white 11.313708498984761px,
+                white calc(100% - 10.313708498984761px),
                 transparent calc(100% - 11.313708498984761px)
             ),
             linear-gradient(
-                45deg, 
-                transparent -1px, 
-                white 0px, 
+                45deg,
+                transparent -1px,
+                white 0px,
                 white calc(100% - -1px),
                 transparent calc(100% - 0px)
             );-webkit-mask-composite:destination-in;mask-composite:intersect
@@ -183,6 +183,7 @@
 
 /* smooth scroll */
 html {
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scroll-padding-top: 3rem;
 }
@@ -216,4 +217,8 @@ html {
 
 .cursed {
   mask-image:radial-gradient(transparent 1px, rgb(15, 17, 21), #ffffff 1px);mask-size:4px 4px;
+}
+
+.bevel {
+    corner-shape: bevel
 }
