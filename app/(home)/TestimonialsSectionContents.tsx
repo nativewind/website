@@ -324,4 +324,11 @@ const items: ShowcaseItemProps[] = [
     website: "https://vibecodeapp.com/",
     appstore: "https://apps.apple.com/us/app/vibecode/id6742912146",
   },
+  {
+    name: "Word Bank",
+    description:
+      "Word Bank is a vocabulary app that helps learners discover, save and practice new words.",
+    logo: "https://github.com/wordbank-project.png?size=256",
+    website: "https://wordbankapp.com/",
+  },
 ];
