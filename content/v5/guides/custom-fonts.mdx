@@ -191,12 +191,12 @@ Use the `ios:` and `android:` variants for platform-specific font overrides:
 </Text>
 ```
 
-Or override the default system fonts in your theme:
+Or override the default system fonts in a `:root` block after the imports:
 
 ```css title="global.css"
-@theme {
+:root {
   --font-sans: "Inter-Regular";
 }
 ```
 
-This makes `font-sans` (the default) use Inter instead of the system font.
+This makes `font-sans` (the default) use Inter instead of the system font. In this RC, an `@theme` block doesn't override `--font-sans`, `--font-serif` or `--font-mono` on iOS and Android, because Nativewind sets their platform defaults on `:root`.
