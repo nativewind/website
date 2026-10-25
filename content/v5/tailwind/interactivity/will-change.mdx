@@ -11,6 +11,22 @@ import Usage from "../_usage.tsx";
 
 <Usage />
 
+## RC notes
+
+On native, some className changes after the first render reset the component's state and re-mount its children. To avoid that, add the matching class below from the first render, on the components whose className changes. These classes come from react-native-css and only apply on native; the Tailwind classes in the table further down are web only.
+
+| Class | Use it when a className later adds or removes |
+| --- | --- |
+| `will-change-variable` | a class that sets a CSS variable, such as `text-red-500`, `text-lg`, `font-bold`, `leading-6`, `shadow-md` or `scale-50` |
+| `will-change-animation` | an animation or transition, such as `animate-pulse` or `transition-colors` |
+| `will-change-container` | a container, such as `@container`, or `group` when you use `group-*` classes |
+
+Some classes need two: `duration-300` needs both `will-change-animation` and `will-change-variable`. In development, the console names one class per change, so check again after adding it.
+
+`will-change-pressable` has no effect in this RC. To add an `active:` class later without a reset, use `Pressable` instead of `View`, or give the View an `active:` class from the first render. The console may still warn about a pressable state; nothing resets.
+
+In this RC, a View with `will-change-container` handles presses itself, so a `Pressable` around it doesn't get the tap.
+
 ## Compatibility
 
 <Compatibility
