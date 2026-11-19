@@ -39,7 +39,7 @@ export default function FooterSection() {
             <div className="text-xs">
               <div className="inline-block -scale-x-100 mr-1">©</div>
               Copyright {new Date().getFullYear()}. Built by{" "}
-              <a href="https://ronindevs.com/?utm_source=nativewind&utm_medium=site" target="_blank" rel="noopener noreferrer" className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Ronin Software</a>.
+              <a href="https://ronindevs.com/?utm_source=nativewind&utm_medium=site" target="_blank" rel="noopener noreferrer" className="hover:decoration-fd-primary hover:underline-offset-2 hover:text-fd-foreground decoration-transparent underline duration-300">Ronin Technologies</a>.
             </div>
             <ThemeToggle mode="light-dark-system" />
           </div>
